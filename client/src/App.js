@@ -1,5 +1,6 @@
 import SideNav from './components/SideNav';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import HomeView from './components/HomeView';
 import './App.css';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       {/* Sidebar */}
       <SideNav />
+      <HomeView />
     </div>
   );
 }

@@ -1,0 +1,49 @@
+@import url('../App.css');
+
+#home-view {
+  display: grid;
+  grid-template-columns: 0.1fr 0.1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  width: 75vw;
+  margin-left: 200px;
+  padding: 20vh;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--primary-gradient);
+  border-radius: 0;
+  color: white;
+  padding: 20px;
+  margin: 20px;
+  height: 200px;
+  width: 200px;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 578px) {
+  #home-view {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    width: 100vw;
+    margin-left: 0;
+    margin: 0 0 100px 0;
+    height: 100%;
+  }
+  .card {
+    height: 75px;
+    width: 80vw;
+  }
+}
