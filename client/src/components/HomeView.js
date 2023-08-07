@@ -31,7 +31,11 @@ function HomeView() {
     });
   };
 
-  return <div id="home-view">{renderCards()}</div>;
+  return (
+    <div id="home-view" className="main-view">
+      {renderCards()}
+    </div>
+  );
 }
 
 export default HomeView;

@@ -1,0 +1,22 @@
+@import url('../App.css');
+
+#side-nav {
+  position: fixed;
+}
+
+#side-nav-col {
+  width: 200px;
+  height: 100vh;
+}
+
+@media screen and (max-width: 578px) {
+  #side-nav {
+    position: absolute;
+    width: 100vw;
+  }
+
+  #side-nav-col {
+    width: 100vw;
+    height: 100px;
+  }
+}

@@ -1,10 +1,10 @@
-@import url('../App.css');
-
-#home-view {
+.App {
+  text-align: center;
   display: grid;
-  grid-template-columns: 0.1fr 0.1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: 1fr 4fr;
+}
+
+.main-view {
   width: 75vw;
   margin-left: 200px;
   padding: 20vh;
@@ -13,12 +13,30 @@
   height: 100vh;
 }
 
+@media screen and (max-width: 578px) {
+  .App {
+    grid-template-columns: 1fr;
+  }
+  .main-view {
+    width: 100vw;
+    margin-left: 0;
+    margin: 0 0 100px 0;
+    height: 100%;
+  }
+}
+#home-view {
+  display: grid;
+  grid-template-columns: 0.1fr 0.1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: var(--primary-gradient);
+  background-image: linear-gradient(to bottom, #282c34, #3f4e67);
   border-radius: 0;
   color: white;
   padding: 20px;
@@ -37,13 +55,11 @@
   #home-view {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    width: 100vw;
-    margin-left: 0;
-    margin: 0 0 100px 0;
-    height: 100%;
   }
   .card {
     height: 75px;
     width: 80vw;
   }
 }
+
+/*# sourceMappingURL=HomeView.css.map */

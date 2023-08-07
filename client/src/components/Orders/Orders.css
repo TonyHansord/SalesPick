@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.main-view {
+  width: 75vw;
+  margin-left: 200px;
+  padding: 20vh;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+@media screen and (max-width: 578px) {
+  .App {
+    grid-template-columns: 1fr;
+  }
+  .main-view {
+    width: 100vw;
+    margin-left: 0;
+    margin: 0 0 100px 0;
+    height: 100%;
+  }
+}
+
+/*# sourceMappingURL=Orders.css.map */
