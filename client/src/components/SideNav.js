@@ -1,6 +1,20 @@
 import './SideNav.css';
+import { Link } from 'react-router-dom';
+import * as Icon from 'react-bootstrap-icons';
 
-function SideNav() {
+function SideNav({ sections }) {
+  const renderNavLinks = () => {
+    return sections.map((section) => {
+      return (
+        <Link to={section.url}>
+          <li className="nav-item">
+            <span className="ms-1 d-none d-sm-inline">{section.title}</span>
+          </li>
+        </Link>
+      );
+    });
+  };
+
   return (
     <div id="side-nav" className="container-fluid overflow-hidden ">
       <div className="row overflow-auto">
@@ -21,32 +35,7 @@ function SideNav() {
               className="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
               id="menu"
             >
-              <li className="nav-item">
-                <a href="/" className="nav-link px-sm-0 px-2">
-                  <i className="fs-5 bi-house"></i>
-                  <span className="ms-1 d-none d-sm-inline">Home</span>
-                </a>
-              </li>
-              <li>
-                <a href="/orders" className="nav-link px-sm-0 px-2">
-                  <i className="fs-5 bi-table"></i>
-                  <span className="ms-1 d-none d-sm-inline">Orders</span>
-                </a>
-              </li>
-              <li>
-                <a href="/products" className="nav-link px-sm-0 px-2">
-                  <i className="fs-5 bi-grid"></i>
-                  <span className="ms-1 d-none d-sm-inline">Products</span>
-                </a>
-              </li>
-              <li>
-                <a href="/customers" className="nav-link px-sm-0 px-2">
-                  <i className="fs-5 bi-people"></i>
-                  <span className="ms-1 d-none d-sm-inline">
-                    Customers
-                  </span>{' '}
-                </a>
-              </li>
+              {renderNavLinks()}
             </ul>
           </div>
         </div>

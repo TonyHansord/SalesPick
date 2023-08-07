@@ -1,32 +1,16 @@
 import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './HomeView.css';
 
-function HomeView() {
-  const sections = [
-    {
-      title: 'Customers',
-      url: '/customers',
-    },
-    {
-      title: 'Orders',
-      url: '/orders',
-    },
-    {
-      title: 'Products',
-      url: '/products',
-    },
-    {
-      title: 'User Management',
-      url: '/users',
-    },
-  ];
+function HomeView({ sections }) {
+  const mainSections = sections.filter((section) => section.title !== 'Home');
 
   const renderCards = () => {
-    return sections.map((section) => {
+    return mainSections.map((section) => {
       return (
-        <div className="card">
+        <Link to={section.url} className="card">
           <Card.Title>{section.title}</Card.Title>
-        </div>
+        </Link>
       );
     });
   };
