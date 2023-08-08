@@ -7,9 +7,11 @@ import './App.css';
 import SideNav from './components/SideNav';
 import HomeView from './components/HomeView';
 import OrderList from './components/Orders/OrderList';
+import ProductList from './components/Products/ProductList';
+import CustomerList from './components/Customers/CustomerList';
 
 function App() {
-  const [userRole, setUserRole] = useState('sales');
+  const [userRole, setUserRole] = useState('admin');
 
   const sections = [
     {
@@ -55,8 +57,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeView sections={viewableSections} />} />
         <Route path="/orders" element={<OrderList />} />
-        <Route path="/products" element={<HomeView />} />
-        <Route path="/customers" element={<HomeView />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/customers" element={<CustomerList />} />
         <Route path="/users" element={<HomeView />} />
       </Routes>
     </div>

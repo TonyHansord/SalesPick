@@ -1,6 +1,6 @@
 function OrderList() {
   return (
-    <div>
+    <div className="main-view">
       <p>OrderList</p>
     </div>
   );

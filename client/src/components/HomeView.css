@@ -1,3 +1,7 @@
+body {
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
   display: grid;
@@ -5,12 +9,13 @@
 }
 
 .main-view {
-  width: 75vw;
+  width: 80vw;
   margin-left: 200px;
   padding: 20vh;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: #282c34;
 }
 
 @media screen and (max-width: 578px) {
@@ -18,10 +23,10 @@
     grid-template-columns: 1fr;
   }
   .main-view {
-    width: 100vw;
     margin-left: 0;
     margin: 0 0 100px 0;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
   }
 }
 #home-view {
@@ -36,13 +41,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(to bottom, #282c34, #3f4e67);
+  background-image: linear-gradient(to bottom, #565b66, #3f4e67);
   border-radius: 0;
   color: white;
   padding: 20px;
   margin: 20px;
   height: 200px;
   width: 200px;
+  text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
 

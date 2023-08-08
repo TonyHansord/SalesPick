@@ -1,3 +1,7 @@
+body {
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
   display: grid;
@@ -5,12 +9,13 @@
 }
 
 .main-view {
-  width: 75vw;
+  width: 80vw;
   margin-left: 200px;
   padding: 20vh;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: #282c34;
 }
 
 @media screen and (max-width: 578px) {
@@ -18,10 +23,10 @@
     grid-template-columns: 1fr;
   }
   .main-view {
-    width: 100vw;
     margin-left: 0;
     margin: 0 0 100px 0;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
   }
 }
 
