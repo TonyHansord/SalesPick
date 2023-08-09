@@ -2,6 +2,7 @@ import './SideNav.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import * as Icon from 'react-bootstrap-icons';
+import { Button } from 'react-bootstrap';
 
 function SideNav({ sections }) {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
@@ -22,9 +23,6 @@ function SideNav({ sections }) {
 
   return (
     <nav id="side-nav" class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <a class="app-name navbar-brand font-weight-bolder" href="/">
-        <span className="brand">SalesPick</span>
-      </a>
       <button
         class="toggler navbar-toggler"
         type="button"
@@ -37,12 +35,27 @@ function SideNav({ sections }) {
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+      <a class="app-name navbar-brand font-weight-bolder" href="/">
+        <span className="brand">SalesPick</span>
+      </a>
 
       <div
         class={`${isNavCollapsed ? 'collapse' : ''} bg-dark navbar-collapse`}
         id="navbarNav"
       >
         {renderNavLinks()}
+      </div>
+
+      <div id="user">
+        <Icon.PersonCircle className="user-icon" />
+        <span className="user-name">John Doe</span>
+        <Link to="/login" className="login">
+          <span className="d-sm-inline">
+            <Button className="btn btn-outline-secondary btn-sm nav-section">
+              Logout
+            </Button>
+          </span>
+        </Link>
       </div>
     </nav>
   );

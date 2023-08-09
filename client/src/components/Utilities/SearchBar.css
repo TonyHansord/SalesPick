@@ -1,0 +1,38 @@
+.search-bar {
+  display: flex;
+  padding: 20px;
+  width: 60%;
+  gap: 10px;
+}
+
+.search-bar select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin: 0 10px 10px 0;
+  height: 50px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin: 0 0 10px 0;
+  height: 50px;
+}
+
+.search-bar button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  height: 50px;
+  width: 100px;
+}

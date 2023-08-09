@@ -16,7 +16,7 @@ function HomeView({ sections }) {
   };
 
   return (
-    <div id="home-view" className="main-view">
+    <div id="home-view" className="home-view">
       {renderCards()}
     </div>
   );

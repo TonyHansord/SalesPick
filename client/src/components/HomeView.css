@@ -8,7 +8,7 @@ body {
   grid-template-columns: 1fr 4fr;
 }
 
-.main-view {
+.home-view {
   width: 80vw;
   margin-left: 200px;
   padding: 20vh;

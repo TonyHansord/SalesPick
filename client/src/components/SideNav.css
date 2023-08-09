@@ -1,9 +1,9 @@
-@import url("../App.css");
+@import url('../App.css');
 #side-nav {
   position: fixed;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   height: 100vh;
   width: 250px;
   padding: 20px;
@@ -12,7 +12,7 @@
 .navbar-collapse {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   width: 100%;
   height: fit-content;
 }
@@ -27,7 +27,7 @@
   border: none;
   background: none;
   color: white;
-  padding: 10px 20px 0 0;
+  padding-left: 20px;
   margin: 0;
 }
 
@@ -36,11 +36,35 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
-  padding: 10px 0 0 20px;
+  padding-left: 20px;
 }
 
 .navbar-toggler:focus {
   box-shadow: none;
+}
+
+#user {
+  display: flex;
+  right: 20px;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  font-size: 1rem;
+}
+#user .btn {
+  background: none;
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+  padding: 5px 10px;
+}
+#user .user-icon {
+  margin-right: 10px;
+  color: white;
+}
+#user .user-name {
+  margin: 0 10px 0 0;
+  color: white;
 }
 
 @media screen and (max-width: 578px) {
@@ -49,10 +73,15 @@
     width: 100vw;
     display: flex;
     flex-direction: row;
-    align-items: start;
-    height: 50px;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70px;
     padding: 0;
     z-index: 1;
+  }
+  #user {
+    position: absolute;
+    right: 20px;
   }
 }
 

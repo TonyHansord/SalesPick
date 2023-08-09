@@ -1,3 +1,7 @@
+:root {
+  --accent-color: #6a5acd;
+}
+
 body {
   background-color: #282c34;
 }
@@ -9,13 +13,22 @@ body {
 }
 
 .main-view {
-  width: 80vw;
-  margin-left: 200px;
-  padding: 20vh;
-  align-items: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 250px);
+  margin-left: 250px;
+  align-items: flex-start;
+  justify-content: flex-start;
   height: 100vh;
   background-color: #282c34;
+}
+
+.title-bar {
+  background-color: var(--accent-color);
+  width: 100%;
+}
+.search-bar {
+  padding: 20px;
 }
 
 @media screen and (max-width: 578px) {
@@ -29,5 +42,3 @@ body {
     width: 100vw;
   }
 }
-
-/*# sourceMappingURL=App.css.map */

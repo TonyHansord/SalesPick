@@ -1,6 +1,6 @@
 function OrderView() {
   return (
-    <div>
+    <div className="main-view">
       <h1>OrderView</h1>
     </div>
   );
