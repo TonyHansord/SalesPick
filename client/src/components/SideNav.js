@@ -12,7 +12,7 @@ function SideNav({ sections }) {
   const renderNavLinks = () => {
     return sections.map((section) => {
       return (
-        <Link to={section.url} className="nav-link">
+        <Link key={section.title} to={section.url} className="nav-link">
           <span className="d-sm-inline">
             <h4 className="nav-section">{section.title}</h4>
           </span>
@@ -22,9 +22,9 @@ function SideNav({ sections }) {
   };
 
   return (
-    <nav id="side-nav" class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav id="side-nav" className="navbar navbar-expand-sm navbar-dark bg-dark">
       <button
-        class="toggler navbar-toggler"
+        className="toggler navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNav"
@@ -33,14 +33,16 @@ function SideNav({ sections }) {
         aria-label="Toggle navigation"
         onClick={handleNavCollapse}
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
-      <a class="app-name navbar-brand font-weight-bolder" href="/">
+      <a className="app-name navbar-brand font-weight-bolder" href="/">
         <span className="brand">SalesPick</span>
       </a>
 
       <div
-        class={`${isNavCollapsed ? 'collapse' : ''} bg-dark navbar-collapse`}
+        className={`${
+          isNavCollapsed ? 'collapse' : ''
+        } bg-dark navbar-collapse`}
         id="navbarNav"
       >
         {renderNavLinks()}

@@ -1,3 +1,5 @@
+@import '../App.css';
+
 body {
   background-color: #282c34;
 }
@@ -41,7 +43,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(to bottom, #565b66, #3f4e67);
+  background-color: var(--accent-color);
   border-radius: 0;
   color: white;
   padding: 20px;
