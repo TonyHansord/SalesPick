@@ -12,7 +12,12 @@ function SideNav({ sections }) {
   const renderNavLinks = () => {
     return sections.map((section) => {
       return (
-        <Link key={section.title} to={section.url} className="nav-link">
+        <Link
+          key={section.title}
+          to={section.url}
+          onClick={handleNavCollapse}
+          className="nav-link"
+        >
           <span className="d-sm-inline">
             <h4 className="nav-section">{section.title}</h4>
           </span>
@@ -45,12 +50,8 @@ function SideNav({ sections }) {
         } bg-dark navbar-collapse`}
         id="navbarNav"
       >
-        {renderNavLinks()}
-      </div>
+        <div className="nav-links">{renderNavLinks()}</div>
 
-      <div id="user">
-        <Icon.PersonCircle className="user-icon" />
-        <span className="user-name">John Doe</span>
         <Link to="/login" className="login">
           <span className="d-sm-inline">
             <Button className="btn btn-outline-secondary btn-sm nav-section">
@@ -58,6 +59,11 @@ function SideNav({ sections }) {
             </Button>
           </span>
         </Link>
+      </div>
+
+      <div id="user">
+        <Icon.PersonCircle className="user-icon" />
+        <span className="user-name">John Doe</span>
       </div>
     </nav>
   );

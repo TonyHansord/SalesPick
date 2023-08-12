@@ -1,9 +1,5 @@
 @import '../App.css';
 
-body {
-  background-color: #282c34;
-}
-
 .App {
   text-align: center;
   display: grid;
@@ -17,20 +13,9 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #282c34;
+  background-color: var(--background-color);
 }
 
-@media screen and (max-width: 578px) {
-  .App {
-    grid-template-columns: 1fr;
-  }
-  .main-view {
-    margin-left: 0;
-    margin: 0 0 100px 0;
-    height: 100vh;
-    width: 100vw;
-  }
-}
 #home-view {
   display: grid;
   grid-template-columns: 0.1fr 0.1fr;

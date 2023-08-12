@@ -1,9 +1,11 @@
 :root {
+  --background-color: white;
   --accent-color: #5acbcd;
+  --text-color: #282c34;
 }
 
 body {
-  background-color: #282c34;
+  background-color: var(--background-color);
 }
 
 .App {
@@ -20,7 +22,7 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
   height: 100vh;
-  background-color: #282c34;
+  background-color: var(--background-color);
 }
 
 .title-bar {
@@ -38,8 +40,8 @@ body {
 }
 
 .top-container h3 {
-  color: white;
-  font-size: 2rem;
+  color: var(--text-color);
+  font-size: 2vw;
   margin: 0;
 }
 .top-container button {
@@ -58,19 +60,22 @@ body {
   display: flex;
   padding: 20px 0;
 
+  justify-content: center;
   width: 50%;
 }
 
 .action-container .card {
   margin: 0 10px;
-  width: 50%;
-  height: auto;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  border: none;
 }
 
 select {
   width: 100%;
   padding: 10px;
-  border: none;
+  border: 1px solid var(--accent-color);
   border-radius: 5px;
   font-size: 1rem;
   height: 50px;
@@ -84,13 +89,24 @@ select {
   padding: 20px;
 }
 
+.list-container {
+  /* display: grid;
+  flex-direction: column;
+  width: calc(100vw - 250px); */
+  padding: 0;
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+  background-color: var(--background-color);
+  color: white;
+}
+
 @media screen and (max-width: 578px) {
   .App {
     grid-template-columns: 1fr;
   }
   .main-view {
     margin-left: 0;
-    margin: 0 0 100px 0;
+    margin: 70px 0 100px 0;
     height: 100vh;
     width: 100vw;
   }
@@ -101,6 +117,9 @@ select {
 
   .top-container {
     justify-content: stretch;
-    flex-direction: column;
+  }
+
+  .top-container h3 {
+    font-size: 5vw;
   }
 }
