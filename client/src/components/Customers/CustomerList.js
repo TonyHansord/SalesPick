@@ -1,6 +1,7 @@
 import Customer from './Customer';
 import SearchBar from '../Utilities/SearchBar';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
+import { Container, Card } from 'react-bootstrap';
 
 function CustomerList() {
   const searchOptions = [
@@ -17,11 +18,16 @@ function CustomerList() {
   return (
     <div className="main-view">
       <ViewTitleBar title="Customer List" />
-      <div className="top-container">
-        <SearchBar type="customers" searchOptions={searchOptions} />
-      </div>
-      <div className="customer-list">
-        <Customer />
+      <div className="main-container">
+        <div className="top-container">
+          <SearchBar type="customer" searchOptions={searchOptions} />
+          <div className="action-container">
+            <Card className="card">
+              <Card.Title>New Customer</Card.Title>
+            </Card>
+          </div>
+        </div>
+        <Container id="customer-list" className="list-container"></Container>
       </div>
     </div>
   );

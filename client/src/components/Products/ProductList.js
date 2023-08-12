@@ -32,7 +32,7 @@ function ProductList() {
             </Card>
           </div>
         </div>
-        <Container id="order-list" className="list-container"></Container>
+        <Container id="product-list" className="list-container"></Container>
       </div>
     </div>
   );

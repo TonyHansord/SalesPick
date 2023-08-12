@@ -29,6 +29,7 @@ function SearchBar({ type, searchOptions }) {
 
   return (
     <div className="search-bar">
+      <h3>Search {type}</h3>
       <select onChange={handleSearchTypeChange}>{renderSearchOptions()}</select>
       <input
         type={searchType}

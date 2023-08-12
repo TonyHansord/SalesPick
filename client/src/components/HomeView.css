@@ -61,6 +61,8 @@ body {
 
 @media screen and (max-width: 578px) {
   #home-view {
+    margin: 0;
+    width: 100vw;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
   }
