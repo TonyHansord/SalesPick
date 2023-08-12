@@ -27,7 +27,32 @@ body {
   background-color: var(--accent-color);
   width: 100%;
 }
-.search-bar {
+
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.action-container {
+  display: flex;
+  padding: 20px 0;
+  justify-content: center;
+  width: 40%;
+}
+
+.action-container .card {
+  margin: 0 10px;
+  width: 50%;
+  height: auto;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 250px);
+  height: 100%;
   padding: 20px;
 }
 
@@ -40,5 +65,14 @@ body {
     margin: 0 0 100px 0;
     height: 100vh;
     width: 100vw;
+  }
+
+  .main-container {
+    width: 100vw;
+  }
+
+  .top-container {
+    justify-content: stretch;
+    flex-direction: column;
   }
 }

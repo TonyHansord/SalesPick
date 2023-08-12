@@ -1,8 +1,37 @@
-.top-container {
-  display: flex;
-  justify-content: space-between;
+.list-container {
+  /* display: grid;
+  flex-direction: column;
+  width: calc(100vw - 250px); */
+  padding: 0;
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+  background-color: #282c34;
+  color: white;
+}
+
+.list-container .list-header {
   margin-bottom: 1rem;
+  height: 50px;
   width: 100%;
+  background-color: var(--accent-color);
+}
+
+table {
+  text-align: left;
+  width: 100%;
+  border: none;
+}
+
+thead {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.order .col {
+  display: flex;
+  padding: 10px;
+  border: 1px solid var(--accent-color);
+  flex-direction: row;
 }
 
 @media screen and (max-width: 578px) {

@@ -1,7 +1,8 @@
 .search-bar {
   display: flex;
-  padding: 20px;
-  width: 60%;
+  flex-direction: column;
+  padding: 20px 0;
+  width: 50%;
   gap: 10px;
 }
 
@@ -34,5 +35,23 @@
   font-size: 1rem;
   cursor: pointer;
   height: 50px;
-  width: 100px;
+  width: 100%;
+}
+
+@media screen and (max-width: 578px) {
+  .search-bar {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .search-bar select {
+    margin: 0 0 10px 0;
+  }
+  .search-bar input {
+    margin: 0 0 10px 0;
+  }
+  .search-bar button {
+    margin: 0 0 10px 0;
+    width: 100%;
+  }
 }
