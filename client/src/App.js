@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -18,6 +18,14 @@ function App() {
     role: '',
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login');
+    }
+  }, [isLoggedIn, navigate]);
 
   const sections = [
     {
@@ -80,7 +88,7 @@ function App() {
         // if not logged in display the login page
         <Routes>
           <Route
-            path="/"
+            path="/login"
             element={
               <LoginView setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
             }

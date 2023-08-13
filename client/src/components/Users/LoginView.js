@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 
 function LoginView({ setUser, setIsLoggedIn }) {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -13,6 +16,7 @@ function LoginView({ setUser, setIsLoggedIn }) {
     });
 
     setIsLoggedIn(true);
+    navigate('/');
   };
 
   return (

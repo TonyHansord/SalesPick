@@ -8,7 +8,7 @@ function HomeView({ sections }) {
   const renderCards = () => {
     return mainSections.map((section) => {
       return (
-        <Link to={section.url} className="card">
+        <Link key={section.title} to={section.url} className="card">
           <Card.Title>{section.title}</Card.Title>
         </Link>
       );

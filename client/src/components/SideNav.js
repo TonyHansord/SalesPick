@@ -54,7 +54,7 @@ function SideNav({ sections, setIsLoggedIn, user }) {
 
         <Link to="/" className="login" onClick={() => setIsLoggedIn(false)}>
           <span className="d-sm-inline">
-            <Button className="btn btn-outline-secondary btn-sm nav-section">
+            <Button className="btn-outline-secondary btn-sm nav-section">
               Logout
             </Button>
           </span>

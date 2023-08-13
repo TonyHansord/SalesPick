@@ -40,12 +40,17 @@ body {
   width: 100%;
   gap: 1rem;
   margin-bottom: 1rem;
+  background-color: var(--accent-color);
+  border-radius: 5px;
 }
 
 .form-group label {
-  color: var(--text-color);
+  color: var(--background-color);
   font-size: 1rem;
+  text-align: center;
   width: 20%;
+  margin: 10px;
+  height: auto;
   text-align: start;
 }
 
@@ -54,7 +59,7 @@ body {
   font-size: 5vw;
 }
 
-.login-view input {
+.form-group input {
   width: 80%;
   border: 1px solid var(--accent-color);
   border-radius: 5px;
@@ -62,15 +67,26 @@ body {
   height: 50px;
 }
 
-.login-view .btn {
+.form-group.dimensions input {
+  width: 24%;
+}
+
+.btn {
   background-color: var(--accent-color);
   color: white;
   border: none;
   font-size: 1rem;
   margin: 0;
-  padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.btn:hover {
+  color: var(--accent-color);
+  background-color: var(--background-color);
+  border: 1px solid var(--accent-color);
 }
 
 .login-view .btn:hover {
@@ -99,6 +115,7 @@ body {
 }
 
 .title-bar {
+  color: var(--background-color);
   background-color: var(--accent-color);
   width: 100%;
 }

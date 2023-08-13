@@ -1,24 +1,24 @@
-function Product() {
+function Product({ product }) {
   return (
     <div className="product">
-      <img
-        src="https://www.bigw.com.au/medias/sys_master/images/images/hb9/hb3/27923258376222.jpg"
-        alt=""
-      />
+      <img src={product.productImageURL} alt={product.productName} />
       <div className="product-info-container">
         <div className="product-info">
           <p className="product-code">
-            <span>Code: </span>156548
+            <span>Code: </span>
+            {product.productCode}
           </p>
-          <p className="product-name">Bright Starts Hug-a-bye Baby ​</p>
+          <p className="product-name">{product.productName}​</p>
         </div>
         <div className="product-price-stock">
-          <p className="product-price">$19.00</p>
+          <p className="product-price">{product.productPrice}</p>
           <p className="product-stock">
-            <span>In Stock: </span>15
+            <span>In Stock: </span>
+            {product.productQuantity}
           </p>
           <p className="product-stock">
-            <span>Assigned: </span>3
+            <span>Assigned: </span>
+            {product.productAssigned}
           </p>
         </div>
       </div>
