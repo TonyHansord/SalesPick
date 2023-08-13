@@ -9,9 +9,14 @@ import HomeView from './components/HomeView';
 import OrderList from './components/Orders/OrderList';
 import ProductList from './components/Products/ProductList';
 import CustomerList from './components/Customers/CustomerList';
+import LoginView from './components/Users/LoginView';
 
 function App() {
-  const [userRole, setUserRole] = useState('admin');
+  const [user, setUser] = useState({
+    name: '',
+    role: '',
+  });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const sections = [
     {
@@ -47,20 +52,40 @@ function App() {
   ];
 
   const viewableSections = sections.filter((section) =>
-    section.viewableToRole.includes(userRole)
+    section.viewableToRole.includes(user.role)
   );
 
   return (
     <div className="App">
-      {/* Sidebar */}
-      <SideNav sections={viewableSections} />
-      <Routes>
-        <Route path="/" element={<HomeView sections={viewableSections} />} />
-        <Route path="/orders" element={<OrderList />} />
-        <Route path="/products" element={<ProductList />} />
-        <Route path="/customers" element={<CustomerList />} />
-        <Route path="/users" element={<HomeView />} />
-      </Routes>
+      {isLoggedIn ? ( // if logged in display the side nav and home view
+        <>
+          <SideNav
+            sections={viewableSections}
+            setIsLoggedIn={setIsLoggedIn}
+            user={user}
+          />
+          <Routes>
+            <Route
+              path="/"
+              element={<HomeView sections={viewableSections} />}
+            />
+            <Route path="/orders" element={<OrderList />} />
+            <Route path="/products" element={<ProductList />} />
+            <Route path="/customers" element={<CustomerList />} />
+            <Route path="/users" element={<HomeView />} />
+          </Routes>
+        </>
+      ) : (
+        // if not logged in display the login page
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LoginView setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+            }
+          />
+        </Routes>
+      )}
     </div>
   );
 }

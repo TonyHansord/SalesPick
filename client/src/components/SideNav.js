@@ -4,7 +4,7 @@ import { useState } from 'react';
 import * as Icon from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
 
-function SideNav({ sections }) {
+function SideNav({ sections, setIsLoggedIn, user }) {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
@@ -52,7 +52,7 @@ function SideNav({ sections }) {
       >
         <div className="nav-links">{renderNavLinks()}</div>
 
-        <Link to="/login" className="login">
+        <Link to="/" className="login" onClick={() => setIsLoggedIn(false)}>
           <span className="d-sm-inline">
             <Button className="btn btn-outline-secondary btn-sm nav-section">
               Logout
@@ -63,7 +63,7 @@ function SideNav({ sections }) {
 
       <div id="user">
         <Icon.PersonCircle className="user-icon" />
-        <span className="user-name">John Doe</span>
+        <span className="user-name">{user.name}</span>
       </div>
     </nav>
   );

@@ -14,6 +14,65 @@ body {
   grid-template-columns: 1fr 4fr;
 }
 
+.login-view {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  gap: 10vw;
+  margin-top: 10vh;
+  background-color: var(--background-color);
+}
+
+.login-view form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 100vh;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  color: var(--text-color);
+  font-size: 1rem;
+  width: 20%;
+  text-align: start;
+}
+
+.login-view h1 {
+  color: var(--text-color);
+  font-size: 5vw;
+}
+
+.login-view input {
+  width: 80%;
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
+  font-size: 1rem;
+  height: 50px;
+}
+
+.login-view .btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .main-view {
   display: flex;
   flex-direction: column;
@@ -121,5 +180,13 @@ select {
 
   .top-container h3 {
     font-size: 5vw;
+  }
+
+  .login-view h1 {
+    font-size: 8vw;
+  }
+
+  .login-view form {
+    width: 80%;
   }
 }
