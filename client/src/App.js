@@ -10,6 +10,7 @@ import OrderList from './components/Orders/OrderList';
 import ProductList from './components/Products/ProductList';
 import CustomerList from './components/Customers/CustomerList';
 import LoginView from './components/Users/LoginView';
+import UserManagement from './components/Users/UserManagement';
 
 function App() {
   const [user, setUser] = useState({
@@ -72,7 +73,7 @@ function App() {
             <Route path="/orders" element={<OrderList />} />
             <Route path="/products" element={<ProductList />} />
             <Route path="/customers" element={<CustomerList />} />
-            <Route path="/users" element={<HomeView />} />
+            <Route path="/users" element={<UserManagement />} />
           </Routes>
         </>
       ) : (

@@ -73,6 +73,20 @@ body {
   cursor: pointer;
 }
 
+.login-view .btn:hover {
+  background-color: #4a9cb7;
+}
+
+.action-button.btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  font-size: 1vw;
+  margin: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .main-view {
   display: flex;
   flex-direction: column;
@@ -118,7 +132,7 @@ body {
 .action-container {
   display: flex;
   padding: 20px 0;
-
+  align-items: center;
   justify-content: center;
   width: 50%;
 }
@@ -149,14 +163,36 @@ select {
 }
 
 .list-container {
-  /* display: grid;
-  flex-direction: column;
-  width: calc(100vw - 250px); */
+  font-size: 2vw;
   padding: 0;
   border: 2px solid var(--accent-color);
   border-radius: 5px;
   background-color: var(--background-color);
   color: white;
+}
+
+.list-container table {
+  color: var(--text-color);
+  margin: 0;
+  width: 100%;
+}
+
+.list-container table th {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px;
+  text-align: start;
+}
+
+.list-container table td {
+  padding: 10px;
+  text-align: start;
+  border: 1px solid var(--accent-color);
+  width: 20%;
+}
+
+.list-container table tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 @media screen and (max-width: 578px) {
