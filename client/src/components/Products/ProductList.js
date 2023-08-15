@@ -40,14 +40,13 @@ function ProductList() {
   ];
 
   const [productList, setProductList] = useState(products);
+  const [showModal, setShowModal] = useState(false);
 
   const renderProducts = () => {
     return productList.map((product) => {
       return <Product key={product} product={product} />;
     });
   };
-
-  const [showModal, setShowModal] = useState(false);
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);

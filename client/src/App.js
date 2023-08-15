@@ -11,6 +11,7 @@ import ProductList from './components/Products/ProductList';
 import CustomerList from './components/Customers/CustomerList';
 import LoginView from './components/Users/LoginView';
 import UserManagement from './components/Users/UserManagement';
+import CustomerView from './components/Customers/CustomerView';
 
 function App() {
   const [user, setUser] = useState({
@@ -18,6 +19,7 @@ function App() {
     role: '',
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedCustomer, setSelectedCustomer] = useState({});
 
   const navigate = useNavigate();
 
@@ -80,7 +82,16 @@ function App() {
             />
             <Route path="/orders" element={<OrderList />} />
             <Route path="/products" element={<ProductList />} />
-            <Route path="/customers" element={<CustomerList />} />
+            <Route
+              path="/customers"
+              element={
+                <CustomerList setSelectedCustomer={setSelectedCustomer} />
+              }
+            />
+            <Route
+              path="/customers/:id"
+              element={<CustomerView customer={selectedCustomer} />}
+            />
             <Route path="/users" element={<UserManagement />} />
           </Routes>
         </>
