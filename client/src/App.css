@@ -195,6 +195,8 @@ select {
 }
 
 .list-container table th {
+  font-size: 1rem;
+  font-weight: bold;
   background-color: var(--accent-color);
   color: white;
   padding: 10px;
@@ -202,6 +204,7 @@ select {
 }
 
 .list-container table td {
+  font-size: 1rem;
   padding: 10px;
   text-align: start;
   border: 1px solid var(--accent-color);
