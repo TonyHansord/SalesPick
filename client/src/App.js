@@ -14,20 +14,29 @@ import UserManagement from './components/Users/UserManagement';
 import CustomerView from './components/Customers/CustomerView';
 
 function App() {
-  const [user, setUser] = useState({
-    name: '',
-    role: '',
-  });
+  const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState({});
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login');
-    }
-  }, [isLoggedIn, navigate]);
+    fetch('/user')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.username) {
+          setUser(data);
+          setIsLoggedIn(true);
+          navigate('/');
+        } else {
+          setUser('');
+          setIsLoggedIn(false);
+          navigate('/login');
+        }
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const sections = [
     {
@@ -74,6 +83,7 @@ function App() {
             sections={viewableSections}
             setIsLoggedIn={setIsLoggedIn}
             user={user}
+            setUser={setUser}
           />
           <Routes>
             <Route

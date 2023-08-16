@@ -1,13 +1,28 @@
 import './SideNav.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import * as Icon from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
 
-function SideNav({ sections, setIsLoggedIn, user }) {
+function SideNav({ sections, setIsLoggedIn, user, setUser }) {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    fetch('/logout', {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.message);
+        setUser({});
+        setIsLoggedIn(false);
+        navigate('/login');
+      });
+  };
 
   const renderNavLinks = () => {
     return sections.map((section) => {
@@ -52,7 +67,7 @@ function SideNav({ sections, setIsLoggedIn, user }) {
       >
         <div className="nav-links">{renderNavLinks()}</div>
 
-        <Link to="/" className="login" onClick={() => setIsLoggedIn(false)}>
+        <Link to="/" className="login" onClick={handleLogout}>
           <span className="d-sm-inline">
             <Button className="btn-outline-secondary btn-sm nav-section">
               Logout
@@ -63,7 +78,7 @@ function SideNav({ sections, setIsLoggedIn, user }) {
 
       <div id="user">
         <Icon.PersonCircle className="user-icon" />
-        <span className="user-name">{user.name}</span>
+        <span className="user-name">{user.username}</span>
       </div>
     </nav>
   );

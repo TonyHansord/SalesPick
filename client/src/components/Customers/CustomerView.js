@@ -8,40 +8,24 @@ function CustomerView({ customer }) {
       <div className="main-container">
         <div className="top-container">
           <div className="details-container">
-            <h3>Customer Details</h3>
+            <h3>{customer.name}</h3>
             <div className="details">
-              <div className="detail">
-                <h4>Customer Name</h4>
-                <p>{customer.name}</p>
-              </div>
-              <div className="detail">
-                <h4>Customer ID</h4>
-                <p>{customer.id}</p>
-              </div>
-              <div className="detail">
-                <h4>Address</h4>
-                <p>{customer.address}</p>
-              </div>
-              <div className="detail">
-                <h4>Suburb</h4>
-                <p>{customer.suburb}</p>
-              </div>
-              <div className="detail">
-                <h4>State</h4>
-                <p>{customer.state}</p>
-              </div>
-              <div className="detail">
-                <h4>Postcode</h4>
-                <p>{customer.postcode}</p>
-              </div>
-              <div className="detail">
-                <h4>Phone</h4>
-                <p>{customer.phone}</p>
-              </div>
-              <div className="detail">
-                <h4>Email</h4>
-                <p>{customer.email}</p>
-              </div>
+              <p>
+                <span className="bold-detail">ID: </span>
+                {customer.id}
+              </p>
+              <p>
+                <span className="bold-detail">Address: </span>
+                {`${customer.address} ${customer.suburb} ${customer.state} ${customer.postcode}`}
+              </p>
+              <p>
+                <span className="bold-detail">Phone: </span>
+                {customer.phone}
+              </p>
+              <p>
+                <span className="bold-detail">Email: </span>
+                {customer.email}
+              </p>
             </div>
           </div>
           <div className="action-container">

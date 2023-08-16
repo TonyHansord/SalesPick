@@ -3,20 +3,32 @@ import { useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 
 function LoginView({ setUser, setIsLoggedIn }) {
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setUser({
-      name: name,
-      role: 'admin',
-    });
 
-    setIsLoggedIn(true);
-    navigate('/');
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.username) {
+          console.log(data);
+          setUser(data);
+          setIsLoggedIn(true);
+          navigate('/');
+        } else {
+          alert('Invalid username or password');
+        }
+      });
   };
 
   return (
@@ -32,8 +44,8 @@ function LoginView({ setUser, setIsLoggedIn }) {
             type="text"
             placeholder="Enter name"
             name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <Form.Control.Feedback type="invalid">
             Please provide a valid name.

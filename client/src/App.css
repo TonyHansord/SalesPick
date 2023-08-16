@@ -212,6 +212,10 @@ select {
   background-color: #f2f2f2;
 }
 
+.bold-detail {
+  font-weight: bold;
+}
+
 @media screen and (max-width: 578px) {
   .App {
     grid-template-columns: 1fr;
