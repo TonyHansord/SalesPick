@@ -1,16 +1,21 @@
-function User({ user }) {
+import { useNavigate } from 'react-router-dom';
+
+function User({ user, setSelectedUser }) {
+  const navigate = useNavigate();
+
+  const handleClickUser = () => {
+    setSelectedUser(user);
+    navigate(`/users/${user.id}`);
+  };
+
   return (
-    <tr>
+    <tr onClick={handleClickUser}>
       <td>{user.username}</td>
       <td>{user.first_name}</td>
       <td>{user.last_name}</td>
       <td>{user.role.charAt(0).toUpperCase() + user.role.slice(1)}</td>
       {/* <td>
-        <div className="user-action-container">
-          <button className="action-button btn">Update Details</button>
-          <button className="action-button btn">Reset Password</button>
-          <button className="action-button btn">Delete</button>
-        </div>
+       
       </td> */}
     </tr>
   );

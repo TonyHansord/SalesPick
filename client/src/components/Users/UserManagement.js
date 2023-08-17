@@ -5,7 +5,7 @@ import User from './User';
 import { useEffect, useState } from 'react';
 import UserModal from './UserModal';
 
-function UserManagement() {
+function UserManagement({ setSelectedUser }) {
   const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [direction, setDirection] = useState('asc');
@@ -43,7 +43,9 @@ function UserManagement() {
 
   const renderUsers = () => {
     return users.map((user) => {
-      return <User key={user.id} user={user} />;
+      return (
+        <User key={user.id} user={user} setSelectedUser={setSelectedUser} />
+      );
     });
   };
 

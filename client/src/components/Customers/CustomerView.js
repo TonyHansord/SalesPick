@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 function CustomerView({ customer }) {
   return (
     <div className="main-view">
-      <ViewTitleBar title="Customer List" />
+      <ViewTitleBar title={customer.name} />
       <div className="main-container">
         <div className="top-container">
           <div className="details-container">

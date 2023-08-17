@@ -12,11 +12,13 @@ import CustomerList from './components/Customers/CustomerList';
 import LoginView from './components/Users/LoginView';
 import UserManagement from './components/Users/UserManagement';
 import CustomerView from './components/Customers/CustomerView';
+import UserView from './components/Users/UserView';
 
 function App() {
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState({});
+  const [selectedUser, setSelectedUser] = useState({});
 
   const navigate = useNavigate();
 
@@ -102,7 +104,14 @@ function App() {
               path="/customers/:id"
               element={<CustomerView customer={selectedCustomer} />}
             />
-            <Route path="/users" element={<UserManagement />} />
+            <Route
+              path="/users"
+              element={<UserManagement setSelectedUser={setSelectedUser} />}
+            />
+            <Route
+              path="/users/:id"
+              element={<UserView user={selectedUser} />}
+            />
           </Routes>
         </>
       ) : (
