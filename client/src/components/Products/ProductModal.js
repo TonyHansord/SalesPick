@@ -13,14 +13,37 @@ function ProductModal({ show, handleCloseModal, setProductList }) {
     productWeight: 0,
     productQuantity: 0,
     productAssigned: 0,
-    productImageURL: '',
+    productImage: null,
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('submit');
     console.log(product);
-    setProductList((productList) => [...productList, product]);
+
+    const formData = new FormData();
+    formData.append('code', product.productCode);
+    formData.append('name', product.productName);
+    formData.append('category', product.productCategory);
+    formData.append('price', product.productPrice);
+    formData.append('length', product.productLength);
+    formData.append('width', product.productWidth);
+    formData.append('height', product.productHeight);
+    formData.append('weight', product.productWeight);
+    formData.append('current_stock', product.productQuantity);
+    formData.append('assigned_stock', product.productAssigned);
+    formData.append('product_image', product.productImage);
+
+    fetch('/products', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setProductList((productList) => [...productList, data]);
+      });
+
     handleCloseModal();
   };
 
@@ -129,14 +152,17 @@ function ProductModal({ show, handleCloseModal, setProductList }) {
           </Form.Group>
 
           <Form.Group className="form-group" controlId="productImageURL">
-            <Form.Label>Image URL</Form.Label>
+            <Form.Label>Image</Form.Label>
             <Form.Control
-              type="text"
-              value={product.productImageURL}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              multiple={false}
+              // value={product.productImageURL}
               onChange={(e) =>
-                setProduct({ ...product, productImageURL: e.target.value })
+                setProduct({ ...product, productImage: e.target.files[0] })
               }
-              placeholder="Image URL"
+              // placeholder="Image"
             />
           </Form.Group>
 

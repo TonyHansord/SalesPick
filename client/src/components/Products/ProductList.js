@@ -1,7 +1,7 @@
 import Product from './Product';
 import SearchBar from '../Utilities/SearchBar';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import './Product.css';
 import ProductModal from './ProductModal';
@@ -22,25 +22,17 @@ function ProductList() {
     },
   ];
 
-  let products = [
-    {
-      productCode: 'P001',
-      productName: 'Product 1',
-      productCategory: 'Category 1',
-      productDescription: 'Description 1',
-      productPrice: 100,
-      productQuantity: 10,
-      productAssigned: 0,
-      productLength: 10,
-      productWidth: 10,
-      productHeight: 10,
-      productWeight: 10,
-      productImageURL: 'https://via.placeholder.com/150',
-    },
-  ];
-
-  const [productList, setProductList] = useState(products);
+  const [productList, setProductList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    fetch('/products')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setProductList(data);
+      });
+  }, []);
 
   const renderProducts = () => {
     return productList.map((product) => {

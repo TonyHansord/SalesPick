@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  default_url_options :host => Rails.application.config.domain
+
+  resources :products
+
   get "/users", to: "users#index"
   get "/user", to: "users#show"
   post "/users", to: "users#create"
