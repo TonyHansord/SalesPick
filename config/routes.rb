@@ -1,8 +1,24 @@
 Rails.application.routes.draw do
   default_url_options :host => Rails.application.config.domain
-  resources :orders
-  resources :customers
-  resources :products
+
+  get "/products", to: "products#index"
+  get "/products/:id", to: "products#show"
+  post "/products", to: "products#create"
+  patch "/products/:id", to: "products#update"
+  delete "/products/:id", to: "products#destroy"
+
+  get "/orders", to: "orders#index"
+  get "/orders/:id", to: "orders#show"
+  post "/orders", to: "orders#create"
+  patch "/orders/:id", to: "orders#update"
+  patch "/orders/:id/assign", to: "orders#assign"
+  delete "/orders/:id", to: "orders#destroy"
+
+  get "/customers", to: "customers#index"
+  get "/customers/:id", to: "customers#show"
+  post "/customers", to: "customers#create"
+  patch "/customers/:id", to: "customers#update"
+  delete "/customers/:id", to: "customers#destroy"
 
   get "/users", to: "users#index"
   get "/user", to: "users#show"

@@ -23,6 +23,24 @@ class OrdersController < ApplicationController
     render json: @order
   end
 
+  def update
+    @order = Order.find_by_id(params[:id])
+    @order.update(order_params)
+    render json: @order
+  end
+
+  def assign
+    @order = Order.find_by_id(params[:id])
+    @order.update(order_params)
+    render json: Order.all
+  end
+
+  def destroy
+    @order = Order.find_by_id(params[:id])
+    @order.destroy
+    render json: @order
+  end
+
   private
 
   def order_params

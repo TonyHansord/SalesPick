@@ -1,4 +1,4 @@
-import { ViewTitleBar } from '../ViewTitleBar';
+import ViewTitleBar from '../Utilities/ViewTitleBar';
 
 function SalesView() {
   return (

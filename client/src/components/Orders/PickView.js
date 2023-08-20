@@ -1,4 +1,4 @@
-import { ViewTitleBar } from '../ViewTitleBar';
+import ViewTitleBar from '../Utilities/ViewTitleBar';
 
 function PickView() {
   return (
@@ -6,7 +6,6 @@ function PickView() {
       <ViewTitleBar title="Pick View" />
       <div className="main-container">
         <div className="top-container"></div>
-        
 
         <div className="bottom-container">
           <div className="Items">

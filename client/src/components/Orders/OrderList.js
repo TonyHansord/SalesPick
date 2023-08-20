@@ -43,6 +43,10 @@ function OrderList() {
   ];
 
   const [orderList, setOrderList] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [selectedOrders, setSelectedOrders] = useState([]);
+  const [selectedUser, setSelectedUser] = useState([]);
+  const [selectedPriority, setSelectedPriority] = useState('');
 
   useEffect(() => {
     fetch('/orders')
@@ -53,12 +57,82 @@ function OrderList() {
       });
   }, []);
 
-  const renderOrders = () => {
-    return orderList.map((order) => {
-      return <Order key={order} order={order} />;
+  useEffect(() => {
+    fetch('/users')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUsers(data);
+      });
+  }, []);
+
+  const renderUsers = () => {
+    return users.map((user) => {
+      return (
+        <option key={user.id} value={user.full_name}>
+          {user.full_name}
+        </option>
+      );
     });
   };
 
+  const renderOrders = () => {
+    return orderList.map((order) => {
+      return (
+        <Order
+          key={order}
+          order={order}
+          setSelectedOrders={setSelectedOrders}
+        />
+      );
+    });
+  };
+
+  const assignPriority = (priority) => {
+    console.log(priority);
+    console.log(selectedOrders);
+
+    selectedOrders.forEach((order) => {
+      fetch(`/orders/${order.id}/assign`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          priority: priority,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setOrderList(data);
+        });
+    });
+  };
+
+  const assignUser = (user_name) => {
+    let user = users.find((user) => {
+      return user.full_name === user_name;
+    });
+
+    console.log(user);
+    console.log(selectedOrders);
+
+    selectedOrders.forEach((order) => {
+      fetch(`/orders/${order.id}/assign`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          assigned_to: user,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setOrderList(data);
+        });
+    });
+  };
 
   return (
     <div className="main-view">
@@ -70,22 +144,37 @@ function OrderList() {
             <h3>Assign</h3>
             <div className="assign">
               <Form.Label>Priority</Form.Label>
-              <Form.Select id="select-priority" className="select">
-                <option value="all">All</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
+              <Form.Select
+                id="select-priority"
+                className="select"
+                onChange={(e) => setSelectedPriority(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
               </Form.Select>
+              <button
+                type="button"
+                onClick={() => assignPriority(selectedPriority)}
+              >
+                Assign
+              </button>
             </div>
             <div className="assign">
               <Form.Label>User</Form.Label>
-              <Form.Select id="select-assigned-to" className="select">
-                <option value="all">All</option>
-                <option value="john-doe">John Doe</option>
-                <option value="jane-doe">Jane Doe</option>
+              <Form.Select
+                id="select-assigned-to"
+                className="select"
+                onChange={(e) => setSelectedUser(e.target.value)}
+              >
+                <option value=""></option>
+                {renderUsers()}
               </Form.Select>
+              <button type="button" onClick={() => assignUser(selectedUser)}>
+                Assign
+              </button>
             </div>
-            <button type="button">Assign</button>
           </div>
         </div>
         <Container id="order-list" className="list-container">
@@ -105,9 +194,7 @@ function OrderList() {
                 <th className="order-status">Order Status</th>
               </tr>
             </thead>
-            <tbody>
-      
-            </tbody>
+            <tbody>{renderOrders()}</tbody>
           </table>
         </Container>
       </div>

@@ -13,6 +13,8 @@ import LoginView from './components/Users/LoginView';
 import UserManagement from './components/Users/UserManagement';
 import CustomerView from './components/Customers/CustomerView';
 import UserView from './components/Users/UserView';
+import PickView from './components/Orders/PickView';
+import SalesView from './components/Orders/SalesView';
 
 function App() {
   const [user, setUser] = useState({});
@@ -93,6 +95,11 @@ function App() {
               element={<HomeView sections={viewableSections} />}
             />
             <Route path="/orders" element={<OrderList />} />
+            <Route
+              path="/orders/:id"
+              element={user.role === 'warehouse' ? <PickView /> : <SalesView />}
+            />
+
             <Route path="/products" element={<ProductList />} />
             <Route
               path="/customers"
