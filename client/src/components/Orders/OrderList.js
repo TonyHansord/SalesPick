@@ -1,5 +1,6 @@
 import SearchBar from '../Utilities/SearchBar';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
+import { useEffect, useState } from 'react';
 import './Orders.css';
 import Order from './Order';
 import { Container, Card, Form } from 'react-bootstrap';
@@ -40,6 +41,24 @@ function OrderList() {
       type: 'text',
     },
   ];
+
+  const [orderList, setOrderList] = useState([]);
+
+  useEffect(() => {
+    fetch('/orders')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setOrderList(data);
+      });
+  }, []);
+
+  const renderOrders = () => {
+    return orderList.map((order) => {
+      return <Order key={order} order={order} />;
+    });
+  };
+
 
   return (
     <div className="main-view">
@@ -87,9 +106,7 @@ function OrderList() {
               </tr>
             </thead>
             <tbody>
-              <Order />
-              <Order />
-              <Order />
+      
             </tbody>
           </table>
         </Container>

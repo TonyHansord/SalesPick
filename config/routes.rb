@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   default_url_options :host => Rails.application.config.domain
-
+  resources :orders
   resources :customers
   resources :products
 
