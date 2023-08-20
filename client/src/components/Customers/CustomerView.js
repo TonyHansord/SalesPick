@@ -2,8 +2,32 @@ import ViewTitleBar from '../Utilities/ViewTitleBar';
 import { Card } from 'react-bootstrap';
 
 function CustomerView({
-  customer: { id, name, address, phone_number, email },
+  customer: { id, name, address, phone_number, email, orders },
 }) {
+  const renderOrders = () => {
+    console.log(orders);
+
+    if (orders.length === 0) {
+      return (
+        <tr>
+          <td>No orders found</td>
+        </tr>
+      );
+    } else {
+      return orders.map((order) => {
+        return (
+          <tr key={order.id}>
+            <td>{order.id}</td>
+            <td>{order.created_at}</td>
+            <td>{order.first_product.name}</td>
+            <td>{order.order_total}</td>
+            <td>{order.status}</td>
+          </tr>
+        );
+      });
+    }
+  };
+
   return (
     <div className="main-view">
       <ViewTitleBar title={name} hasBackButton />
@@ -40,9 +64,18 @@ function CustomerView({
           <div className="orders-container">
             <h3>Orders</h3>
             <div className="orders">
-              <p>Order 1</p>
-              <p>Order 2</p>
-              <p>Order 3</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Order Date</th>
+                    <th>Product Name</th>
+                    <th>Order Total</th>
+                    <th>Order Status</th>
+                  </tr>
+                </thead>
+                <tbody>{renderOrders()}</tbody>
+              </table>
             </div>
           </div>
         </div>
