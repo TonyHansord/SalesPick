@@ -12,11 +12,11 @@ function Customer({ customer, setSelectedCustomer }) {
   return (
     <tr onClick={renderCustomerView}>
       <td>{customer.name}</td>
-      <td>{customer.address}</td>
-      <td>{customer.suburb}</td>
-      <td>{customer.state}</td>
-      <td>{customer.postcode}</td>
-      <td>{customer.phone}</td>
+      <td>{customer.address?.street}</td>
+      <td>{customer.address?.suburb}</td>
+      <td>{customer.address?.state}</td>
+      <td>{customer.address?.postcode}</td>
+      <td>{customer.phone_number}</td>
       <td>{customer.email}</td>
     </tr>
   );

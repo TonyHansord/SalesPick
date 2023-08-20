@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
 
-function SearchBar({ type, searchOptions }) {
+function SearchBar({ type, searchOptions, setSearchResults, data }) {
   const [search, setSearch] = useState('');
-  const [searchOption, setSearchOption] = useState(searchOptions[0].title);
-  const [searchType, setSearchType] = useState(searchOptions[0].type);
+  const [searchOption, setSearchOption] = useState(searchOptions[0]);
 
   const handleSearch = () => {
-    console.log(search);
+    const results = data.filter((item) =>
+      item[searchOption.key].includes(search)
+    );
+    console.log(results);
+    setSearchResults(results);
   };
 
   const handleSearchTypeChange = (e) => {
-    setSearchOption(e.target.value);
-    setSearchType(
-      searchOptions.find((option) => option.title === e.target.value).type
+    console.log(e.target.value);
+
+    const option = searchOptions.find(
+      (option) => option.title === e.target.value
     );
+
+    setSearchOption(option);
   };
 
   const renderSearchOptions = () => {
     return searchOptions.map((option) => {
       return (
-        <option key={option.title} value={option.title}>
+        <option key={option.key} value={option.title}>
           {option.title}
         </option>
       );
@@ -32,9 +38,9 @@ function SearchBar({ type, searchOptions }) {
       <h3>Search {type}</h3>
       <select onChange={handleSearchTypeChange}>{renderSearchOptions()}</select>
       <input
-        type={searchType}
+        type={searchOption.type}
         value={search}
-        placeholder={`Search ${type} by ${searchOption}`}
+        placeholder={`Search ${type} by ${searchOption.title}`}
         onChange={(e) => setSearch(e.target.value)}
       />
       <button type="button" onClick={handleSearch}>

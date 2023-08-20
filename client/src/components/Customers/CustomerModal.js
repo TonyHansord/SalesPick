@@ -3,9 +3,8 @@ import { useState } from 'react';
 
 function CustomerModal({ show, handleClose, setCustomerList }) {
   const [customer, setCustomer] = useState({
-    id: 0,
     name: '',
-    address: '',
+    street: '',
     suburb: '',
     state: '',
     postcode: '',
@@ -16,9 +15,30 @@ function CustomerModal({ show, handleClose, setCustomerList }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('submit');
-    console.log(customer);
-    setCustomer({ ...customer, id: Math.random() });
-    setCustomerList((customerList) => [...customerList, customer]);
+
+    fetch('/customers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: customer.name,
+        address: {
+          street: customer.street,
+          suburb: customer.suburb,
+          state: customer.state,
+          postcode: customer.postcode,
+        },
+        phone_number: customer.phone,
+        email: customer.email,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setCustomerList((customerList) => [...customerList, data]);
+      });
+
     handleClose();
   };
 
@@ -41,13 +61,13 @@ function CustomerModal({ show, handleClose, setCustomerList }) {
             />
           </Form.Group>
           <Form.Group className="form-group" controlId="customer-address">
-            <Form.Label>Address</Form.Label>
+            <Form.Label>Street</Form.Label>
             <Form.Control
               type="text"
               placeholder="Address"
-              value={customer.address}
+              value={customer.street}
               onChange={(e) =>
-                setCustomer({ ...customer, address: e.target.value })
+                setCustomer({ ...customer, street: e.target.value })
               }
             />
           </Form.Group>
