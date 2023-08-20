@@ -69,7 +69,30 @@ function OrderList() {
             <button type="button">Assign</button>
           </div>
         </div>
-        <Container id="order-list" className="list-container"></Container>
+        <Container id="order-list" className="list-container">
+          <table className="table">
+            <thead>
+              <tr>
+                <th className="select">
+                  <input type="checkbox" />
+                </th>
+                <th className="order-priority">Priority</th>
+                <th className="order-assigned-to">Assigned To</th>
+                <th className="order-id">Order ID</th>
+                <th className="order-customer">Customer Name</th>
+                <th className="order-product">Product Name</th>
+                <th className="order-date">Order Date</th>
+                <th className="order-total">Total</th>
+                <th className="order-status">Order Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <Order />
+              <Order />
+              <Order />
+            </tbody>
+          </table>
+        </Container>
       </div>
     </div>
   );

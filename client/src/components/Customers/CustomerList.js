@@ -17,22 +17,11 @@ function CustomerList({ setSelectedCustomer }) {
     },
   ];
 
-  let customers = [
-    {
-      id: 1,
-      name: 'John Doe',
-      address: '123 Main St',
-      suburb: 'San Diego',
-      state: 'CA',
-      postcode: '92101',
-      phone: '555-555-5555',
-      email: '',
-    },
-  ];
-
-  const [customerList, setCustomerList] = useState(customers);
-
+  const [customerList, setCustomerList] = useState({});
   const [showModal, setShowModal] = useState(false);
+
+
+
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -68,7 +57,7 @@ function CustomerList({ setSelectedCustomer }) {
               <th>Address</th>
               <th>Suburb</th>
               <th>State</th>
-              <th>Postcode Code</th>
+              <th>Postcode</th>
               <th>Phone Number</th>
               <th>Email</th>
             </tr>
