@@ -53,11 +53,10 @@ ActiveRecord::Schema.define(version: 2023_08_20_044347) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "priority"
+    t.integer "priority"
     t.bigint "user_id", null: false
     t.bigint "customer_id", null: false
-    t.string "status"
-    t.float "total"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
@@ -67,7 +66,6 @@ ActiveRecord::Schema.define(version: 2023_08_20_044347) do
   create_table "orders_products", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.bigint "product_id", null: false
-    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_orders_products_on_order_id"
@@ -94,7 +92,7 @@ ActiveRecord::Schema.define(version: 2023_08_20_044347) do
     t.string "first_name"
     t.string "last_name"
     t.string "username"
-    t.string "role"
+    t.integer "role"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
