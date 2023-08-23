@@ -109,7 +109,7 @@ function App() {
             />
             <Route
               path="/customers/:id"
-              element={<CustomerView customer={selectedCustomer} />}
+              element={<CustomerView user={user} customer={selectedCustomer} />}
             />
             <Route
               path="/users"

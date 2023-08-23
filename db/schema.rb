@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_20_044347) do
+ActiveRecord::Schema.define(version: 2023_08_23_105508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,32 @@ ActiveRecord::Schema.define(version: 2023_08_20_044347) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "items", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_items_on_product_id"
+  end
+
+  create_table "items_orders", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_items_orders_on_item_id"
+    t.index ["order_id"], name: "index_items_orders_on_order_id"
+  end
+
+  create_table "items_products", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_items_products_on_item_id"
+    t.index ["product_id"], name: "index_items_products_on_product_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "priority"
     t.bigint "user_id", null: false
@@ -61,15 +87,6 @@ ActiveRecord::Schema.define(version: 2023_08_20_044347) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-
-  create_table "orders_products", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.bigint "product_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_orders_products_on_order_id"
-    t.index ["product_id"], name: "index_orders_products_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -100,8 +117,11 @@ ActiveRecord::Schema.define(version: 2023_08_20_044347) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "items", "products"
+  add_foreign_key "items_orders", "items"
+  add_foreign_key "items_orders", "orders"
+  add_foreign_key "items_products", "items"
+  add_foreign_key "items_products", "products"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "users"
-  add_foreign_key "orders_products", "orders"
-  add_foreign_key "orders_products", "products"
 end

@@ -14,11 +14,7 @@ class OrdersController < ApplicationController
 
   def create
     customer = Customer.find_by_id(params[:customer_id])
-    products = params[:products]
     @order = customer.orders.create!(order_params)
-    products.each do |product|
-      @order.products << Product.find_by_id(product[:id])
-    end
 
     render json: @order
   end
@@ -44,6 +40,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:customer_id, :user, :status, :priority)
+    params.permit(:customer_id, :user_id, :status, :priority)
   end
 end

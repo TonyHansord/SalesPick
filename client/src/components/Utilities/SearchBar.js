@@ -6,9 +6,15 @@ function SearchBar({ type, searchOptions, setSearchResults, data }) {
   const [searchOption, setSearchOption] = useState(searchOptions[0]);
 
   const handleSearch = () => {
-    const results = data.filter((item) =>
-      item[searchOption.key].includes(search)
-    );
+    const searchKey = searchOption.key;
+
+    const results = data.filter((item) => {
+      if (searchKey === 'id') {
+        return item[searchKey] === parseInt(search);
+      } else {
+        return item[searchKey].includes(search);
+      }
+    });
     console.log(results);
     setSearchResults(results);
   };

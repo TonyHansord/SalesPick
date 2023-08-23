@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :items
   default_url_options :host => Rails.application.config.domain
 
   get "/products", to: "products#index"
