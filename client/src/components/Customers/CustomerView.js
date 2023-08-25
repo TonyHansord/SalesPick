@@ -1,28 +1,28 @@
 import ViewTitleBar from '../Utilities/ViewTitleBar';
 import { Card } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function CustomerView({
-  user,
-  customer: { id, name, address, phone_number, email, orders },
-}) {
+function CustomerView({ user, customer }) {
   const navigate = useNavigate();
-  const renderOrders = () => {
-    console.log(orders);
 
-    if (orders.length === 0) {
+  // for each order in customer.orders, render a row in the table
+  const renderOrders = () => {
+    console.log(customer.orders);
+
+    if (!customer.orders) {
       return (
         <tr>
           <td>No orders found</td>
         </tr>
       );
     } else {
-      return orders.map((order) => {
+      return customer.orders.map((order) => {
         return (
           <tr key={order.id} onClick={() => navigate(`/orders/${order.id}`)}>
             <td>{order.id}</td>
             <td>{order.created_at}</td>
-            <td>{order.first_product?.name}</td>
+            <td>{order.first_item}</td>
             <td>{order.order_total}</td>
             <td>{order.status}</td>
           </tr>
@@ -38,7 +38,7 @@ function CustomerView({
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        customer_id: id,
+        customer_id: customer.id,
         user_id: user.id,
         status: 0,
       }),
@@ -52,27 +52,27 @@ function CustomerView({
 
   return (
     <div className="main-view">
-      <ViewTitleBar title={name} hasBackButton />
+      <ViewTitleBar title={customer.name} hasBackButton />
       <div className="main-container">
         <div className="top-container">
           <div className="details-container">
-            <h3>{name}</h3>
+            <h3>{customer.name}</h3>
             <div className="details">
               <p>
                 <span className="bold-detail">ID: </span>
-                {id}
+                {customer.id}
               </p>
               <p>
                 <span className="bold-detail">Address: </span>
-                {`${address?.street} ${address?.suburb} ${address?.state} ${address?.postcode}`}
+                {`${customer.address?.street} ${customer.address?.suburb} ${customer.address?.state} ${customer.address?.postcode}`}
               </p>
               <p>
                 <span className="bold-detail">Phone: </span>
-                {phone_number}
+                {customer.phone_number}
               </p>
               <p>
                 <span className="bold-detail">Email: </span>
-                {email}
+                {customer.email}
               </p>
             </div>
           </div>

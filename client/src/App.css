@@ -192,7 +192,8 @@ select {
   padding: 20px;
 }
 
-.list-container {
+.list-container,
+.bottom-container {
   font-size: 2vw;
   padding: 0;
   border: 2px solid var(--accent-color);

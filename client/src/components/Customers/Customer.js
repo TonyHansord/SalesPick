@@ -5,6 +5,7 @@ function Customer({ customer, setSelectedCustomer }) {
   const navigate = useNavigate();
 
   const renderCustomerView = () => {
+    console.log(customer)
     setSelectedCustomer(customer);
     navigate(`/customers/${customer.id}`);
   };

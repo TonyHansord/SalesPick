@@ -31,7 +31,7 @@ function Order({ order, setSelectedOrders }) {
         <Link to={`${order.id}`}>{order.id}</Link>
       </td>
       <td className="order-customer">{order.customer.name}</td>
-      <td className="order-product">{order.first_item.product.name}</td>
+      <td className="order-product">{order.first_item}</td>
       <td className="order-date">{order.created_at}</td>
       <td className="order-total">${order.order_total}</td>
       <td className="order-status">{order.status}</td>

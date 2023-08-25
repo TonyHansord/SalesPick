@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
 
-function SearchBar({ type, searchOptions, setSearchResults, data }) {
+function SearchBar({
+  type,
+  searchOptions,
+  setSearchResults,
+  data,
+  hasNoTitle,
+}) {
   const [search, setSearch] = useState('');
   const [searchOption, setSearchOption] = useState(searchOptions[0]);
 
@@ -41,7 +47,8 @@ function SearchBar({ type, searchOptions, setSearchResults, data }) {
 
   return (
     <div className="search-bar">
-      <h3>Search {type}</h3>
+      {!hasNoTitle ? <h3>Search {type}</h3> : null}
+
       <select onChange={handleSearchTypeChange}>{renderSearchOptions()}</select>
       <input
         type={searchOption.type}

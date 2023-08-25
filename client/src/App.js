@@ -32,7 +32,7 @@ function App() {
         if (data.username) {
           setUser(data);
           setIsLoggedIn(true);
-          navigate('/');
+          // navigate('/');
         } else {
           setUser('');
           setIsLoggedIn(false);
@@ -108,7 +108,7 @@ function App() {
               }
             />
             <Route
-              path="/customers/:id"
+              path="/customers/:customer_id"
               element={<CustomerView user={user} customer={selectedCustomer} />}
             />
             <Route
