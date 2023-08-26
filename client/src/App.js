@@ -109,7 +109,9 @@ function App() {
             />
             <Route
               path="/customers/:customer_id"
-              element={<CustomerView user={user} customer={selectedCustomer} />}
+              element={
+                <CustomerView user={user} customerID={selectedCustomer.id} />
+              }
             />
             <Route
               path="/users"

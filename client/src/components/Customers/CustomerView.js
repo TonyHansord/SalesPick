@@ -1,23 +1,39 @@
 import ViewTitleBar from '../Utilities/ViewTitleBar';
 import { Card } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function CustomerView({ user, customer }) {
+function CustomerView({ user, customerID }) {
   const navigate = useNavigate();
+  const params = useParams();
+  const [customer, setCustomer] = useState({});
+  const [customerOrders, setCustomerOrders] = useState([]);
+
+  console.log(params);
+  let id = params.customer_id ? params.customer_id : customerID;
+
+  useEffect(() => {
+    fetch(`/customers/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setCustomer(data);
+        setCustomerOrders(data.orders);
+      });
+  }, []);
 
   // for each order in customer.orders, render a row in the table
-  const renderOrders = () => {
-    console.log(customer.orders);
+  const renderOrders = (orders) => {
+    console.log(orders);
 
-    if (!customer.orders) {
+    if (!orders) {
       return (
         <tr>
           <td>No orders found</td>
         </tr>
       );
     } else {
-      return customer.orders.map((order) => {
+      return orders.map((order) => {
         return (
           <tr key={order.id} onClick={() => navigate(`/orders/${order.id}`)}>
             <td>{order.id}</td>
@@ -52,7 +68,7 @@ function CustomerView({ user, customer }) {
 
   return (
     <div className="main-view">
-      <ViewTitleBar title={customer.name} hasBackButton />
+      <ViewTitleBar title={customer?.name} hasBackButton />
       <div className="main-container">
         <div className="top-container">
           <div className="details-container">
@@ -96,7 +112,7 @@ function CustomerView({ user, customer }) {
                     <th>Order Status</th>
                   </tr>
                 </thead>
-                <tbody>{renderOrders()}</tbody>
+                <tbody>{renderOrders(customerOrders)}</tbody>
               </table>
             </div>
           </div>

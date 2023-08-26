@@ -80,7 +80,7 @@ function OrderList() {
     return orderList.map((order) => {
       return (
         <Order
-          key={order}
+          key={order.id}
           order={order}
           setSelectedOrders={setSelectedOrders}
         />

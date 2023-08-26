@@ -1,7 +1,10 @@
 :root {
   --background-color: white;
-  --accent-color: #5acbcd;
+  --accent-color: rgb(91, 203, 205);
   --text-color: #282c34;
+  --main-view-width: calc(100vw - 250px);
+  --main-view-height: 100vh;
+  --main-view-margin-left: 250px;
 }
 
 body {
@@ -106,8 +109,8 @@ body {
 .main-view {
   display: flex;
   flex-direction: column;
-  width: calc(100vw - 250px);
-  margin-left: 250px;
+  width: var(--main-view-width);
+  margin-left: var(--main-view-margin-left);
   align-items: flex-start;
   justify-content: flex-start;
   height: 100vh;
@@ -187,7 +190,7 @@ select {
 .main-container {
   display: flex;
   flex-direction: column;
-  width: calc(100vw - 250px);
+  width: var(--main-view-width);
   height: 100%;
   padding: 20px;
 }
@@ -199,7 +202,6 @@ select {
   border: 2px solid var(--accent-color);
   border-radius: 5px;
   background-color: var(--background-color);
-  color: white;
 }
 
 .list-container table {
