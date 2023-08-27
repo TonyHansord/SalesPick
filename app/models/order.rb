@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :customer
-  has_and_belongs_to_many :items
+  has_many :items
   has_many :products, through: :items
 
   enum status: [:pending, :in_progress, :complete]
@@ -12,6 +12,6 @@ class Order < ApplicationRecord
   end
 
   def order_total
-    products.sum(:price)
+    items.map { |item| item.product.price * item.quantity }.sum.round(2)
   end
 end

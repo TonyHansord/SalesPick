@@ -16,6 +16,12 @@ class ProductsController < ApplicationController
     render json: @product
   end
 
+  def update
+    @product = Product.find_by_id(params[:id])
+    @product.update(product_params)
+    render json: @product
+  end
+
   private
 
   def product_params

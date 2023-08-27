@@ -138,5 +138,44 @@ table td.select {
   height: 100%;
 } */
 
+.item-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  justify-content: space-between;
+  border: none;
+}
+
+.item-container .item-details {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  justify-content: space-between;
+  text-align: left;
+  padding: 0;
+  width: 40vw;
+  height: 50px;
+}
+
+.item-container p {
+  width: 100%;
+  margin: 0;
+  font-size: 1rem;
+  display: flex;
+}
+
+.item-heading {
+  font-weight: bold;
+  font-size: 1rem;
+  width: 70px;
+}
+
+.item-actions .card {
+  position: relative;
+  height: 50px;
+}
+
 @media screen and (max-width: 578px) {
 }
