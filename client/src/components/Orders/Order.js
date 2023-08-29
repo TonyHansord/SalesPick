@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-function Order({ order, setSelectedOrders }) {
+function Order({ order, setSelectedOrders, action }) {
   const [isSelected, setIsSelected] = useState(false);
 
   const handleChange = (e) => {

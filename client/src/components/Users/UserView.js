@@ -1,26 +1,27 @@
+import DetailsContainer from '../Utilities/DetailsContainer';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
 
 function UserView({ user }) {
+  const userDetails = [
+    {
+      title: 'Username',
+      value: user.username,
+    },
+    {
+      title: 'Full Name',
+      value: user.full_name,
+    },
+    {
+      title: 'Role',
+      value: user.role,
+    },
+  ];
+
   return (
     <div className="main-view">
       <ViewTitleBar title={user.full_name} hasBackButton={true} />
       <div className="top-container">
-        <div className="details-container">
-          <div className="details">
-            <p>
-              <span className="bold-detail">Username: </span>
-              {user.username}
-            </p>
-            <p>
-              <span className="bold-detail">Name: </span>
-              {user.full_name}
-            </p>
-            <p>
-              <span className="bold-detail">Role: </span>
-              {user.role}
-            </p>
-          </div>
-        </div>
+        <DetailsContainer data={userDetails} />
         <div className="action-container">
           <div className="user-action-container">
             <button className="action-button btn">Update Details</button>

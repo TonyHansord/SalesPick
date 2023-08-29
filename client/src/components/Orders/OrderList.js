@@ -3,9 +3,9 @@ import ViewTitleBar from '../Utilities/ViewTitleBar';
 import { useEffect, useState } from 'react';
 import './Orders.css';
 import Order from './Order';
-import { Container, Card, Form } from 'react-bootstrap';
+import { Container, Form } from 'react-bootstrap';
 
-function OrderList() {
+function OrderList({ action }) {
   const searchOptions = [
     {
       title: 'Priority',
@@ -82,6 +82,7 @@ function OrderList() {
         <Order
           key={order.id}
           order={order}
+          action={action}
           setSelectedOrders={setSelectedOrders}
         />
       );

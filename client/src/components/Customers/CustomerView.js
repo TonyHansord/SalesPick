@@ -20,7 +20,7 @@ function CustomerView({ user, customerID }) {
         setCustomer(data);
         setCustomerOrders(data.orders);
       });
-  }, []);
+  }, [id]);
 
   // for each order in customer.orders, render a row in the table
   const renderOrders = (orders) => {

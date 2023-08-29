@@ -26,6 +26,7 @@ function Item({ item, order, setOrderTotal }) {
             setOrderTotal(data.order_total);
           });
       });
+      
   }, [quantity]);
 
   return (

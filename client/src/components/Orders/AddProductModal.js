@@ -1,5 +1,5 @@
 import SearchBar from '../Utilities/SearchBar';
-import { Modal, Form, Card } from 'react-bootstrap';
+import { Modal, Card } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 function AddProductModal({ show, handleClose, orderID, order }) {

@@ -62,6 +62,12 @@ function App() {
       iconName: 'shop',
     },
     {
+      title: 'Picking',
+      url: '/picking',
+      viewableToRole: ['admin', 'warehouse'],
+      iconName: 'clipboard',
+    },
+    {
       title: 'Products',
       url: '/products',
       viewableToRole: ['admin', 'sales', 'warehouse'],
@@ -95,10 +101,9 @@ function App() {
               element={<HomeView sections={viewableSections} />}
             />
             <Route path="/orders" element={<OrderList />} />
-            <Route
-              path="/orders/:id"
-              element={user.role === 'warehouse' ? <PickView /> : <SalesView />}
-            />
+            <Route path="/orders/:id" element={<SalesView />} />
+            <Route path="/picking" element={<OrderList />} />
+            <Route path="/picking/:id" element={<PickView />} />
 
             <Route path="/products" element={<ProductList />} />
             <Route
