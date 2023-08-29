@@ -28,6 +28,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(:order_id, :product_id, :quantity)
+    params.permit(:order_id, :product_id, :quantity, :assigned_quantity, :picked_quantity)
   end
 end

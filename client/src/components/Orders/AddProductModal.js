@@ -2,7 +2,7 @@ import SearchBar from '../Utilities/SearchBar';
 import { Modal, Form, Card } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
-function AddProductModal({ show, handleClose, orderID }) {
+function AddProductModal({ show, handleClose, orderID, order }) {
   const [searchResults, setSearchResults] = useState([]);
   const [products, setProducts] = useState([]);
 
@@ -30,6 +30,7 @@ function AddProductModal({ show, handleClose, orderID }) {
       .then((data) => {
         console.log(data);
         setProducts(data);
+        setSearchResults(data);
       });
   }, []);
 
@@ -39,7 +40,7 @@ function AddProductModal({ show, handleClose, orderID }) {
       return (
         <Card key={product.id} id={product.id} onClick={handleAddItem}>
           <Card.Title>{product.name}</Card.Title>
-          <img src={product.product_image.url} />
+          <img src={product.product_image.url} alt={product.name} />
           <Card.Text>$ {product.price}</Card.Text>
           {/* <Card.Text>{product.code}</Card.Text> */}
         </Card>
@@ -63,11 +64,15 @@ function AddProductModal({ show, handleClose, orderID }) {
         product_id: targetID,
         quantity: 1,
         order_id: orderID,
+        assigned_quantity: 0,
+        picked_quantity: 0,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        order.items.push(data);
+        handleClose();
       });
   };
 

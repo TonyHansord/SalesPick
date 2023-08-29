@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_27_034301) do
+ActiveRecord::Schema.define(version: 2023_08_27_214912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2023_08_27_034301) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "order_id"
+    t.integer "assigned_quantity"
+    t.integer "picked_quantity"
     t.index ["order_id"], name: "index_items_on_order_id"
     t.index ["product_id"], name: "index_items_on_product_id"
   end
@@ -102,7 +104,6 @@ ActiveRecord::Schema.define(version: 2023_08_27_034301) do
     t.float "weight"
     t.integer "current_stock"
     t.integer "assigned_stock"
-    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

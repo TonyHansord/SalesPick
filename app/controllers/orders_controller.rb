@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by_id(params[:id])
-    render json: @order, include: [:items]
+    render json: @order, include: { :items => { product: [:product_image] } }, except: [:created_at, :updated_at]
   end
 
   def create

@@ -52,18 +52,34 @@ function SalesView() {
       .then((res) => res.json())
       .then((data) => {
         data.items.forEach((item) => {
-          fetch(`/products/${item.product.id}`, {
+          fetch(`/items/${item.id}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              assigned_stock: item.product.assigned_stock + item.quantity,
+              assigned_quantity: item.quantity,
             }),
           })
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
+
+              fetch(`/products/${item.product.id}`, {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  // add the difference between the new quantity and the old quantity to the assigned stock
+                  assigned_stock: item.product.assigned_stock + (item.quantity - item.assigned_quantity), 
+      
+                }),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  console.log(data);
+                });
             });
         });
       });
@@ -114,6 +130,7 @@ function SalesView() {
         show={isOpen}
         handleClose={handleCloseModal}
         orderID={params.id}
+        order={order}
       />
     </div>
   );

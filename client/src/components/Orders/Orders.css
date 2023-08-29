@@ -143,8 +143,18 @@ table td.select {
   flex-direction: row;
   gap: 20px;
   width: 100%;
+  height: 50px;
   justify-content: space-between;
   border: none;
+}
+
+.item-container .item-image {
+  position: relative;
+  display: flex;
+  background-color: transparent;
+  justify-content: space-between;
+  padding: 0;
+  object-fit: contain;
 }
 
 .item-container .item-details {
@@ -155,7 +165,18 @@ table td.select {
   justify-content: space-between;
   text-align: left;
   padding: 0;
-  width: 40vw;
+  width: 35vw;
+  height: 50px;
+}
+
+.item-stock {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: left;
+  padding: 0;
+  width: 15vw;
   height: 50px;
 }
 
@@ -174,6 +195,8 @@ table td.select {
 
 .item-actions .card {
   position: relative;
+  display: flex;
+  margin: 0;
   height: 50px;
 }
 

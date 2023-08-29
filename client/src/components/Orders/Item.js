@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 function Item({ item, order, setOrderTotal }) {
   const [quantity, setQuantity] = useState(item.quantity);
   const availableStock =
-    item.product.current_stock - item.product.assigned_stock;
+    (item.product.current_stock - item.product.assigned_stock) + item.assigned_quantity;
 
   useEffect(() => {
     fetch(`/items/${item.id}`, {
@@ -30,6 +30,9 @@ function Item({ item, order, setOrderTotal }) {
 
   return (
     <div className="item-container">
+      <div className="item-image">
+        <img src={item.product.product_image.url} alt={item.product.name} />
+      </div>
       <div className="item-details">
         <p>
           <span className="item-heading">Code: </span>

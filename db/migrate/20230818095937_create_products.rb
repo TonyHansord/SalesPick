@@ -11,7 +11,6 @@ class CreateProducts < ActiveRecord::Migration[6.1]
       t.float :weight
       t.integer :current_stock
       t.integer :assigned_stock
-      t.string :image
 
       t.timestamps
     end
