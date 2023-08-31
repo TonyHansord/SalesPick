@@ -34,7 +34,7 @@ function UserModal({ show, handleClose, setUsers }) {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleAddUser}>
-          <Form.Group controlId="userFirstName">
+          <Form.Group className="form-group" controlId="userFirstName">
             <Form.Label>First Name</Form.Label>
             <Form.Control
               type="text"
@@ -43,7 +43,7 @@ function UserModal({ show, handleClose, setUsers }) {
               onChange={(e) => setUser({ ...user, firstName: e.target.value })}
             />
           </Form.Group>
-          <Form.Group controlId="userLastName">
+          <Form.Group className="form-group" controlId="userLastName">
             <Form.Label>Last Name</Form.Label>
             <Form.Control
               type="text"
@@ -52,7 +52,7 @@ function UserModal({ show, handleClose, setUsers }) {
               onChange={(e) => setUser({ ...user, lastName: e.target.value })}
             />
           </Form.Group>
-          <Form.Group controlId="userUsername">
+          <Form.Group className="form-group" controlId="userUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control
               type="text"
@@ -61,7 +61,7 @@ function UserModal({ show, handleClose, setUsers }) {
               onChange={(e) => setUser({ ...user, username: e.target.value })}
             />
           </Form.Group>
-          <Form.Group controlId="userPassword">
+          <Form.Group className="form-group" controlId="userPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -70,7 +70,7 @@ function UserModal({ show, handleClose, setUsers }) {
               onChange={(e) => setUser({ ...user, password: e.target.value })}
             />
           </Form.Group>
-          <Form.Group controlId="userRole">
+          <Form.Group className="form-group" controlId="userRole">
             <Form.Label>Role</Form.Label>
             <Form.Control
               as="select"
