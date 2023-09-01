@@ -1,8 +1,20 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function Order({ order, setSelectedOrders, action }) {
   const [isSelected, setIsSelected] = useState(false);
+  const formattedDate = new Date(order.created_at).toLocaleDateString();
+  const [statusClass, setStatusClass] = useState('');
+
+  useEffect(() => {
+    if (order.status === 'pending') {
+      setStatusClass('order pending');
+    } else if (order.status === 'in_progress') {
+      setStatusClass('order in-progress');
+    } else if (order.status === 'completed') {
+      setStatusClass('order completed');
+    }
+  }, [order.status]);
 
   const handleChange = (e) => {
     console.log(e.target.checked);
@@ -21,40 +33,62 @@ function Order({ order, setSelectedOrders, action }) {
   };
 
   return (
-    <tr id='order-row-status'
-      className={
-        order.status === 'pending'
-          ? 'order pending'
-          : order.status === 'in_progress'
-          ? 'order in-progress'
-          : 'order completed'
-      }
-    >
-      <td className="select">
-        <input type="checkbox" name="assign" onChange={handleChange} />
-      </td>
-      <td className="order-priority">
-        {order.priority === 'high' ? (
-          <i className="fas fa-exclamation-circle high">High</i>
-        ) : order.priority === 'medium' ? (
-          <i className="fas fa-exclamation-circle medium">Medium</i>
-        ) : order.priority === 'low' ? (
-          <i className="fas fa-exclamation-circle low">Low</i>
-        ) : (
-          ''
-        )}
-      </td>
-      <td className="order-assigned-to">{order.user.full_name}</td>
-      <td className="order-id">
-        <Link to={`${order.id}`}>{order.id}</Link>
-      </td>
-      <td className="order-customer">{order.customer.name}</td>
-      <td className="order-product">{order.first_item}</td>
-      <td className="order-date">{order.created_at}</td>
-      {action === 'sales' ? (
-        <td className="order-total">${order.order_total}</td>
-      ) : null}
-    </tr>
+    <tbody>
+      
+      <tr id="order-row-details" className={statusClass}>
+        <td rowSpan={2} className="select">
+          <input type="checkbox" name="assign" onChange={handleChange} />
+        </td>
+        <td className="order-id">
+          <p>
+            Order ID:
+            <span>
+              <Link to={`${order.id}`}>{order.id}</Link>
+            </span>
+          </p>
+        </td>
+        <td className="order-date">{formattedDate}</td>
+        {action === 'sales' ? (
+          <td rowSpan={3} className="order-total">
+            ${order.order_total}
+          </td>
+        ) : null}
+      </tr>
+      <tr id="order-row-product" className={statusClass}>
+        <td colSpan={2} className="order-product">
+          {order.items[0].product.name}
+        </td>
+      </tr>
+
+      <tr id="order-row-priority" className={statusClass}>
+        <td className="order-priority">
+          <svg height="20" width="20">
+            <circle
+              cx="10"
+              cy="10"
+              r="10"
+              fill={
+                order.priority === 'high'
+                  ? '#ff0000'
+                  : order.priority === 'medium'
+                  ? '#ffa500'
+                  : order.priority === 'low'
+                  ? '#008000'
+                  : 'transparent'
+              }
+            />
+          </svg>
+        </td>
+
+        <td className="order-customer">
+          Customer:
+          {order.customer.name}
+        </td>
+        <td className="order-assigned-to">
+          {`Assigned To: ${order.user.full_name}`}
+        </td>
+      </tr>
+    </tbody>
   );
 }
 

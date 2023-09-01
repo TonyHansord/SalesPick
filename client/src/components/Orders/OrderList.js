@@ -3,7 +3,7 @@ import ViewTitleBar from '../Utilities/ViewTitleBar';
 import { useEffect, useState } from 'react';
 import './Orders.css';
 import Order from './Order';
-import { Container, Form } from 'react-bootstrap';
+import { Container, Form, Table } from 'react-bootstrap';
 
 function OrderList({ action }) {
   const searchOptions = [
@@ -179,25 +179,9 @@ function OrderList({ action }) {
           </div>
         </div>
         <Container id="order-list" className="list-container">
-          <table className="table">
-            <thead>
-              <tr>
-                <th className="select">
-                  <input type="checkbox" />
-                </th>
-                <th className="order-priority">Priority</th>
-                <th className="order-assigned-to">Assigned To</th>
-                <th className="order-id">Order ID</th>
-                <th className="order-customer">Customer Name</th>
-                <th className="order-product">Product Name</th>
-                <th className="order-date">Order Date</th>
-                {action === 'sales' ? (
-                  <th className="order-total">Total</th>
-                ) : null}
-              </tr>
-            </thead>
-            <tbody>{renderOrders()}</tbody>
-          </table>
+          <Table>
+            {renderOrders()}
+          </Table>
         </Container>
       </div>
     </div>
