@@ -3,9 +3,10 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_many :items
   has_many :products, through: :items
+  has_many_attached :order_images
 
   enum status: [:pending, :in_progress, :complete]
-  enum priority: [:low, :medium, :high]
+  enum priority: [:unassigned, :high, :medium, :low]
 
   def first_product
     items.first

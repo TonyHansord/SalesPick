@@ -164,18 +164,11 @@ body {
 
 .action-container {
   display: flex;
-  padding: 20px 0;
+  flex-wrap: wrap;
+  padding: 20px;
   align-items: center;
   justify-content: center;
   width: 50%;
-}
-
-.action-container .card {
-  margin: 0 10px;
-  width: 150px;
-  height: 150px;
-  text-align: center;
-  border: none;
 }
 
 select {
@@ -243,6 +236,27 @@ select {
 
 .bold-detail {
   font-weight: bold;
+}
+
+.card {
+  margin: 10px;
+  text-align: center;
+}
+
+.card.sml {
+  width: 6rem;
+  height: 6rem;
+  font-size: 1rem;
+}
+
+.card.med {
+  width: 8rem;
+  height: 8rem;
+}
+
+.card.lrg {
+  width: 10rem;
+  height: 10rem;
 }
 
 @media screen and (max-width: 578px) {

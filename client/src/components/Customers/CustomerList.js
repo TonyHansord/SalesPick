@@ -19,6 +19,16 @@ function CustomerList({ setSelectedCustomer }) {
     },
   ];
 
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  const actions = [
+    {
+      title: 'New Customer',
+      method: handleShowModal,
+    },
+  ];
+
   const [customerList, setCustomerList] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -32,14 +42,11 @@ function CustomerList({ setSelectedCustomer }) {
       });
   }, []);
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-
   const renderCustomers = () => {
     if (searchResults.length === 0) {
       return (
         <tr>
-          <td >No results found</td>
+          <td>No results found</td>
         </tr>
       );
     } else {
@@ -67,7 +74,7 @@ function CustomerList({ setSelectedCustomer }) {
             data={customerList}
           />
           <div className="action-container">
-            <Card className="card" onClick={handleShowModal}>
+            <Card className="card lrg" onClick={handleShowModal}>
               <Card.Title>New Customer</Card.Title>
             </Card>
           </div>

@@ -100,9 +100,9 @@ function App() {
               path="/"
               element={<HomeView sections={viewableSections} />}
             />
-            <Route path="/orders" element={<OrderList />} />
+            <Route path="/orders" element={<OrderList action="sales" />} />
             <Route path="/orders/:id" element={<SalesView />} />
-            <Route path="/picking" element={<OrderList />} />
+            <Route path="/picking" element={<OrderList action="picking" />} />
             <Route path="/picking/:id" element={<PickView />} />
 
             <Route path="/products" element={<ProductList />} />

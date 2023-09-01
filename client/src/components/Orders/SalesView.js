@@ -72,8 +72,9 @@ function SalesView() {
                 },
                 body: JSON.stringify({
                   // add the difference between the new quantity and the old quantity to the assigned stock
-                  assigned_stock: item.product.assigned_stock + (item.quantity - item.assigned_quantity), 
-      
+                  assigned_stock:
+                    item.product.assigned_stock +
+                    (item.quantity - item.assigned_quantity),
                 }),
               })
                 .then((res) => res.json())
@@ -111,10 +112,10 @@ function SalesView() {
             </div>
           </div>
           <div className="action-container">
-            <Card className="card" onClick={handleSaveOrder}>
+            <Card className="card med" onClick={handleSaveOrder}>
               <Card.Title>Save</Card.Title>
             </Card>
-            <Card className="card" onClick={handleShowModal}>
+            <Card className="card med" onClick={handleShowModal}>
               <Card.Title>Add Item</Card.Title>
             </Card>
           </div>

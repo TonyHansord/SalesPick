@@ -32,9 +32,7 @@
   border-radius: 0;
   color: white;
   padding: 20px;
-  margin: 20px;
-  height: 200px;
-  width: 200px;
+  margin: 10px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }

@@ -46,7 +46,7 @@ function OrderList({ action }) {
   const [users, setUsers] = useState([]);
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [selectedUser, setSelectedUser] = useState([]);
-  const [selectedPriority, setSelectedPriority] = useState('');
+  const [selectedPriority, setSelectedPriority] = useState(0);
 
   useEffect(() => {
     fetch('/orders')
@@ -148,7 +148,7 @@ function OrderList({ action }) {
               <Form.Select
                 id="select-priority"
                 className="select"
-                onChange={(e) => setSelectedPriority(e.target.value)}
+                onChange={(e) => setSelectedPriority(e.target.selectedIndex)}
               >
                 <option value=""></option>
                 <option value="High">High</option>
@@ -191,8 +191,9 @@ function OrderList({ action }) {
                 <th className="order-customer">Customer Name</th>
                 <th className="order-product">Product Name</th>
                 <th className="order-date">Order Date</th>
-                <th className="order-total">Total</th>
-                <th className="order-status">Order Status</th>
+                {action === 'sales' ? (
+                  <th className="order-total">Total</th>
+                ) : null}
               </tr>
             </thead>
             <tbody>{renderOrders()}</tbody>

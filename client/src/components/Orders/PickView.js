@@ -38,12 +38,27 @@ function PickView() {
       title: 'Generate Package',
       method: () => {
         console.log('Generate Package');
+        fetch(`/orders/${params.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            status: 1,
+          }),
+        });
       },
     },
     {
       title: 'Photos',
       method: () => {
         console.log('Photos');
+      },
+    },
+    {
+      title: 'Packages',
+      method: () => {
+        console.log('Packages');
       },
     },
     {
@@ -67,9 +82,10 @@ function PickView() {
     <div className="main-view">
       <ViewTitleBar title="Pick View" />
       <div className="main-container">
-        <div className="top-container"></div>
-        <DetailsContainer data={orderDetails} />
-        <ActionContainer actions={actions} />
+        <div className="top-container">
+          <DetailsContainer data={orderDetails} />
+          <ActionContainer actions={actions} cardSize={'sml'} />
+        </div>
         <div className="bottom-container">
           <div className="Items">
             <h3>Items</h3>

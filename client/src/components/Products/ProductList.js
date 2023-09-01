@@ -50,7 +50,7 @@ function ProductList() {
         <div className="top-container">
           <SearchBar type="products" searchOptions={searchOptions} />
           <div className="action-container">
-            <Card className="card" onClick={handleShowModal}>
+            <Card className="lrg" onClick={handleShowModal}>
               <Card.Title>New Product</Card.Title>
             </Card>
           </div>

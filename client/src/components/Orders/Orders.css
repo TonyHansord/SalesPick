@@ -200,6 +200,25 @@ table td.select {
   height: 50px;
 }
 
+.table > :not(caption) > * > * {
+  background-color: transparent;
+}
+
+#order-row-status.order.pending {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+#order-row-status.order.in-progress {
+  background-color: rgba(245, 233, 6, 0.443);
+  color: var(--text-color);
+}
+
+#order-row-status.order.completed {
+  background-color: rgba(6, 245, 6, 0.443);
+  color: var(--text-color);
+}
+
 @media screen and (max-width: 578px) {
 
 .item-container .item-image {

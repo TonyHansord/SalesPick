@@ -21,11 +21,29 @@ function Order({ order, setSelectedOrders, action }) {
   };
 
   return (
-    <tr className="order">
+    <tr id='order-row-status'
+      className={
+        order.status === 'pending'
+          ? 'order pending'
+          : order.status === 'in_progress'
+          ? 'order in-progress'
+          : 'order completed'
+      }
+    >
       <td className="select">
         <input type="checkbox" name="assign" onChange={handleChange} />
       </td>
-      <td className="order-priority">{order.priority}</td>
+      <td className="order-priority">
+        {order.priority === 'high' ? (
+          <i className="fas fa-exclamation-circle high">High</i>
+        ) : order.priority === 'medium' ? (
+          <i className="fas fa-exclamation-circle medium">Medium</i>
+        ) : order.priority === 'low' ? (
+          <i className="fas fa-exclamation-circle low">Low</i>
+        ) : (
+          ''
+        )}
+      </td>
       <td className="order-assigned-to">{order.user.full_name}</td>
       <td className="order-id">
         <Link to={`${order.id}`}>{order.id}</Link>
@@ -33,8 +51,9 @@ function Order({ order, setSelectedOrders, action }) {
       <td className="order-customer">{order.customer.name}</td>
       <td className="order-product">{order.first_item}</td>
       <td className="order-date">{order.created_at}</td>
-      <td className="order-total">${order.order_total}</td>
-      <td className="order-status">{order.status}</td>
+      {action === 'sales' ? (
+        <td className="order-total">${order.order_total}</td>
+      ) : null}
     </tr>
   );
 }

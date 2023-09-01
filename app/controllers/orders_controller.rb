@@ -40,6 +40,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:customer_id, :user_id, :status, :priority)
+    params.permit(:id, :customer_id, :user_id, :status, :priority)
   end
 end
