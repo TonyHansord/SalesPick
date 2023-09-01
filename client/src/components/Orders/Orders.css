@@ -205,9 +205,8 @@ table td.select {
 .item-container .item-image {
   position: relative;
   display: flex;
-  width 50px;
-  height 50px;
-  
+  width: 50px;
+  height: 50px;
   background-color: transparent;
   justify-content: space-between;
   padding: 0;
@@ -215,7 +214,7 @@ table td.select {
 }
 
 .addProduct .modal-dialog {
-margin-left 0;
+margin-left: 0;
 }
 
 
