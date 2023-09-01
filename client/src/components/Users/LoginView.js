@@ -38,7 +38,7 @@ function LoginView({ setUser, setIsLoggedIn }) {
       <Form noValidate onSubmit={handleLogin}>
         <h3>Login</h3>
         <Form.Group className="form-group" controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Control
             required
             type="text"

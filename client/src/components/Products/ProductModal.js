@@ -156,7 +156,6 @@ function ProductModal({ show, handleCloseModal, setProductList }) {
             <Form.Control
               type="file"
               accept="image/*"
-              capture="environment"
               multiple={false}
               // value={product.productImageURL}
               onChange={(e) =>
