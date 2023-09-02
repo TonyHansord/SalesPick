@@ -3,8 +3,8 @@ class PackagesController < ApplicationController
   skip_before_action :authorize, only: [:index, :show, :create]
 
   def index
-    @packages = Package.all
-    render json: @packages
+    packages = Package.all
+    render json: packages
   end
 
   def show
@@ -28,6 +28,6 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    params.permit(:order_id, :height, :width, :length, :weight)
+    params.permit(:order_id, :height, :width, :length, :weight, :package_items)
   end
 end

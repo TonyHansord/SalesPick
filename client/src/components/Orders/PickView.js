@@ -4,6 +4,7 @@ import ViewTitleBar from '../Utilities/ViewTitleBar';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Orders.css';
+import PhotosModal from './PhotosModal';
 
 function PickView() {
   const params = useParams();
@@ -16,7 +17,11 @@ function PickView() {
     status: '',
     order_total: 0,
     items: [],
+    order_images: [],
   });
+
+  const [currentPackageID, setCurrentPackageID] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const orderDetails = [
     {
@@ -31,6 +36,10 @@ function PickView() {
       title: 'Status',
       value: order.status,
     },
+    {
+      title: 'Package Number',
+      value: currentPackageID,
+    },
   ];
 
   const actions = [
@@ -38,21 +47,31 @@ function PickView() {
       title: 'Generate Package',
       method: () => {
         console.log('Generate Package');
-        fetch(`/orders/${params.id}`, {
-          method: 'PATCH',
+        fetch('/packages', {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            status: 1,
+            order_id: order.id,
+            height: 0,
+            width: 0,
+            length: 0,
+            weight: 0,
           }),
-        });
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setCurrentPackageID(data.id);
+          });
       },
     },
     {
       title: 'Photos',
       method: () => {
         console.log('Photos');
+        handleShowModal();
       },
     },
     {
@@ -78,6 +97,9 @@ function PickView() {
       });
   }, [params.id]);
 
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+
   return (
     <div className="main-view">
       <ViewTitleBar title="Pick View" />
@@ -102,6 +124,12 @@ function PickView() {
           </div>
         </div>
       </div>
+      <PhotosModal
+        order={order}
+        handleClose={handleCloseModal}
+        show={showModal}
+        setOrder={setOrder}
+      />
     </div>
   );
 }

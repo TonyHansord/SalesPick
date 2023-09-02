@@ -25,6 +25,12 @@ class OrdersController < ApplicationController
     render json: @order
   end
 
+  def add_photos 
+    @order = Order.find_by_id(params[:id])
+    @order.order_images.attach(params[:order_images])
+    render json: @order
+  end
+
   def assign
     @order = Order.find_by_id(params[:id])
     @order.update(order_params)
@@ -40,6 +46,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:id, :customer_id, :user_id, :status, :priority, :packages)
+    params.permit(:id, :customer_id, :user_id, :status, :priority, :packages, :order_images)
   end
 end

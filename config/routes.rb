@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/orders/:id", to: "orders#show"
   post "/orders", to: "orders#create"
   patch "/orders/:id", to: "orders#update"
+  post "/orders/:id/photos", to: "orders#add_photos"
   patch "/orders/:id/assign", to: "orders#assign"
   delete "/orders/:id", to: "orders#destroy"
 
