@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :customer
   has_many :items
   has_many :products, through: :items
+  has_many :packages, dependent: :destroy
   has_many_attached :order_images
 
   enum status: [:pending, :in_progress, :complete]

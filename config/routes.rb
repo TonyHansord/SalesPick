@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :package_items
+  resources :packages
   resources :items
   default_url_options :host => Rails.application.config.domain
 

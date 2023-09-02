@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function Order({ order, setSelectedOrders, action }) {
-  const [isSelected, setIsSelected] = useState(false);
   const formattedDate = new Date(order.created_at).toLocaleDateString();
   const [statusClass, setStatusClass] = useState('');
 
@@ -19,8 +18,6 @@ function Order({ order, setSelectedOrders, action }) {
   const handleChange = (e) => {
     console.log(e.target.checked);
     console.log(order);
-
-    setIsSelected(e.target.checked);
     setSelectedOrders((selectedOrders) => {
       if (e.target.checked) {
         return [...selectedOrders, order];
@@ -34,7 +31,6 @@ function Order({ order, setSelectedOrders, action }) {
 
   return (
     <tbody>
-      
       <tr id="order-row-details" className={statusClass}>
         <td rowSpan={2} className="select">
           <input type="checkbox" name="assign" onChange={handleChange} />
