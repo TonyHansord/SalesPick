@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Orders.css';
 import PhotosModal from './PhotosModal';
+import PickItem from './PickItem';
 
 function PickView() {
   const params = useParams();
@@ -100,6 +101,46 @@ function PickView() {
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
+  const addItemToPackage = (item) => {
+    console.log(item);
+    console.log(currentPackageID);
+
+    fetch('/package_items', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        package_id: currentPackageID,
+        product_id: item.product.id,
+        quantity: 1,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        fetch(`/items/${item.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            picked_quantity: item.picked_quantity + 1,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+      });
+  };
+
+  const renderItems = () => {
+    return order.items.map((item) => {
+      return <PickItem item={item} addItem={addItemToPackage} />;
+    });
+  };
+
   return (
     <div className="main-view">
       <ViewTitleBar title="Pick View" />
@@ -110,17 +151,7 @@ function PickView() {
         </div>
         <div className="bottom-container">
           <div className="Items">
-            <h3>Items</h3>
-            <div className="items">
-              {order.items.map((item) => {
-                return (
-                  <div className="item" key={item.id}>
-                    <p>{item.product.name}</p>
-                    <p>{item.quantity}</p>
-                  </div>
-                );
-              })}
-            </div>
+            <div className="items">{renderItems()}</div>
           </div>
         </div>
       </div>

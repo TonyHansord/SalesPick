@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Sales Pick",
+  "name": "Sales Pick Inventory Management System",
   "icons": [
     {
       "src": "favicon.ico",

@@ -29,6 +29,6 @@ class PackageItemsController < ApplicationController
     private
     
     def package_item_params
-        params.permit(:package_id, :item_id, :quantity)
+        params.permit(:package_id, :product_id, :quantity)
     end
 end
