@@ -111,6 +111,7 @@ function PickView() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        item_id: item.id,
         package_id: currentPackageID,
         product_id: item.product.id,
         quantity: 1,
@@ -119,20 +120,8 @@ function PickView() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        fetch(`/items/${item.id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            picked_quantity: item.picked_quantity + 1,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-      });
+      }
+    );
   };
 
   const renderItems = () => {
