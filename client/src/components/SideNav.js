@@ -7,6 +7,8 @@ import { Button } from 'react-bootstrap';
 function SideNav({ sections, setIsLoggedIn, user, setUser }) {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
+
+  console.log('nav rendered')
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
   const navigate = useNavigate();

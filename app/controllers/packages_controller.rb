@@ -25,6 +25,13 @@ class PackagesController < ApplicationController
     render json: @package
   end
 
+  def destroy
+    @order = Order.find_by_id(params[:order_id])
+    @package = Package.find_by_id(params[:id])
+    @package.destroy
+    render json: @order
+  end
+
   private
 
   def package_params

@@ -2,6 +2,7 @@ class OrderSerializer < ActiveModel::Serializer
   attributes :id, :priority, :status, :order_total, :created_at, :first_product, :user_id, :customer, :items, :packages, :order_images
   has_one :customer
   has_many :packages
+  has_many :package_items, through: :packages
   has_many :items
   has_one :user
 

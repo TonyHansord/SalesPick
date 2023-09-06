@@ -6,7 +6,7 @@ function PickItem({ item, addItem }) {
       <Card.Img src={item.product.product_image.url} />
       <Card.Body>
         <Card.Title>{item.product.name}</Card.Title>
-        <ListGroup horizontal variant="flush">
+        <ListGroup horizontal>
           <ListGroup.Item>
             <p className="item-heading">Code</p>
             <p>{item.product.code}</p>
@@ -24,9 +24,6 @@ function PickItem({ item, addItem }) {
       <Card.Footer>
         <button className="btn btn-primary" onClick={() => addItem(item)}>
           +
-        </button>
-        <button className="btn btn-primary" onClick={() => addItem(item)}>
-          -
         </button>
       </Card.Footer>
     </Card>

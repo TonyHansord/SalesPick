@@ -347,7 +347,6 @@ table td.order-total {
   width: 100px;
   height: 100px;
   background-color: transparent;
-
 }
 
 .card.pick-item .card-footer .btn {
@@ -357,7 +356,104 @@ table td.order-total {
   height: 50px;
 }
 
+.packages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  text-align: start;
+  border: none;
+}
+
+.packages .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  cursor: auto;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  background-color: var(--background-color);
+  border-radius: 5px;
+  border: 1px solid var(--accent-color);
+  color: var(--text-color);
+}
+
+.packages .card:hover {
+  transform: none;
+}
+
+.packages .package-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  text-align: start;
+  border: none;
+  border-radius: 0;
+}
+
+
+.packages .package-id {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+  font-size: medium;
+}
+
+.packages .list-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  text-align: start;
+  border: none;
+  border-radius: none;
+}
+
+.packages .list-group-item {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.packages .list-group-item .card-text {
+  font-size: small;
+  margin: 0;
+  width: 100%;
+}
+
+.packages .list-group-item .btn {
+  font-size: small;
+  margin: 0;
+  width: 10vw;
+}
+
+.packages.hidden {
+  display: none;
+}
+
 @media screen and (max-width: 578px) {
+
+
+  .packages .card
+  {
+    width: 100%;
+    height: 100%;
+  }
+
+  .packages .list-group-item .btn {
+    font-size: small;
+    margin: 0;
+    width: 30vw;
+  }
+
+
   .item-container .item-image {
     position: relative;
     display: flex;
@@ -396,5 +492,4 @@ table td.order-total {
     width: 100%;
     height: 50px;
   }
-
 }

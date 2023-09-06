@@ -1,11 +1,12 @@
 import DetailsContainer from '../Utilities/DetailsContainer';
 import ActionContainer from '../Utilities/ActionContainer';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Orders.css';
 import PhotosModal from './PhotosModal';
 import PickItem from './PickItem';
+import { ListGroup, Card, Button } from 'react-bootstrap';
 
 function PickView() {
   const params = useParams();
@@ -19,10 +20,12 @@ function PickView() {
     order_total: 0,
     items: [],
     order_images: [],
+    packages: [],
   });
 
   const [currentPackageID, setCurrentPackageID] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [packagesHidden, setPackagesHidden] = useState(true);
 
   const orderDetails = [
     {
@@ -65,6 +68,7 @@ function PickView() {
           .then((data) => {
             console.log(data);
             setCurrentPackageID(data.id);
+            fetchOrder();
           });
       },
     },
@@ -89,7 +93,7 @@ function PickView() {
     },
   ];
 
-  useEffect(() => {
+  const fetchOrder = useCallback(() => {
     fetch(`/orders/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -97,6 +101,10 @@ function PickView() {
         setOrder(data);
       });
   }, [params.id]);
+
+  useEffect(() => {
+    fetchOrder();
+  }, [fetchOrder]);
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
@@ -120,8 +128,29 @@ function PickView() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-      }
-    );
+        fetchOrder();
+      });
+  };
+
+  
+
+  const deletePackage = (id) => {
+    console.log('delete package');
+
+    fetch(`/packages/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: id,
+        order_id: order.id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        fetchOrder();
+      });
   };
 
   const renderItems = () => {
@@ -130,9 +159,40 @@ function PickView() {
     });
   };
 
+  const handleTogglePackages = () => {
+    console.log(packagesHidden)
+    setPackagesHidden(!packagesHidden);
+  };
+
+  const renderPackages = () => {
+    return order.packages.map((pack) => {
+      return (
+        <Card className="package">
+          <div className="package-id">Package ID: {pack.id}</div>
+          <div className="package-items">
+            <ListGroup>
+              {pack.package_items.map((item) => {
+                return (
+                  <ListGroup.Item>
+                    <Card.Text>{item.product_name}</Card.Text>
+                    <Card.Text>{item.quantity}</Card.Text>
+                    
+                    <Button>Remove</Button>
+                  </ListGroup.Item>
+                );
+              })}
+            </ListGroup>
+          </div>
+          <Button onClick={() => setCurrentPackageID(pack.id)}>Set as Active</Button>
+          <Button onClick={() => deletePackage(pack.id)}>Delete Package</Button>
+        </Card>
+      );
+    });
+  };
+
   return (
     <div className="main-view">
-      <ViewTitleBar title="Pick View" />
+      <ViewTitleBar title="Pick View" hasBackButton={true} />
       <div className="main-container">
         <div className="top-container">
           <DetailsContainer data={orderDetails} />
@@ -141,6 +201,12 @@ function PickView() {
         <div className="bottom-container">
           <div className="Items">
             <div className="items">{renderItems()}</div>
+          </div>
+          <Button className="Packages" onClick={handleTogglePackages}>
+            Packages
+          </Button>
+          <div className={packagesHidden ? 'packages hidden' : 'packages'}>
+            {order.packages.length > 0 ? renderPackages() : ''}
           </div>
         </div>
       </div>

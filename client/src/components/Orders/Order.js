@@ -52,7 +52,7 @@ function Order({ order, setSelectedOrders, action }) {
       </tr>
       <tr id="order-row-product" className={statusClass}>
         <td colSpan={2} className="order-product">
-          {order.items[0].product.name}
+          {order.items[0]?.product.name}
         </td>
       </tr>
 

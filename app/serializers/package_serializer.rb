@@ -1,3 +1,4 @@
 class PackageSerializer < ActiveModel::Serializer
-  attributes :id, :height, :width, :length, :package_items
+  attributes :id, :height, :width, :length, :weight, :package_items
+  has_many :package_items
 end

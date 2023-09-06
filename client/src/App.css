@@ -1,6 +1,6 @@
 :root {
   --background-color: white;
-  --accent-color: rgb(91, 203, 205);
+  --accent-color: rgb(64, 89, 87);
   --text-color: #282c34;
   --main-view-width: calc(100vw - 250px);
   --main-view-height: 100vh;
@@ -215,7 +215,7 @@ select {
   padding: 10px;
   text-align: start;
 }
-.list-container table > tr {
+.list-container table > td {
   border: 1px solid var(--accent-color);
 }
 
