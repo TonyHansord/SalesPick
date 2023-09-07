@@ -25,7 +25,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/user')
+    fetch('/api/user')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

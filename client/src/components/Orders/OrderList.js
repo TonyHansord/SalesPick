@@ -49,7 +49,7 @@ function OrderList({ action }) {
   const [selectedPriority, setSelectedPriority] = useState(0);
 
   useEffect(() => {
-    fetch('/orders')
+    fetch('/api/orders')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -58,7 +58,7 @@ function OrderList({ action }) {
   }, []);
 
   useEffect(() => {
-    fetch('/users')
+    fetch('/api/users')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -94,7 +94,7 @@ function OrderList({ action }) {
     console.log(selectedOrders);
 
     selectedOrders.forEach((order) => {
-      fetch(`/orders/${order.id}/assign`, {
+      fetch(`/api/orders/${order.id}/assign`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ function OrderList({ action }) {
     console.log(selectedOrders);
 
     selectedOrders.forEach((order) => {
-      fetch(`/orders/${order.id}/assign`, {
+      fetch(`/api/orders/${order.id}/assign`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

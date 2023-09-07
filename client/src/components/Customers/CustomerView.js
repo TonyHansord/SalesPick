@@ -13,7 +13,7 @@ function CustomerView({ user, customerID }) {
   let id = params.customer_id ? params.customer_id : customerID;
 
   useEffect(() => {
-    fetch(`/customers/${id}`)
+    fetch(`/api/customers/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -48,7 +48,7 @@ function CustomerView({ user, customerID }) {
   };
 
   const handleClickNewOrder = () => {
-    fetch('/orders', {
+    fetch('/api/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

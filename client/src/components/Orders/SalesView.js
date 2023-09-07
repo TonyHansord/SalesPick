@@ -22,7 +22,7 @@ function SalesView() {
   const params = useParams();
 
   useEffect(() => {
-    fetch(`/orders/${params.id}`)
+    fetch(`/api/orders/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -48,11 +48,11 @@ function SalesView() {
   const handleCloseModal = () => setIsOpen(false);
 
   const handleSaveOrder = () => {
-    fetch(`/orders/${params.id}`)
+    fetch(`/api/orders/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
         data.items.forEach((item) => {
-          fetch(`/items/${item.id}`, {
+          fetch(`/api/items/${item.id}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ function SalesView() {
             .then((data) => {
               console.log(data);
 
-              fetch(`/products/${item.product.id}`, {
+              fetch(`/api/products/${item.product.id}`, {
                 method: 'PATCH',
                 headers: {
                   'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ function SideNav({ sections, setIsLoggedIn, user, setUser }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    fetch('/logout', {
+    fetch('/api/logout', {
       method: 'DELETE',
     })
       .then((res) => res.json())

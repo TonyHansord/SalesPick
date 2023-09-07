@@ -16,7 +16,7 @@ function CustomerModal({ show, handleClose, setCustomerList }) {
     e.preventDefault();
     console.log('submit');
 
-    fetch('/customers', {
+    fetch('/api/customers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ function UserManagement({ setSelectedUser }) {
   const handleCloseModal = () => setShowModal(false);
 
   useEffect(() => {
-    fetch('/users')
+    fetch('/api/users')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

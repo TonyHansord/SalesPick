@@ -25,7 +25,7 @@ function AddProductModal({ show, handleClose, orderID, order }) {
   ];
 
   useEffect(() => {
-    fetch('/products')
+    fetch('/api/products')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -54,7 +54,7 @@ function AddProductModal({ show, handleClose, orderID, order }) {
     const targetID = parseInt(e.target.parentElement.id);
     console.log(targetID);
 
-    fetch('/items', {
+    fetch('/api/items', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

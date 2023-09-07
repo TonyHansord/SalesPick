@@ -20,7 +20,7 @@ function PhotosModal({ show, handleClose, order, setOrder }) {
     const formData = new FormData();
     formData.append('order_images', e.target.files[0]);
 
-    fetch(`/orders/${order.id}/photos`, {
+    fetch(`/api/orders/${order.id}/photos`, {
       method: 'POST',
       body: formData,
     })

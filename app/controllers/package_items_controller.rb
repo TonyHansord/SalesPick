@@ -68,7 +68,14 @@ class PackageItemsController < ApplicationController
 
   def update_dimensions
     package = Package.find_by_id(params[:package_id])
+    package_volume = package.length * package.width * package.height
     product = Product.find_by_id(params[:product_id])
-    package.update(length: product.length, width: product.width, height: product.height, weight: package.weight + product.weight)
+    product_volume = product.length * product.width * product.height
+
+    if package_volume < product_volume
+      package.update(length: product.length, width: product.width, height: product.height, weight: package.weight + product.weight)
+    else
+      package.update(weight: package.weight + product.weight)
+    end
   end
 end

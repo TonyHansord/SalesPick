@@ -51,7 +51,7 @@ function PickView() {
       title: 'Generate Package',
       method: () => {
         console.log('Generate Package');
-        fetch('/packages', {
+        fetch('/api/packages', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -80,12 +80,6 @@ function PickView() {
       },
     },
     {
-      title: 'Packages',
-      method: () => {
-        console.log('Packages');
-      },
-    },
-    {
       title: 'Complete',
       method: () => {
         console.log('Complete');
@@ -94,7 +88,7 @@ function PickView() {
   ];
 
   const fetchOrder = useCallback(() => {
-    fetch(`/orders/${params.id}`)
+    fetch(`/api/orders/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -113,7 +107,7 @@ function PickView() {
     console.log(item);
     console.log(currentPackageID);
 
-    fetch('/package_items', {
+    fetch('/api/package_items', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -132,12 +126,12 @@ function PickView() {
       });
   };
 
-  
+
 
   const deletePackage = (id) => {
     console.log('delete package');
 
-    fetch(`/packages/${id}`, {
+    fetch(`/api/packages/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -176,7 +170,6 @@ function PickView() {
                   <ListGroup.Item>
                     <Card.Text>{item.product_name}</Card.Text>
                     <Card.Text>{item.quantity}</Card.Text>
-                    
                     <Button>Remove</Button>
                   </ListGroup.Item>
                 );

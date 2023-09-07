@@ -34,7 +34,7 @@ function ProductModal({ show, handleCloseModal, setProductList }) {
     formData.append('assigned_stock', product.productAssigned);
     formData.append('product_image', product.productImage);
 
-    fetch('/products', {
+    fetch('/api/products', {
       method: 'POST',
       body: formData,
     })

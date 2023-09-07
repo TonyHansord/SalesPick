@@ -26,7 +26,7 @@ function ProductList() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetch('/products')
+    fetch('/api/products')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

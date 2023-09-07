@@ -34,7 +34,7 @@ function CustomerList({ setSelectedCustomer }) {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetch('/customers')
+    fetch('/api/customers')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
