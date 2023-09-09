@@ -1,11 +1,10 @@
-import CustomerView from './CustomerView';
 import { useNavigate } from 'react-router-dom';
 
 function Customer({ customer, setSelectedCustomer }) {
   const navigate = useNavigate();
 
   const renderCustomerView = () => {
-    console.log(customer)
+    console.log(customer);
     setSelectedCustomer(customer);
     navigate(`/customers/${customer.id}`);
   };

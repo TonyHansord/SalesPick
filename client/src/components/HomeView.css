@@ -42,7 +42,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 578px) {
+@media screen and (max-width: 768px) {
   #home-view {
     margin: 0;
     width: 100vw;

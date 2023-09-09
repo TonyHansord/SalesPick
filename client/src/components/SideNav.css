@@ -73,7 +73,7 @@
   color: white;
 }
 
-@media screen and (max-width: 578px) {
+@media screen and (max-width: 768px) {
   #side-nav {
     position: absolute;
     width: 100vw;

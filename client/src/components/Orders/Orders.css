@@ -395,7 +395,6 @@ table td.order-total {
   border-radius: 0;
 }
 
-
 .packages .package-id {
   background-color: var(--accent-color);
   color: white;
@@ -403,7 +402,7 @@ table td.order-total {
   width: 100%;
   text-align: center;
   border-radius: 5px 5px 0 0;
-  font-size: medium;
+  font-size: small;
 }
 
 .packages .list-group {
@@ -434,15 +433,49 @@ table td.order-total {
   width: 10vw;
 }
 
+.packages form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: space-evenly;
+  text-align: start;
+  border: none;
+  border-radius: none;
+}
+
+.packages form .form-group {
+  display: flex;
+  width: 20%;
+  gap: 10px;
+  margin: 0;
+}
+
+.packages form .form-group label {
+  display: flex;
+  width: 30%;
+  text-align: left;
+  align-items: center;
+  font-size: small;
+}
+
+.packages form .form-group .form-control {
+  width: 30%;
+  text-align: left;
+  font-size: small;
+}
+
+.packages form .btn {
+  font-size: small;
+  margin: 0;
+  width: 10vw;
+}
+
 .packages.hidden {
   display: none;
 }
 
-@media screen and (max-width: 578px) {
-
-
-  .packages .card
-  {
+@media screen and (max-width: 768px) {
+  .packages .card {
     width: 100%;
     height: 100%;
   }
@@ -452,7 +485,6 @@ table td.order-total {
     margin: 0;
     width: 30vw;
   }
-
 
   .item-container .item-image {
     position: relative;
@@ -491,5 +523,24 @@ table td.order-total {
     font-size: medium;
     width: 100%;
     height: 50px;
+  }
+
+  .packages form .form-group {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .packages form .form-group label {
+    display: flex;
+    width: 100%;
+    text-align: left;
+    align-items: center;
+    font-size: small;
+  }
+
+  .packages form .form-group .form-control {
+    width: 100%;
+    text-align: center;
+    font-size: small;
   }
 }

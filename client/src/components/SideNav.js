@@ -44,7 +44,7 @@ function SideNav({ sections, setIsLoggedIn, user, setUser }) {
   };
 
   return (
-    <nav id="side-nav" className="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav id="side-nav" className="navbar navbar-expand-md navbar-dark bg-dark">
       <button
         className="toggler navbar-toggler"
         type="button"

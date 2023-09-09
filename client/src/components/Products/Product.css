@@ -72,7 +72,7 @@
   text-align: center;
 }
 
-@media screen and (max-width: 578px) {
+@media screen and (max-width: 768px) {
   .product img {
     width: 20vw;
     height: 20vw;

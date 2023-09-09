@@ -22,15 +22,8 @@ function CustomerList({ setSelectedCustomer }) {
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-  const actions = [
-    {
-      title: 'New Customer',
-      method: handleShowModal,
-    },
-  ];
-
   const [customerList, setCustomerList] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(customerList);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -39,27 +32,20 @@ function CustomerList({ setSelectedCustomer }) {
       .then((data) => {
         console.log(data);
         setCustomerList(data);
+        setSearchResults(data);
       });
   }, []);
 
   const renderCustomers = () => {
-    if (searchResults.length === 0) {
+    return searchResults.map((customer) => {
       return (
-        <tr>
-          <td>No results found</td>
-        </tr>
+        <Customer
+          key={customer.id}
+          customer={customer}
+          setSelectedCustomer={setSelectedCustomer}
+        />
       );
-    } else {
-      return searchResults.map((customer) => {
-        return (
-          <Customer
-            key={customer.id}
-            customer={customer}
-            setSelectedCustomer={setSelectedCustomer}
-          />
-        );
-      });
-    }
+    });
   };
 
   return (

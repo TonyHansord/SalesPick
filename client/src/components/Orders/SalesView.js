@@ -107,7 +107,7 @@ function SalesView() {
               </p>
               <p>
                 <span className="bold-detail">Total: </span>
-                {`$ ${orderTotal.toFixed(2)}`}
+                {`$ ${orderTotal?.toFixed(2)}`}
               </p>
             </div>
           </div>

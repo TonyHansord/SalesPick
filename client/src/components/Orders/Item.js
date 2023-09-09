@@ -7,7 +7,7 @@ function Item({ item, order, setOrderTotal }) {
     (item.product.current_stock - item.product.assigned_stock) + item.assigned_quantity;
 
   useEffect(() => {
-    fetch(`/items/${item.id}`, {
+    fetch(`/api/items/${item.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -19,14 +19,14 @@ function Item({ item, order, setOrderTotal }) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        fetch(`/orders/${order.id}`)
+        fetch(`/api/orders/${order.id}`)
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
             setOrderTotal(data.order_total);
           });
       });
-      
+
   }, [quantity]);
 
   return (

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Modal, Form, Card } from 'react-bootstrap';
 
 function PhotosModal({ show, handleClose, order, setOrder }) {
@@ -6,8 +5,12 @@ function PhotosModal({ show, handleClose, order, setOrder }) {
     console.log(order.order_images);
 
     return order.order_images.length ? (
-      order.order_images.map((photo) => {
-        return <img src={photo} alt="product" />;
+      order.order_images.map((photo, index) => {
+        return (
+          <Card key={index}>
+            <Card.Img src={photo} />
+          </Card>
+        );
       })
     ) : (
       <p>No photos</p>

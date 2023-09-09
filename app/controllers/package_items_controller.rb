@@ -1,5 +1,5 @@
 class PackageItemsController < ApplicationController
-  skip_before_action :authorize, only: [:index, :show, :create]
+  skip_before_action :authorize, only: [:index, :show, :create, :destroy]
   wrap_parameters format: []
   before_action :check_package, only: [:create]
 
@@ -47,6 +47,22 @@ class PackageItemsController < ApplicationController
     render json: @package_item
   end
 
+  def destroy
+    @package_item = PackageItem.find_by_id(params[:id])
+
+    # Update the picked quantity of the item
+    item = Item.find_by_id(params[:item_id])
+    if @package_item.quantity > 1
+      @package_item.update(quantity: @package_item.quantity - 1)
+      item.update(picked_quantity: item.picked_quantity - 1)
+      render json: @package_item
+    else
+      @package_item.destroy
+      item.update(picked_quantity: item.picked_quantity - 1)
+      render json: { message: "Successfully deleted" }
+    end
+  end
+
   private
 
   def package_item_params
@@ -62,7 +78,6 @@ class PackageItemsController < ApplicationController
 
   def update_picked_quantity
     item = Item.find_by_id(params[:item_id])
-
     item.update(picked_quantity: item.picked_quantity + params[:quantity])
   end
 

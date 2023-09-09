@@ -6,7 +6,8 @@ import { useParams } from 'react-router-dom';
 import './Orders.css';
 import PhotosModal from './PhotosModal';
 import PickItem from './PickItem';
-import { ListGroup, Card, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import Package from './Package';
 
 function PickView() {
   const params = useParams();
@@ -91,7 +92,10 @@ function PickView() {
     fetch(`/api/orders/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        const lastID = data.packages[data.packages.length - 1]
+          ? data.packages[data.packages.length - 1].id
+          : '';
+        setCurrentPackageID(lastID);
         setOrder(data);
       });
   }, [params.id]);
@@ -126,8 +130,6 @@ function PickView() {
       });
   };
 
-
-
   const deletePackage = (id) => {
     console.log('delete package');
 
@@ -147,38 +149,32 @@ function PickView() {
       });
   };
 
+  const setActivePackage = (id) => setCurrentPackageID(id);
+
   const renderItems = () => {
-    return order.items.map((item) => {
-      return <PickItem item={item} addItem={addItemToPackage} />;
+    return order.items.map((item, index) => {
+      return <PickItem key={index} item={item} addItem={addItemToPackage} />;
     });
   };
 
   const handleTogglePackages = () => {
-    console.log(packagesHidden)
+    console.log(packagesHidden);
     setPackagesHidden(!packagesHidden);
   };
 
   const renderPackages = () => {
-    return order.packages.map((pack) => {
+    return order.packages.map((pack, index) => {
+      console.log(pack)
+
       return (
-        <Card className="package">
-          <div className="package-id">Package ID: {pack.id}</div>
-          <div className="package-items">
-            <ListGroup>
-              {pack.package_items.map((item) => {
-                return (
-                  <ListGroup.Item>
-                    <Card.Text>{item.product_name}</Card.Text>
-                    <Card.Text>{item.quantity}</Card.Text>
-                    <Button>Remove</Button>
-                  </ListGroup.Item>
-                );
-              })}
-            </ListGroup>
-          </div>
-          <Button onClick={() => setCurrentPackageID(pack.id)}>Set as Active</Button>
-          <Button onClick={() => deletePackage(pack.id)}>Delete Package</Button>
-        </Card>
+        <Package
+          key={index}
+          orderItems={order.items}
+          pack={pack}
+          fetchOrder={fetchOrder}
+          deletePackage={deletePackage}
+          setActivePackage={setActivePackage}
+        />
       );
     });
   };
