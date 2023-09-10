@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-function Order({ order, setSelectedOrders, action }) {
+function Order({ order, setSelectedOrders, action}) {
   const formattedDate = new Date(order.created_at).toLocaleDateString();
   const [statusClass, setStatusClass] = useState('');
+
 
   useEffect(() => {
     if (order.status === 'pending') {
       setStatusClass('order pending');
     } else if (order.status === 'in_progress') {
       setStatusClass('order in-progress');
-    } else if (order.status === 'completed') {
+    } else if (order.status === 'complete') {
       setStatusClass('order completed');
     }
   }, [order.status]);

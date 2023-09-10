@@ -1,6 +1,5 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -15,6 +14,8 @@ import CustomerView from './components/Customers/CustomerView';
 import UserView from './components/Users/UserView';
 import PickView from './components/Orders/PickView';
 import SalesView from './components/Orders/SalesView';
+import ProductView from './components/Products/ProductView';
+import * as Icon from 'react-bootstrap-icons';
 
 function App() {
   const [user, setUser] = useState({});
@@ -32,7 +33,6 @@ function App() {
         if (data.username) {
           setUser(data);
           setIsLoggedIn(true);
-          // navigate('/');
         } else {
           setUser('');
           setIsLoggedIn(false);
@@ -47,39 +47,41 @@ function App() {
       title: 'Home',
       url: '/',
       viewableToRole: ['admin', 'sales', 'warehouse'],
-      iconName: 'home',
+      icon: <Icon.HouseFill />,
     },
     {
       title: 'Customers',
       url: '/customers',
       viewableToRole: ['admin', 'sales'],
-      iconName: 'people',
+      icon: <Icon.PeopleFill />,
     },
     {
       title: 'Orders',
       url: '/orders',
       viewableToRole: ['admin', 'sales', 'warehouse'],
-      iconName: 'shop',
+      icon: <Icon.Cart />,
     },
     {
       title: 'Picking',
       url: '/picking',
       viewableToRole: ['admin', 'warehouse'],
-      iconName: 'clipboard',
+      icon: <Icon.Box />,
     },
     {
       title: 'Products',
       url: '/products',
       viewableToRole: ['admin', 'sales', 'warehouse'],
-      iconName: 'box',
+      icon: <Icon.CollectionFill/>,
     },
     {
       title: 'User Management',
       url: '/users',
       viewableToRole: ['admin'],
-      iconName: 'person',
+      icon: <Icon.Person />
     },
   ];
+  console.log(sections)
+  
 
   const viewableSections = sections.filter((section) =>
     section.viewableToRole.includes(user.role)
@@ -104,8 +106,8 @@ function App() {
             <Route path="/orders/:id" element={<SalesView />} />
             <Route path="/picking" element={<OrderList action="picking" />} />
             <Route path="/picking/:id" element={<PickView />} />
-
             <Route path="/products" element={<ProductList />} />
+            <Route path="/products/:id" element={<ProductView />} />
             <Route
               path="/customers"
               element={

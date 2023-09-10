@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(version: 2023_09_02_061719) do
   end
 
   create_table "packages_package_items", force: :cascade do |t|
-    t.bigint "package_id", null: false
-    t.bigint "package_item_id", null: false
+    t.bigint "package_id"
+    t.bigint "package_item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["package_id"], name: "index_packages_package_items_on_package_id"

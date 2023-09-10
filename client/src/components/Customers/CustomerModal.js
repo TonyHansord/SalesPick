@@ -1,7 +1,7 @@
 import { Modal, Form } from 'react-bootstrap';
 import { useState } from 'react';
 
-function CustomerModal({ show, handleClose, setCustomerList }) {
+function CustomerModal({ show, handleClose, fetchCustomers }) {
   const [customer, setCustomer] = useState({
     name: '',
     street: '',
@@ -36,9 +36,8 @@ function CustomerModal({ show, handleClose, setCustomerList }) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setCustomerList((customerList) => [...customerList, data]);
+        fetchCustomers();
       });
-
     handleClose();
   };
 

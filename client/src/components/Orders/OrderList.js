@@ -9,19 +9,18 @@ function OrderList({ action }) {
   const searchOptions = [
     {
       title: 'Priority',
-      type: 'text',
-    },
-    {
-      title: 'Assigned To',
+      key: 'priority',
       type: 'text',
     },
 
     {
       title: 'Order ID',
+      key: 'id',
       type: 'integer',
     },
     {
       title: 'Customer Name',
+      key: 'customer_name',
       type: 'text',
     },
     {
@@ -31,10 +30,6 @@ function OrderList({ action }) {
     {
       title: 'Order Date',
       type: 'date',
-    },
-    {
-      title: 'Total',
-      type: 'currency',
     },
     {
       title: 'Order Status',
@@ -125,7 +120,7 @@ function OrderList({ action }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          assigned_to: user,
+          user_id: user.id,
         }),
       })
         .then((res) => res.json())

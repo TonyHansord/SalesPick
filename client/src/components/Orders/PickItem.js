@@ -3,7 +3,7 @@ import { Card, ListGroup } from 'react-bootstrap';
 function PickItem({ item, addItem }) {
   return (
     <Card className="pick-item">
-      <Card.Img src={item.product.product_image.url} />
+      <Card.Img src={item.product.product_image?.url} />
       <Card.Body>
         <Card.Title>{item.product.name}</Card.Title>
         <ListGroup horizontal>

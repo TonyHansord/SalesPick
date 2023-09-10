@@ -88,7 +88,7 @@ function SalesView() {
 
   return (
     <div className="main-view">
-      <ViewTitleBar title="Sales View" />
+      <ViewTitleBar title="Sales View" hasBackButton={true}/>
       <div className="main-container">
         <div className="top-container">
           <div className="details-container">
@@ -121,9 +121,10 @@ function SalesView() {
           </div>
         </div>
         <div className="bottom-container">
-          <div className="items-container">
-            <h3>Items</h3>
+          <div className="Items">
+            <div className="items">
             {order.items.length !== 0 ? renderItems() : <p>No items</p>}
+            </div>
           </div>
         </div>
       </div>

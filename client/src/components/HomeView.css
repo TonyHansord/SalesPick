@@ -8,7 +8,7 @@
 
 .home-view {
   width: 80vw;
-  margin-left: 200px;
+  margin-left: 250px;
   padding: 20vh;
   align-items: center;
   justify-content: center;
@@ -18,8 +18,8 @@
 
 #home-view {
   display: grid;
-  grid-template-columns: 0.1fr 0.1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 0.1fr 0.1fr 0.1fr;
+  grid-template-rows: 0.1fr 0.1fr;
   gap: 10px;
 }
 
@@ -28,17 +28,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--accent-color);
-  border-radius: 0;
+  background-color: var(--primary-color);
+  border: 5px solid var(--primary-color);
+  border-radius: 5px;
   color: white;
   padding: 20px;
   margin: 10px;
-  text-decoration: none;
   transition: all 0.2s ease-in-out;
+  text-decoration: none;
 }
 
 .card:hover {
-  transform: scale(1.1);
+  border: 5px solid var(--secondary-color);
+  transform: scale(1.05);
   cursor: pointer;
 }
 

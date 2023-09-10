@@ -9,6 +9,7 @@ function HomeView({ sections }) {
     return mainSections.map((section) => {
       return (
         <Link key={section.title} to={section.url} className="card lrg">
+          {section.icon}
           <Card.Title>{section.title}</Card.Title>
         </Link>
       );

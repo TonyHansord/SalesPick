@@ -30,7 +30,9 @@ Rails.application.routes.draw do
   post "/api/orders", to: "orders#create"
   patch "/api/orders/:id", to: "orders#update"
   post "/api/orders/:id/photos", to: "orders#add_photos"
+  delete "/api/orders/:id/photos/:photo_id", to: "orders#remove_photos"
   patch "/api/orders/:id/assign", to: "orders#assign"
+  patch "/api/orders/:id/complete", to: "orders#complete_order"
   delete "/api/orders/:id", to: "orders#destroy"
 
   get "/api/customers", to: "customers#index"

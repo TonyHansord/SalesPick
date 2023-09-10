@@ -2,7 +2,7 @@ import DetailsContainer from '../Utilities/DetailsContainer';
 import ActionContainer from '../Utilities/ActionContainer';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
 import { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Orders.css';
 import PhotosModal from './PhotosModal';
 import PickItem from './PickItem';
@@ -11,6 +11,8 @@ import Package from './Package';
 
 function PickView() {
   const params = useParams();
+
+  const navigate = useNavigate();
 
   const [order, setOrder] = useState({
     id: '',
@@ -63,7 +65,7 @@ function PickView() {
             width: 0,
             length: 0,
             weight: 0,
-          }),
+          })
         })
           .then((res) => res.json())
           .then((data) => {
@@ -83,7 +85,21 @@ function PickView() {
     {
       title: 'Complete',
       method: () => {
-        console.log('Complete');
+        fetch(`/api/orders/${params.id}/complete`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            status: 2,
+          })
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setOrder(data);
+            navigate('/picking')
+          });
       },
     },
   ];
@@ -164,7 +180,7 @@ function PickView() {
 
   const renderPackages = () => {
     return order.packages.map((pack, index) => {
-      console.log(pack)
+      console.log(pack);
 
       return (
         <Package
@@ -203,7 +219,7 @@ function PickView() {
         order={order}
         handleClose={handleCloseModal}
         show={showModal}
-        setOrder={setOrder}
+        fetchOrder={fetchOrder}
       />
     </div>
   );

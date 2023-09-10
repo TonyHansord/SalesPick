@@ -6,7 +6,6 @@
   align-items: flex-start;
   height: 100vh;
   width: 250px;
-  padding: 20px;
 }
 
 .navbar-collapse {
@@ -18,10 +17,32 @@
   height: fit-content;
 }
 
-.nav-section {
+.nav-item {
+  display: flex;
   color: white;
-  padding: 10px 20px;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
   text-align: start;
+}
+
+.nav-item svg {
+  margin-right: 10px;
+}
+
+.nav-item h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
 }
 
 .navbar-toggler {
@@ -40,7 +61,8 @@
   font-size: 1.5rem;
   font-weight: bold;
   align-items: center;
-  margin: 10px;
+  margin: 10px 0;
+  padding: 20px;
 }
 
 .navbar-toggler:focus {
@@ -58,6 +80,18 @@
 #side-nav .btn {
   background-color: transparent;
   color: white;
+}
+
+#side-nav .nav-link {
+  color: white;
+  margin: 0;
+  width: 100%;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+#side-nav .nav-link:hover {
+  background-color: var(--primary-color);
 }
 
 .login {

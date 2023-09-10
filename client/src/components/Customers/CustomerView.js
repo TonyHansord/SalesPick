@@ -93,7 +93,7 @@ function CustomerView({ user, customerID }) {
             </div>
           </div>
           <div className="action-container">
-            <Card className="card" onClick={handleClickNewOrder}>
+            <Card className="card med" onClick={handleClickNewOrder}>
               <Card.Title>New Order</Card.Title>
             </Card>
           </div>

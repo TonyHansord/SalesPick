@@ -1,4 +1,4 @@
-function DetailsContainer({ data }) {
+function DetailsContainer({ data, image }) {
   const renderDetails = () => {
     return data.map((item) => {
       return (
@@ -12,8 +12,8 @@ function DetailsContainer({ data }) {
 
   return (
     <div className="details-container">
-      <div className="details"></div>
-      {renderDetails()}
+      {image ? <img src={image} alt="product" /> : null}
+      <div className="details">{renderDetails()}</div>
     </div>
   );
 }

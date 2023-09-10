@@ -1,0 +1,43 @@
+#customer-card {
+  border-radius: 5px;
+  border: 5px solid var(--primary-color);
+  transform: none;
+}
+
+#customer-card:hover {
+  border: 5px solid rgb(38, 164, 160);
+}
+
+#customer-card .card-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  color: var(--primary-color);
+  font-size: small;
+}
+
+#customer-card .card-body .card-title {
+  font-size: medium;
+  color: var(--background-color);
+  margin: 10px;
+}
+
+#customer-card .list-group {
+  display: flex;
+  width: 100%;
+  text-align: start;
+  border: none;
+  border-radius: none;
+}
+
+#customer-card .list-group-item {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#customer-card .list-group-item .card-text {
+  font-size: small;
+  margin: 0;
+  width: 25%;
+}

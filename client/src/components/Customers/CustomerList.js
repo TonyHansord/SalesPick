@@ -3,7 +3,7 @@ import SearchBar from '../Utilities/SearchBar';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
 import { Container, Card } from 'react-bootstrap';
 import CustomerModal from './CustomerModal';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 function CustomerList({ setSelectedCustomer }) {
   const searchOptions = [
@@ -26,7 +26,7 @@ function CustomerList({ setSelectedCustomer }) {
   const [searchResults, setSearchResults] = useState(customerList);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
+  const fetchCustomers = useCallback(() => {
     fetch('/api/customers')
       .then((res) => res.json())
       .then((data) => {
@@ -35,6 +35,10 @@ function CustomerList({ setSelectedCustomer }) {
         setSearchResults(data);
       });
   }, []);
+
+  useEffect(() => {
+    fetchCustomers();
+  }, [fetchCustomers]);
 
   const renderCustomers = () => {
     return searchResults.map((customer) => {
@@ -60,32 +64,20 @@ function CustomerList({ setSelectedCustomer }) {
             data={customerList}
           />
           <div className="action-container">
-            <Card className="card lrg" onClick={handleShowModal}>
+            <Card className="card med" onClick={handleShowModal}>
               <Card.Title>New Customer</Card.Title>
             </Card>
           </div>
         </div>
         <Container id="customer-list" className="list-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Customer Name</th>
-                <th>Address</th>
-                <th>Suburb</th>
-                <th>State</th>
-                <th>Postcode</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>{renderCustomers()}</tbody>
-          </table>
+          {renderCustomers()}
         </Container>
       </div>
       <CustomerModal
         show={showModal}
         handleClose={handleCloseModal}
         setCustomerList={setCustomerList}
+        fetchCustomers={fetchCustomers}
       />
     </div>
   );

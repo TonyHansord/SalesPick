@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 
 function Item({ item, order, setOrderTotal }) {
   const [quantity, setQuantity] = useState(item.quantity);
   const availableStock =
-    (item.product.current_stock - item.product.assigned_stock) + item.assigned_quantity;
+    item.product.current_stock -
+    item.product.assigned_stock +
+    item.assigned_quantity;
 
   useEffect(() => {
     fetch(`/api/items/${item.id}`, {
@@ -26,24 +28,21 @@ function Item({ item, order, setOrderTotal }) {
             setOrderTotal(data.order_total);
           });
       });
-
   }, [quantity]);
 
   return (
-    <div className="item-container">
-      <div className="item-image">
-        <img src={item.product.product_image.url} alt={item.product.name} />
-      </div>
-      <div className="item-details">
-        <p>
-          <span className="item-heading">Code: </span>
-          {item.product.code}
-        </p>
-        <p>
-          <span className="item-heading">Product: </span>
-          {item.product.name}
-        </p>
-      </div>
+    <Card className="pick-item">
+      <Card.Img src={item.product.product_image.url} alt={item.product.name} />
+      <Card.Body>
+        <Card.Title>{item.product.name}</Card.Title>
+        <ListGroup horizontal>
+          <p>
+            <span className="item-heading">Code: </span>
+            {item.product.code}
+          </p>
+        </ListGroup>
+      </Card.Body>
+      <div className="item-details"></div>
       <div className="item-stock">
         <span className="item-heading">Available: </span>
         <p>{availableStock}</p>
@@ -70,7 +69,7 @@ function Item({ item, order, setOrderTotal }) {
       <div className="item-actions">
         <Card>Delete</Card>
       </div>
-    </div>
+    </Card>
   );
 }
 

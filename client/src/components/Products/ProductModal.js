@@ -1,7 +1,13 @@
 import { Modal, Form } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function ProductModal({ show, handleCloseModal, setProductList }) {
+function ProductModal({
+  show,
+  handleCloseModal,
+  setProductList,
+  productData,
+  getProductData,
+}) {
   const [product, setProduct] = useState({
     productCode: '',
     productName: '',
@@ -15,6 +21,50 @@ function ProductModal({ show, handleCloseModal, setProductList }) {
     productAssigned: 0,
     productImage: null,
   });
+
+  useEffect(() => {
+    if (productData) {
+      setProduct({
+        productCode: productData.code,
+        productName: productData.name,
+        productCategory: productData.category,
+        productPrice: productData.price,
+        productLength: productData.length,
+        productWidth: productData.width,
+        productHeight: productData.height,
+        productWeight: productData.weight,
+        productQuantity: productData.current_stock,
+        productAssigned: productData.assigned_stock,
+        productImage: null,
+      });
+    }
+  }, [productData]);
+
+  const addProduct = (formData) => {
+    fetch('/api/products', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setProductList((productList) => [...productList, data]);
+      });
+  };
+
+  const editProduct = (formData) => {
+    console.log(product.productImage);
+
+    fetch(`/api/products/${productData.id}`, {
+      method: 'PATCH',
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        getProductData();
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,17 +82,12 @@ function ProductModal({ show, handleCloseModal, setProductList }) {
     formData.append('weight', product.productWeight);
     formData.append('current_stock', product.productQuantity);
     formData.append('assigned_stock', product.productAssigned);
-    formData.append('product_image', product.productImage);
 
-    fetch('/api/products', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setProductList((productList) => [...productList, data]);
-      });
+    product.productImage
+      ? formData.append('product_image', product.productImage)
+      : console.log('no image');
+
+    productData ? editProduct(formData) : addProduct(formData);
 
     handleCloseModal();
   };
@@ -50,7 +95,9 @@ function ProductModal({ show, handleCloseModal, setProductList }) {
   return (
     <Modal show={show} onHide={handleCloseModal}>
       <Modal.Header closeButton>
-        <Modal.Title>New Product</Modal.Title>
+        <Modal.Title>
+          {productData ? 'Edit Product' : 'New Product'}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form id="new-product-form" onSubmit={handleSubmit}>
@@ -157,7 +204,6 @@ function ProductModal({ show, handleCloseModal, setProductList }) {
               type="file"
               accept="image/*"
               multiple={false}
-              // value={product.productImageURL}
               onChange={(e) =>
                 setProduct({ ...product, productImage: e.target.files[0] })
               }
@@ -166,7 +212,7 @@ function ProductModal({ show, handleCloseModal, setProductList }) {
           </Form.Group>
 
           <button className="btn" type="submit">
-            Submit
+            {productData ? 'Update' : 'Add'}
           </button>
         </Form>
       </Modal.Body>

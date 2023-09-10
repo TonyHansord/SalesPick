@@ -1,14 +1,15 @@
-import { Modal, Form, Card } from 'react-bootstrap';
+import { Modal, Form, Card, Button } from 'react-bootstrap';
 
-function PhotosModal({ show, handleClose, order, setOrder }) {
+function PhotosModal({ show, handleClose, order, fetchOrder }) {
   const renderPhotos = () => {
     console.log(order.order_images);
 
     return order.order_images.length ? (
       order.order_images.map((photo, index) => {
         return (
-          <Card key={index}>
+          <Card key={index} id={index} className="orderPhoto">
             <Card.Img src={photo} />
+            <Button onClick={handleRemovePhoto}>Remove</Button>
           </Card>
         );
       })
@@ -30,7 +31,24 @@ function PhotosModal({ show, handleClose, order, setOrder }) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setOrder(data);
+        fetchOrder();
+      });
+    e.target.onreset = () => (e.target.value = null);
+  };
+
+  const handleRemovePhoto = (e) => {
+    console.log(e.target.parentElement.id);
+
+    const targetID = parseInt(e.target.parentElement.id);
+    console.log(targetID);
+
+    fetch(`/api/orders/${order.id}/photos/${targetID}`, {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        fetchOrder();
       });
   };
 
@@ -46,13 +64,13 @@ function PhotosModal({ show, handleClose, order, setOrder }) {
             type="file"
             accept="image/*"
             multiple={false}
-            // value={product.productImageURL}
-            onChange={(e) => handleAddPhoto(e)}
-            // placeholder="Image"
+            value={''}
+            onChange={(e) => {
+              handleAddPhoto(e);
+            }}
           />
         </Form.Group>
-
-        {renderPhotos()}
+        <div className="photos">{renderPhotos()}</div>
       </Modal.Body>
     </Modal>
   );

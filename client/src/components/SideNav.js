@@ -7,8 +7,7 @@ import { Button } from 'react-bootstrap';
 function SideNav({ sections, setIsLoggedIn, user, setUser }) {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
-
-  console.log('nav rendered')
+  console.log('nav rendered');
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
   const navigate = useNavigate();
@@ -35,9 +34,10 @@ function SideNav({ sections, setIsLoggedIn, user, setUser }) {
           onClick={handleNavCollapse}
           className="nav-link"
         >
-          <span className="d-sm-inline">
-            <h4 className="nav-section">{section.title}</h4>
-          </span>
+          <div className="nav-item">
+            {section.icon}
+            <h4>{section.title}</h4>
+          </div>
         </Link>
       );
     });

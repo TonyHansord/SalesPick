@@ -1,7 +1,11 @@
+import { useNavigate } from 'react-router-dom';
+
 function Product({ product }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="product">
-      <img src={product.product_image.url} alt={product.name} />
+    <div onClick={() => navigate(`${product.id}`)} className="product">
+      <img src={product.product_image?.url} alt={product.name} />
       <div className="product-info-container">
         <div className="product-info">
           <p className="product-code">
@@ -21,10 +25,6 @@ function Product({ product }) {
             {product.assigned_stock}
           </p>
         </div>
-      </div>
-      <div className="product-actions">
-        <button className="btn btn-primary">Edit</button>
-        <button className="btn btn-danger">Delete</button>
       </div>
     </div>
   );

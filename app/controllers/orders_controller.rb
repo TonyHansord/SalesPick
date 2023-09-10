@@ -31,10 +31,26 @@ class OrdersController < ApplicationController
     render json: @order
   end
 
+  def remove_photos
+    @order = Order.find_by_id(params[:id])
+    @order.order_images[params[:photo_id].to_i].purge
+    render json: @order
+  end
+
   def assign
     @order = Order.find_by_id(params[:id])
     @order.update(order_params)
     render json: Order.all
+  end
+
+  def complete_order
+    @order = Order.find_by_id(params[:id])
+    @order.items.each do |item|
+      product = Product.find_by_id(item.product_id)
+      product.update(current_stock: product.current_stock - item.picked_quantity, assigned_stock: product.assigned_stock - item.picked_quantity)
+    end
+    @order.update(status: params[:status])
+    render json: @order
   end
 
   def destroy

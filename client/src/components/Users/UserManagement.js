@@ -85,7 +85,7 @@ function UserManagement({ setSelectedUser }) {
         <div className="top-container">
           <SearchBar type="Users" searchOptions={searchOptions} />
           <div className="action-container">
-            <Card className="card" onClick={handleShowModal}>
+            <Card className="card med" onClick={handleShowModal}>
               <Card.Title>New User</Card.Title>
             </Card>
           </div>

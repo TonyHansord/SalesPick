@@ -14,7 +14,7 @@
   border-radius: 5px;
   justify-content: space-between;
   color: white;
-  background-color: var(--accent-color);
+  background-color: var(--primary-color);
 }
 
 .assign label {
@@ -28,7 +28,7 @@
 .assign select {
   width: 80%;
   margin: 0;
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--primary-color);
   border-radius: 5px;
   font-size: 1rem;
   height: 50px;
@@ -49,7 +49,7 @@ table tr {
 
 tbody {
   display: block;
-  border: 2px solid var(--accent-color);
+  border: 2px solid var(--primary-color);
   border-radius: 5px;
   overflow: hidden;
 }
@@ -153,7 +153,7 @@ table td.order-total {
 }
 
 .modal-body .card .card-text {
-  color: var(--accent-color);
+  color: var(--primary-color);
   width: 100%;
   font-size: 40px;
   padding: 0 10px;
@@ -172,60 +172,6 @@ table td.order-total {
   height: 100%;
 } */
 
-.item-container {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  width: 100vw;
-  height: 50px;
-  justify-content: space-between;
-  border: none;
-}
-
-.item-container .item-image {
-  position: relative;
-  display: flex;
-  background-color: transparent;
-  justify-content: space-between;
-  padding: 0;
-  object-fit: contain;
-}
-
-.item-container .item-details {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background-color: transparent;
-  justify-content: space-between;
-  text-align: left;
-  padding: 0;
-  width: 35vw;
-  height: 50px;
-}
-
-.item-stock {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: left;
-  padding: 0;
-  width: 15vw;
-  height: 50px;
-}
-
-.item-container p {
-  width: 100%;
-  margin: 0;
-  font-size: 1rem;
-  display: flex;
-}
-
-.item-heading {
-  font-weight: bold;
-  font-size: 1rem;
-  width: 70px;
-}
 
 .item-actions .card {
   position: relative;
@@ -271,7 +217,7 @@ table td.order-total {
   height: 100px;
   background-color: var(--background-color);
   border-radius: 5px;
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--primary-color);
   color: var(--text-color);
 }
 
@@ -288,7 +234,7 @@ table td.order-total {
   width: 80%;
   height: 100px;
   background-color: transparent;
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--primary-color);
   color: var(--text-color);
 }
 
@@ -376,7 +322,7 @@ table td.order-total {
   align-items: flex-start;
   background-color: var(--background-color);
   border-radius: 5px;
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--primary-color);
   color: var(--text-color);
 }
 
@@ -396,12 +342,12 @@ table td.order-total {
 }
 
 .packages .package-id {
-  background-color: var(--accent-color);
+  background-color: var(--primary-color);
   color: white;
   padding: 10px;
   width: 100%;
   text-align: center;
-  border-radius: 5px 5px 0 0;
+  border-radius: 0;
   font-size: small;
 }
 
@@ -412,13 +358,18 @@ table td.order-total {
   width: 100%;
   text-align: start;
   border: none;
-  border-radius: none;
+  border-radius: 0;
 }
 
 .packages .list-group-item {
   display: flex;
   gap: 10px;
   justify-content: space-between;
+  padding: 0;
+}
+
+.packages .list-group .list-group-item {
+  background-color: var(--primary-color);
 }
 
 .packages .list-group-item .card-text {
@@ -429,15 +380,16 @@ table td.order-total {
 
 .packages .list-group-item .btn {
   font-size: small;
-  margin: 0;
+  margin: 10px;
   width: 10vw;
+  background-color: var(--background-color);
+  color: var(--primary-color);
 }
 
 .packages form {
   display: flex;
-  gap: 10px;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: space-between;
   text-align: start;
   border: none;
   border-radius: none;
@@ -446,7 +398,6 @@ table td.order-total {
 .packages form .form-group {
   display: flex;
   width: 20%;
-  gap: 10px;
   margin: 0;
 }
 
@@ -466,7 +417,6 @@ table td.order-total {
 
 .packages form .btn {
   font-size: small;
-  margin: 0;
   width: 10vw;
 }
 
@@ -482,7 +432,6 @@ table td.order-total {
 
   .packages .list-group-item .btn {
     font-size: small;
-    margin: 0;
     width: 30vw;
   }
 

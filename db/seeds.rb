@@ -9,3 +9,6 @@
 puts "creating users"
 
 User.create(first_name: "Greg", last_name: "Jones", username: "gjones", password: "admin", role: 0)
+
+
+

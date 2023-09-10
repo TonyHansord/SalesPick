@@ -2,6 +2,7 @@ import DetailsContainer from '../Utilities/DetailsContainer';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
 
 function UserView({ user }) {
+
   const userDetails = [
     {
       title: 'Username',

@@ -5,7 +5,7 @@ function User({ user, setSelectedUser }) {
 
   const handleClickUser = () => {
     setSelectedUser(user);
-    navigate(`/api/users/${user.id}`);
+    navigate(`/users/${user.id}`);
   };
 
   return (
