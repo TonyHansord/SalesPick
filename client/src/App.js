@@ -1,5 +1,5 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -16,12 +16,18 @@ import PickView from './components/Orders/PickView';
 import SalesView from './components/Orders/SalesView';
 import ProductView from './components/Products/ProductView';
 import * as Icon from 'react-bootstrap-icons';
+import MessageBar from './components/Utilities/MessageBar';
+
+export const MessageContext = createContext();
 
 function App() {
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState({});
   const [selectedUser, setSelectedUser] = useState({});
+  const [message, setMessage] = useState('');
+  const [showMessageBar, setShowMessageBar] = useState(false);
+  const [messageType, setMessageType] = useState('success');
 
   const navigate = useNavigate();
 
@@ -71,17 +77,16 @@ function App() {
       title: 'Products',
       url: '/products',
       viewableToRole: ['admin', 'sales', 'warehouse'],
-      icon: <Icon.CollectionFill/>,
+      icon: <Icon.CollectionFill />,
     },
     {
       title: 'User Management',
       url: '/users',
       viewableToRole: ['admin'],
-      icon: <Icon.Person />
+      icon: <Icon.Person />,
     },
   ];
-  console.log(sections)
-  
+  console.log(sections);
 
   const viewableSections = sections.filter((section) =>
     section.viewableToRole.includes(user.role)
@@ -102,33 +107,54 @@ function App() {
               path="/"
               element={<HomeView sections={viewableSections} />}
             />
-            <Route path="/orders" element={<OrderList action="sales" />} />
-            <Route path="/orders/:id" element={<SalesView />} />
-            <Route path="/picking" element={<OrderList action="picking" />} />
-            <Route path="/picking/:id" element={<PickView />} />
-            <Route path="/products" element={<ProductList />} />
-            <Route path="/products/:id" element={<ProductView />} />
-            <Route
-              path="/customers"
-              element={
-                <CustomerList setSelectedCustomer={setSelectedCustomer} />
-              }
-            />
-            <Route
-              path="/customers/:customer_id"
-              element={
-                <CustomerView user={user} customerID={selectedCustomer.id} />
-              }
-            />
-            <Route
-              path="/users"
-              element={<UserManagement setSelectedUser={setSelectedUser} />}
-            />
-            <Route
-              path="/users/:id"
-              element={<UserView user={selectedUser} />}
-            />
           </Routes>
+          <MessageContext.Provider
+            value={{ message, setMessage, showMessageBar, setShowMessageBar, messageType, setMessageType }}
+          >
+            <div className="main-view">
+              <MessageBar
+                message={message}
+                showMessageBar={showMessageBar}
+                setShowMessageBar={setShowMessageBar}
+                messageType={messageType}
+              />
+
+              <Routes>
+                <Route path="/orders" element={<OrderList action="sales" />} />
+                <Route path="/orders/:id" element={<SalesView />} />
+                <Route
+                  path="/picking"
+                  element={<OrderList action="picking" />}
+                />
+                <Route path="/picking/:id" element={<PickView />} />
+                <Route path="/products" element={<ProductList />} />
+                <Route path="/products/:id" element={<ProductView />} />
+                <Route
+                  path="/customers"
+                  element={
+                    <CustomerList setSelectedCustomer={setSelectedCustomer} />
+                  }
+                />
+                <Route
+                  path="/customers/:customer_id"
+                  element={
+                    <CustomerView
+                      user={user}
+                      customerID={selectedCustomer.id}
+                    />
+                  }
+                />
+                <Route
+                  path="/users"
+                  element={<UserManagement setSelectedUser={setSelectedUser} />}
+                />
+                <Route
+                  path="/users/:id"
+                  element={<UserView user={selectedUser} />}
+                />
+              </Routes>
+            </div>
+          </MessageContext.Provider>
         </>
       ) : (
         // if not logged in display the login page

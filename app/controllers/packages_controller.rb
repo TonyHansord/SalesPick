@@ -17,7 +17,9 @@ class PackagesController < ApplicationController
     @package = Package.create!(package_params)
     order.packages << @package
     order.update(status: 1)
-    render json: @package
+    render json: {
+      message: "Package created",
+    }
   end
 
   def update
@@ -33,8 +35,8 @@ class PackagesController < ApplicationController
     order_items = @order.items
     package_items = @package.package_items
     package_items.each do |package_item|
-        order_item = order_items.find_by(product_id: package_item.product_id)
-        order_item.update(picked_quantity: order_item.picked_quantity - package_item.quantity)
+      order_item = order_items.find_by(product_id: package_item.product_id)
+      order_item.update(picked_quantity: order_item.picked_quantity - package_item.quantity)
     end
     # Delete the package
     @package.destroy
@@ -46,5 +48,4 @@ class PackagesController < ApplicationController
   def package_params
     params.permit(:order_id, :height, :width, :length, :weight, :package_items)
   end
-
 end

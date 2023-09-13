@@ -53,7 +53,7 @@ function CustomerList({ setSelectedCustomer }) {
   };
 
   return (
-    <div className="main-view">
+    <>
       <ViewTitleBar title="Customer List" />
       <div className="main-container">
         <div className="top-container">
@@ -79,7 +79,7 @@ function CustomerList({ setSelectedCustomer }) {
         setCustomerList={setCustomerList}
         fetchCustomers={fetchCustomers}
       />
-    </div>
+    </>
   );
 }
 

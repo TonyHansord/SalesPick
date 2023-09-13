@@ -87,7 +87,7 @@ function SalesView() {
   };
 
   return (
-    <div className="main-view">
+    <>
       <ViewTitleBar title="Sales View" hasBackButton={true}/>
       <div className="main-container">
         <div className="top-container">
@@ -134,7 +134,7 @@ function SalesView() {
         orderID={params.id}
         order={order}
       />
-    </div>
+    </>
   );
 }
 

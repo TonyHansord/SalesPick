@@ -91,7 +91,7 @@ function ProductView() {
   }, [getProductData]);
 
   return (
-    <div id="product-view" className="main-view">
+    <div id="product-view">
       <ViewTitleBar title="Product View" hasBackButton={true} />
       <div className="main-container">
         <div className="top-container">

@@ -131,7 +131,7 @@ function OrderList({ action }) {
   };
 
   return (
-    <div className="main-view">
+    <>
       <ViewTitleBar title="Orders List" />
       <div className="main-container">
         <div className="top-container">
@@ -179,7 +179,7 @@ function OrderList({ action }) {
           </Table>
         </Container>
       </div>
-    </div>
+    </>
   );
 }
 

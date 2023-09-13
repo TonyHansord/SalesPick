@@ -67,7 +67,7 @@ function CustomerView({ user, customerID }) {
   };
 
   return (
-    <div className="main-view">
+    <>
       <ViewTitleBar title={customer?.name} hasBackButton />
       <div className="main-container">
         <div className="top-container">
@@ -118,7 +118,7 @@ function CustomerView({ user, customerID }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

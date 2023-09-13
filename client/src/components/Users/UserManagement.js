@@ -79,7 +79,7 @@ function UserManagement({ setSelectedUser }) {
   };
 
   return (
-    <div className="main-view">
+    <>
       <ViewTitleBar title="User Management" />
       <div className="main-container">
         <div className="top-container">
@@ -109,7 +109,7 @@ function UserManagement({ setSelectedUser }) {
         handleClose={handleCloseModal}
         setUsers={setUsers}
       />
-    </div>
+    </>
   );
 }
 

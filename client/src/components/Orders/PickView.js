@@ -1,13 +1,14 @@
 import DetailsContainer from '../Utilities/DetailsContainer';
 import ActionContainer from '../Utilities/ActionContainer';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Orders.css';
 import PhotosModal from './PhotosModal';
 import PickItem from './PickItem';
 import { Button } from 'react-bootstrap';
 import Package from './Package';
+import { MessageContext } from '../../App';
 
 function PickView() {
   const params = useParams();
@@ -29,6 +30,8 @@ function PickView() {
   const [currentPackageID, setCurrentPackageID] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [packagesHidden, setPackagesHidden] = useState(true);
+  const { setMessage, setShowMessageBar, setMessageType } =
+    useContext(MessageContext);
 
   const orderDetails = [
     {
@@ -65,12 +68,15 @@ function PickView() {
             width: 0,
             length: 0,
             weight: 0,
-          })
+          }),
         })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
             setCurrentPackageID(data.id);
+            setMessage('Package generated');
+            setMessageType('success');
+            setShowMessageBar(true);
             fetchOrder();
           });
       },
@@ -92,13 +98,13 @@ function PickView() {
           },
           body: JSON.stringify({
             status: 2,
-          })
+          }),
         })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
             setOrder(data);
-            navigate('/picking')
+            navigate('/picking');
           });
       },
     },
@@ -196,7 +202,7 @@ function PickView() {
   };
 
   return (
-    <div className="main-view">
+    <>
       <ViewTitleBar title="Pick View" hasBackButton={true} />
       <div className="main-container">
         <div className="top-container">
@@ -221,7 +227,7 @@ function PickView() {
         show={showModal}
         fetchOrder={fetchOrder}
       />
-    </div>
+    </>
   );
 }
 

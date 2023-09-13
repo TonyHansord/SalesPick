@@ -44,7 +44,7 @@ function ProductList() {
   const handleShowModal = () => setShowModal(true);
 
   return (
-    <div className="main-view">
+    <>
       <ViewTitleBar title="Products List" />
       <div className="main-container">
         <div className="top-container">
@@ -65,7 +65,7 @@ function ProductList() {
         handleCloseModal={handleCloseModal}
         setProductList={setProductList}
       />
-    </div>
+    </>
   );
 }
 
