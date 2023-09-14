@@ -30,8 +30,7 @@ function PickView() {
   const [currentPackageID, setCurrentPackageID] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [packagesHidden, setPackagesHidden] = useState(true);
-  const { setMessage, setShowMessageBar, setMessageType } =
-    useContext(MessageContext);
+  const { displayMessage } = useContext(MessageContext);
 
   const orderDetails = [
     {
@@ -74,9 +73,7 @@ function PickView() {
           .then((data) => {
             console.log(data);
             setCurrentPackageID(data.id);
-            setMessage('Package generated');
-            setMessageType('success');
-            setShowMessageBar(true);
+            displayMessage('Package generated', 'success');
             fetchOrder();
           });
       },
@@ -147,8 +144,12 @@ function PickView() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        fetchOrder();
+        if (data.error) {
+          displayMessage(data.error, 'error');
+        } else {
+          console.log(data);
+          fetchOrder();
+        }
       });
   };
 

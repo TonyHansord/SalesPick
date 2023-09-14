@@ -119,30 +119,6 @@ body {
   background-color: var(--background-color);
 }
 
-#message-bar {
-  position: absolute;
-  top: 45px;
-  width: 100%;
-  height: 50px;
-  background-color: var(--secondary-color);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#message-bar.hidden {
-  display: none;
-}
-
-#message-bar.error {
-  background-color: rgb(86, 38, 38);
-}
-
-#message-bar.success {
-  background-color: var(--secondary-color);
-}
-
 .title-bar {
   color: var(--background-color);
   background-color: var(--primary-color);
@@ -160,6 +136,35 @@ body {
   font-size: 1rem;
   margin: 0;
   padding: 10px;
+}
+
+#message-bar {
+  position: fixed;
+  top: 0;
+  width: var(--main-view-width);
+  height: 50px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+#message-bar p {
+  width: 100%;
+  text-align: center;
+}
+
+#message-bar.hidden {
+  display: none;
+}
+
+#message-bar.error {
+  background-color: rgb(86, 38, 38);
+}
+
+#message-bar.success {
+  background-color: var(--secondary-color);
 }
 
 .top-container {

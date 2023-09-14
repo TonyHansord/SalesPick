@@ -48,6 +48,12 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const displayMessage = (message, type) => {
+    setMessage(message);
+    setMessageType(type);
+    setShowMessageBar(true);
+  };
+
   const sections = [
     {
       title: 'Home',
@@ -109,7 +115,13 @@ function App() {
             />
           </Routes>
           <MessageContext.Provider
-            value={{ message, setMessage, showMessageBar, setShowMessageBar, messageType, setMessageType }}
+            value={{
+              message,
+              showMessageBar,
+              setShowMessageBar,
+              messageType,
+              displayMessage,
+            }}
           >
             <div className="main-view">
               <MessageBar
