@@ -2,6 +2,7 @@ import ViewTitleBar from '../Utilities/ViewTitleBar';
 import { Card } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Order from '../Orders/Order';
 
 function CustomerView({ user, customerID }) {
   const navigate = useNavigate();
@@ -35,13 +36,11 @@ function CustomerView({ user, customerID }) {
     } else {
       return orders.map((order) => {
         return (
-          <tr key={order.id} onClick={() => navigate(`/orders/${order.id}`)}>
-            <td>{order.id}</td>
-            <td>{order.created_at}</td>
-            <td>{order.first_item}</td>
-            <td>{order.order_total}</td>
-            <td>{order.status}</td>
-          </tr>
+          <Order 
+          key={order.id}
+          order={order}
+          action={'sales'}
+          />
         );
       });
     }

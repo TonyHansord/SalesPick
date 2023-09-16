@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: [:create, :index]
+  wrap_parameters format: []
+  before_action only: [:create, :destroy] do authorize_role(["admin"]) end
 
   def index
     users = User.all

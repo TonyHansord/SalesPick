@@ -25,6 +25,13 @@ class ItemsController < ApplicationController
     render json: @item
   end
 
+  def destroy
+    @order = Order.find_by_id(params[:order_id])
+    @item = Item.find_by_id(params[:id])
+    @item.delete
+    render json: @order
+  end
+
   private
 
   def item_params

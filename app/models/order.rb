@@ -8,7 +8,9 @@ class Order < ApplicationRecord
   has_many_attached :order_images
 
   enum status: [:pending, :in_progress, :complete]
-  enum priority: [:unassigned, :high, :medium, :low]
+  enum priority: [:unassigned, :low, :medium, :high]
+
+  default_scope { order({ priority: :desc }, :created_at) }
 
   def first_product
     items.first

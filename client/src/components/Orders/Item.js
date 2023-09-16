@@ -30,6 +30,18 @@ function Item({ item, order, setOrderTotal }) {
       });
   }, [quantity]);
 
+  const handleDeleteItem = () => {
+    console.log(item)
+    fetch(`/api/items/${item.id}`, {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setOrderTotal(data.order_total);
+      });
+  };
+
   return (
     <Card className="pick-item">
       <Card.Img src={item.product.product_image.url} alt={item.product.name} />
@@ -67,7 +79,7 @@ function Item({ item, order, setOrderTotal }) {
         </p>
       </div>
       <div className="item-actions">
-        <Card>Delete</Card>
+        <Card onClick={handleDeleteItem}>Delete</Card>
       </div>
     </Card>
   );

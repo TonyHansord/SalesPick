@@ -280,6 +280,10 @@ select {
   text-align: center;
 }
 
+.card-text {
+  margin-bottom: 0;
+}
+
 .card-title {
   font-size: small;
   margin: 10px;

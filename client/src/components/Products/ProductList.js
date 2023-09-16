@@ -35,8 +35,8 @@ function ProductList() {
   }, []);
 
   const renderProducts = () => {
-    return productList.map((product) => {
-      return <Product key={product} product={product} />;
+    return productList.map((product, index) => {
+      return <Product key={index} product={product} />;
     });
   };
 

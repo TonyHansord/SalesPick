@@ -2,7 +2,6 @@ import DetailsContainer from '../Utilities/DetailsContainer';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
 
 function UserView({ user }) {
-
   const userDetails = [
     {
       title: 'Username',
@@ -19,7 +18,7 @@ function UserView({ user }) {
   ];
 
   return (
-    <div className="main-view">
+    <>
       <ViewTitleBar title={user.full_name} hasBackButton={true} />
       <div className="top-container">
         <DetailsContainer data={userDetails} />
@@ -31,7 +30,7 @@ function UserView({ user }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

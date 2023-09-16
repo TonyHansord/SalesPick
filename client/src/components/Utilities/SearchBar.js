@@ -36,9 +36,9 @@ function SearchBar({
   };
 
   const renderSearchOptions = () => {
-    return searchOptions.map((option) => {
+    return searchOptions.map((option, index) => {
       return (
-        <option key={option.key} value={option.title}>
+        <option key={index} value={option.title}>
           {option.title}
         </option>
       );

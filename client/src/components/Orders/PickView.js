@@ -100,8 +100,15 @@ function PickView() {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            setOrder(data);
-            navigate('/picking');
+            if (data.error) {
+              console.log(data);
+              displayMessage(data.error, 'error');
+            } else {
+              displayMessage('Order completed', 'success');
+              setTimeout(() => {
+                navigate('/picking');
+              }, 3000);
+            }
           });
       },
     },

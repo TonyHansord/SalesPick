@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   wrap_parameters format: []
-  skip_before_action :authorize, only: [:index, :show, :create]
 
   def index
     @orders = Order.all
@@ -15,7 +14,6 @@ class OrdersController < ApplicationController
   def create
     customer = Customer.find_by_id(params[:customer_id])
     @order = customer.orders.create!(order_params)
-
     render json: @order
   end
 
@@ -45,12 +43,17 @@ class OrdersController < ApplicationController
 
   def complete_order
     @order = Order.find_by_id(params[:id])
-    @order.items.each do |item|
-      product = Product.find_by_id(item.product_id)
-      product.update(current_stock: product.current_stock - item.picked_quantity, assigned_stock: product.assigned_stock - item.picked_quantity)
+
+    if check_all_items_picked
+      @order.items.each do |item|
+        product = Product.find_by_id(item.product_id)
+        product.update(current_stock: product.current_stock - item.picked_quantity, assigned_stock: product.assigned_stock - item.picked_quantity)
+      end
+      @order.update(status: params[:status])
+      render json: { message: "Order Completed" }
+    else
+      render json: { message: "Not all items have been picked " }
     end
-    @order.update(status: params[:status])
-    render json: @order
   end
 
   def destroy
@@ -63,5 +66,15 @@ class OrdersController < ApplicationController
 
   def order_params
     params.permit(:id, :customer_id, :user_id, :status, :priority, :packages, :order_images)
+  end
+
+  def check_all_items_picked
+    order_complete = true
+    @order.items.each do |item|
+      if item.picked_quantity < item.assigned_quantity
+        order_complete = false
+      end
+    end
+    order_complete
   end
 end

@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ListGroup, Card, Container } from 'react-bootstrap';
+import { OrderContext } from './OrderList';
 
-function Order({ order, setSelectedOrders, action}) {
+function Order({ order, setSelectedOrders, action }) {
   const formattedDate = new Date(order.created_at).toLocaleDateString();
   const [statusClass, setStatusClass] = useState('');
+  const [priorityClass, setPriorityClass] = useState('');
+  const { selectIsActive } = useContext(OrderContext);
+  const [selectedClass, setSelectedClass] = useState('');
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (order.status === 'pending') {
@@ -16,76 +23,95 @@ function Order({ order, setSelectedOrders, action}) {
     }
   }, [order.status]);
 
-  const handleChange = (e) => {
-    console.log(e.target.checked);
-    console.log(order);
-    setSelectedOrders((selectedOrders) => {
-      if (e.target.checked) {
-        return [...selectedOrders, order];
-      } else {
-        return selectedOrders.filter((selectedOrder) => {
-          return selectedOrder.id !== order.id;
-        });
-      }
-    });
+  useEffect(() => {
+    if (!selectIsActive) {
+      setSelectedClass('');
+      setSelectedOrders([]);
+    }
+  }, [selectIsActive, setSelectedClass, setSelectedOrders]);
+
+  useEffect(() => {
+    if (order.priority === 'high') {
+      setPriorityClass('high');
+    } else if (order.priority === 'medium') {
+      setPriorityClass('medium');
+    } else if (order.priority === 'low') {
+      setPriorityClass('low');
+    } else {
+      setPriorityClass('');
+    }
+  }, [order.priority]);
+
+  const handleOrderWasClicked = () => {
+    console.log('Order was clicked');
+
+    if (selectIsActive) {
+      setSelectedOrders((selectedOrders) => {
+        if (selectedOrders.includes(order)) {
+          setSelectedClass('');
+          return selectedOrders.filter((selectedOrder) => {
+            return selectedOrder.id !== order.id;
+          });
+        } else {
+          setSelectedClass('selected');
+          return [...selectedOrders, order];
+        }
+      });
+    } else {
+      navigate(`${order.id}`);
+    }
   };
 
   return (
-    <tbody>
-      <tr id="order-row-details" className={statusClass}>
-        <td rowSpan={2} className="select">
-          <input type="checkbox" name="assign" onChange={handleChange} />
-        </td>
-        <td className="order-id">
-          <p>
-            Order ID:
-            <span>
-              <Link to={`${order.id}`}>{order.id}</Link>
-            </span>
-          </p>
-        </td>
-        <td className="order-date">{formattedDate}</td>
+    <Container
+      className={`order-container ${selectedClass}`}
+      onClick={handleOrderWasClicked}
+    >
+      <ListGroup horizontal>
+        <ListGroup.Item>
+          <Card.Text className="bold-detail">Order No:</Card.Text>
+          <Card.Text>{order.id}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text className="bold-detail">Customer:</Card.Text>
+          <Card.Text>{order.customer.name}</Card.Text>
+        </ListGroup.Item>
+
         {action === 'sales' ? (
-          <td rowSpan={3} className="order-total">
-            ${order.order_total}
-          </td>
+          <ListGroup.Item>
+            <Card.Text className="order-total">{`$ ${order.order_total}`}</Card.Text>
+          </ListGroup.Item>
         ) : null}
-      </tr>
-      <tr id="order-row-product" className={statusClass}>
-        <td colSpan={2} className="order-product">
-          {order.items[0]?.product.name}
-        </td>
-      </tr>
+      </ListGroup>
 
-      <tr id="order-row-priority" className={statusClass}>
-        <td className="order-priority">
-          <svg height="20" width="20">
-            <circle
-              cx="10"
-              cy="10"
-              r="10"
-              fill={
-                order.priority === 'high'
-                  ? '#ff0000'
-                  : order.priority === 'medium'
-                  ? '#ffa500'
-                  : order.priority === 'low'
-                  ? '#008000'
-                  : 'transparent'
-              }
-            />
-          </svg>
-        </td>
+      <ListGroup horizontal>
+        <ListGroup.Item>
+          <Card.Text className="bold-detail">Date:</Card.Text>
+          <Card.Text>{formattedDate}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text className="bold-detail">Product:</Card.Text>
+          <Card.Text>{order.items[0]?.product.name}</Card.Text>
+        </ListGroup.Item>
+      </ListGroup>
 
-        <td className="order-customer">
-          Customer:
-          {order.customer.name}
-        </td>
-        <td className="order-assigned-to">
-          {`Assigned To: ${order.user.full_name}`}
-        </td>
-      </tr>
-    </tbody>
+      <ListGroup horizontal>
+        <ListGroup.Item>
+          <Container className={`priority ${priorityClass}`}></Container>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text className="bold-detail">Assigned To:</Card.Text>
+          <Card.Text>{order.user.full_name}</Card.Text>
+        </ListGroup.Item>
+      </ListGroup>
+      <ListGroup horizontal>
+        <ListGroup.Item>
+          <Container className={statusClass}>
+            <Card.Text>{order.status}</Card.Text>
+          </Container>
+        </ListGroup.Item>
+      </ListGroup>
+    </Container>
   );
 }
 

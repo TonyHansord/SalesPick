@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
-  skip_before_action :authorize, only: [:index, :show, :create]
   wrap_parameters format: []
+  before_action do authorize_role(["admin", "sales"]) end
 
   def index
     @customers = Customer.all
