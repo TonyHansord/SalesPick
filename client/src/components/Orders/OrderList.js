@@ -1,11 +1,9 @@
 import SearchBar from '../Utilities/SearchBar';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import { useCallback, useEffect, useState, createContext } from 'react';
+import { useCallback, useEffect, useState} from 'react';
 import './Orders.css';
 import Order from './Order';
 import { Container, Form, Button, ListGroup } from 'react-bootstrap';
-
-export const OrderContext = createContext();
 
 function OrderList({ action }) {
   const searchOptions = [
@@ -86,6 +84,7 @@ function OrderList({ action }) {
           key={order.id}
           order={order}
           action={action}
+          selectable={true}
           setSelectedOrders={setSelectedOrders}
           selectIsActive={selectIsActive}
         />
@@ -142,7 +141,7 @@ function OrderList({ action }) {
 
   return (
     <>
-      <OrderContext.Provider value={{ selectIsActive, setSelectIsActive }}>
+    
         <ViewTitleBar title="Orders List" />
         <div className="main-container">
           <div className="top-container">
@@ -215,7 +214,6 @@ function OrderList({ action }) {
             {renderOrders()}
           </Container>
         </div>
-      </OrderContext.Provider>
     </>
   );
 }

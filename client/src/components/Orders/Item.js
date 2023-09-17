@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
 
 function Item({ item, order, setOrderTotal }) {
@@ -8,30 +8,30 @@ function Item({ item, order, setOrderTotal }) {
     item.product.assigned_stock +
     item.assigned_quantity;
 
-  useEffect(() => {
+  const handleUpdateItem = useCallback(() => {
     fetch(`/api/items/${item.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        order_id: order.id,
         quantity: quantity,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        fetch(`/api/orders/${order.id}`)
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            setOrderTotal(data.order_total);
-          });
+        setOrderTotal(data.order_total);
       });
-  }, [quantity]);
+  }, [item.id, quantity, setOrderTotal, order.id]);
+
+  useEffect(() => {
+    handleUpdateItem();
+  }, [handleUpdateItem, quantity]);
 
   const handleDeleteItem = () => {
-    console.log(item)
+    console.log(item);
     fetch(`/api/items/${item.id}`, {
       method: 'DELETE',
     })

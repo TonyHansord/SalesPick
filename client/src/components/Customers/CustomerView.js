@@ -36,10 +36,11 @@ function CustomerView({ user, customerID }) {
     } else {
       return orders.map((order) => {
         return (
-          <Order 
-          key={order.id}
-          order={order}
-          action={'sales'}
+          <Order
+            key={order.id}
+            order={order}
+            action={'sales'}
+            selectable={false}
           />
         );
       });
@@ -100,20 +101,8 @@ function CustomerView({ user, customerID }) {
         <div className="bottom-container">
           <div className="orders-container">
             <h3>Orders</h3>
-            <div className="orders">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Order ID</th>
-                    <th>Order Date</th>
-                    <th>Product Name</th>
-                    <th>Order Total</th>
-                    <th>Order Status</th>
-                  </tr>
-                </thead>
-                <tbody>{renderOrders(customerOrders)}</tbody>
-              </table>
-            </div>
+
+            {renderOrders(customerOrders)}
           </div>
         </div>
       </div>

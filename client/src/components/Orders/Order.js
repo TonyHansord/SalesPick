@@ -2,13 +2,11 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ListGroup, Card, Container } from 'react-bootstrap';
-import { OrderContext } from './OrderList';
 
-function Order({ order, setSelectedOrders, action }) {
+function Order({ order, setSelectedOrders, action, selectable, selectIsActive }) {
   const formattedDate = new Date(order.created_at).toLocaleDateString();
   const [statusClass, setStatusClass] = useState('');
   const [priorityClass, setPriorityClass] = useState('');
-  const { selectIsActive } = useContext(OrderContext);
   const [selectedClass, setSelectedClass] = useState('');
 
   const navigate = useNavigate();
@@ -24,11 +22,13 @@ function Order({ order, setSelectedOrders, action }) {
   }, [order.status]);
 
   useEffect(() => {
-    if (!selectIsActive) {
-      setSelectedClass('');
-      setSelectedOrders([]);
+    if (selectable) {
+      if (!selectIsActive) {
+        setSelectedClass('');
+        setSelectedOrders([]);
+      }
     }
-  }, [selectIsActive, setSelectedClass, setSelectedOrders]);
+  }, [selectable, selectIsActive, setSelectedClass, setSelectedOrders]);
 
   useEffect(() => {
     if (order.priority === 'high') {
@@ -44,21 +44,24 @@ function Order({ order, setSelectedOrders, action }) {
 
   const handleOrderWasClicked = () => {
     console.log('Order was clicked');
-
-    if (selectIsActive) {
-      setSelectedOrders((selectedOrders) => {
-        if (selectedOrders.includes(order)) {
-          setSelectedClass('');
-          return selectedOrders.filter((selectedOrder) => {
-            return selectedOrder.id !== order.id;
-          });
-        } else {
-          setSelectedClass('selected');
-          return [...selectedOrders, order];
-        }
-      });
+    if (selectable) {
+      if (selectIsActive) {
+        setSelectedOrders((selectedOrders) => {
+          if (selectedOrders.includes(order)) {
+            setSelectedClass('');
+            return selectedOrders.filter((selectedOrder) => {
+              return selectedOrder.id !== order.id;
+            });
+          } else {
+            setSelectedClass('selected');
+            return [...selectedOrders, order];
+          }
+        });
+      } else {
+        navigate(`${order.id}`);
+      }
     } else {
-      navigate(`${order.id}`);
+      navigate(`/orders/${order.id}`);
     }
   };
 

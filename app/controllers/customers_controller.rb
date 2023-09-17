@@ -9,7 +9,7 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find_by_id(params[:id])
-    render json: @customer
+    render json: @customer, include: [:orders => { items: [:product], user: [:full_name] }]
   end
 
   def create

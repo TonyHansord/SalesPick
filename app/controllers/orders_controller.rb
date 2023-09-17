@@ -19,8 +19,17 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find_by_id(params[:id])
-    @order.update(order_params)
-    render json: @order
+    if @order.status == "complete"
+      render json: { error: "You can't amend a complete order" }
+    else
+      @items = @order.items
+      @items.each do |item|
+        @product = Product.find_by_id(item.product_id)
+        @product.update(assigned_stock: @product.assigned_stock + (item.quantity - item.assigned_quantity))
+        item.update(assigned_quantity: item.quantity)
+      end
+      render json: { message: "Order Updated" }
+    end
   end
 
   def add_photos

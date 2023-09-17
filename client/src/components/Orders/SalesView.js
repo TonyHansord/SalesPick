@@ -1,10 +1,11 @@
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import './Orders.css';
 import { Card } from 'react-bootstrap';
 import AddProductModal from './AddProductModal';
 import Item from './Item';
+import { MessageContext } from '../../App';
 
 function SalesView() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +19,7 @@ function SalesView() {
     items: [],
   });
   const [orderTotal, setOrderTotal] = useState(0);
+  const { displayMessage } = useContext(MessageContext);
 
   const params = useParams();
 
@@ -48,47 +50,22 @@ function SalesView() {
   const handleCloseModal = () => setIsOpen(false);
 
   const handleSaveOrder = () => {
-    fetch(`/api/orders/${params.id}`)
+    fetch(`/api/orders/${params.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        data.items.forEach((item) => {
-          fetch(`/api/items/${item.id}`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              assigned_quantity: item.quantity,
-            }),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-
-              fetch(`/api/products/${item.product.id}`, {
-                method: 'PATCH',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  // add the difference between the new quantity and the old quantity to the assigned stock
-                  assigned_stock:
-                    item.product.assigned_stock +
-                    (item.quantity - item.assigned_quantity),
-                }),
-              })
-                .then((res) => res.json())
-                .then((data) => {
-                  console.log(data);
-                });
-            });
-        });
+        console.log(data);
+        displayMessage('Order saved', 'success');
       });
   };
 
   return (
     <>
-      <ViewTitleBar title="Sales View" hasBackButton={true}/>
+      <ViewTitleBar title="Sales View" hasBackButton={true} />
       <div className="main-container">
         <div className="top-container">
           <div className="details-container">
@@ -123,7 +100,7 @@ function SalesView() {
         <div className="bottom-container">
           <div className="Items">
             <div className="items">
-            {order.items.length !== 0 ? renderItems() : <p>No items</p>}
+              {order.items.length !== 0 ? renderItems() : <p>No items</p>}
             </div>
           </div>
         </div>

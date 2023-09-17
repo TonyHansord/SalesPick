@@ -21,8 +21,9 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find_by_id(params[:id])
+    @order = Order.find_by_id(params[:order_id])
     @item.update(item_params)
-    render json: @item
+    render json: @order
   end
 
   def destroy
@@ -35,6 +36,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(:order_id, :product_id, :quantity, :assigned_quantity, :picked_quantity)
+    params.permit(:id, :order_id, :product_id, :quantity, :assigned_quantity, :picked_quantity)
   end
 end
