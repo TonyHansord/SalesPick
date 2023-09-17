@@ -108,12 +108,6 @@ function App() {
             user={user}
             setUser={setUser}
           />
-          <Routes>
-            <Route
-              path="/"
-              element={<HomeView sections={viewableSections} />}
-            />
-          </Routes>
           <MessageContext.Provider
             value={{
               message,
@@ -132,6 +126,10 @@ function App() {
               />
 
               <Routes>
+                <Route
+                  path="/"
+                  element={<HomeView sections={viewableSections} />}
+                />
                 <Route path="/orders" element={<OrderList action="sales" />} />
                 <Route path="/orders/:id" element={<SalesView />} />
                 <Route

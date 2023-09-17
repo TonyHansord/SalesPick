@@ -69,7 +69,7 @@ function CustomerList({ setSelectedCustomer }) {
             </Card>
           </div>
         </div>
-        <Container id="customer-list" className="list-container">
+        <Container id="customer-list">
           {renderCustomers()}
         </Container>
       </div>

@@ -11,29 +11,34 @@ function OrderList({ action }) {
       title: 'Priority',
       key: 'priority',
       type: 'text',
+      controlType: 'select',
+      options: ['Low', 'Medium', 'High'],
     },
 
     {
       title: 'Order ID',
       key: 'id',
       type: 'integer',
+      controlType: 'input',
     },
     {
       title: 'Customer Name',
       key: 'customer_name',
       type: 'text',
-    },
-    {
-      title: 'Product Name',
-      type: 'text',
+      controlType: 'input',
     },
     {
       title: 'Order Date',
+      key: 'created_at',
       type: 'date',
+      controlType: 'input',
     },
     {
       title: 'Order Status',
+      key: 'status',
       type: 'text',
+      controlType: 'select',
+      options: ['pending', 'in_progress', 'complete'],
     },
   ];
 
@@ -41,6 +46,7 @@ function OrderList({ action }) {
   const [users, setUsers] = useState([]);
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [selectedUser, setSelectedUser] = useState([]);
+  const [searchResults, setSearchResults] = useState(orderList);
   const [selectedPriority, setSelectedPriority] = useState(0);
   const [selectIsActive, setSelectIsActive] = useState(false);
   const [showCompleted, setShowCompleted] = useState(false);
@@ -51,6 +57,7 @@ function OrderList({ action }) {
       .then((data) => {
         console.log(data);
         setOrderList(data);
+        setSearchResults(data);
       });
   }, []);
 
@@ -78,7 +85,7 @@ function OrderList({ action }) {
   };
 
   const renderOrders = () => {
-    return orderList.map((order) => {
+    return searchResults.map((order) => {
       return (
         <Order
           key={order.id}
@@ -145,7 +152,7 @@ function OrderList({ action }) {
         <ViewTitleBar title="Orders List" />
         <div className="main-container">
           <div className="top-container">
-            <SearchBar type="orders" searchOptions={searchOptions} />
+            <SearchBar type="orders" searchOptions={searchOptions} setSearchResults={setSearchResults} data={orderList}/>
             <div className="action-container assign-container">
               <h3>Assign</h3>
               <div className="assign">

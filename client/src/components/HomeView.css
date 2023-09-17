@@ -7,8 +7,7 @@
 }
 
 .home-view {
-  width: 80vw;
-  margin-left: 250px;
+  width: var(--main-view-width);
   padding: 20vh;
   align-items: center;
   justify-content: center;
@@ -33,7 +32,6 @@
   border-radius: 5px;
   color: white;
   padding: 20px;
-  margin: 10px;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
 }

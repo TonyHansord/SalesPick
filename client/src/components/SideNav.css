@@ -109,7 +109,7 @@
 
 @media screen and (max-width: 768px) {
   #side-nav {
-    position: absolute;
+    position: fixed;
     width: 100vw;
     display: flex;
     flex-direction: row;

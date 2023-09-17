@@ -47,15 +47,29 @@ function SearchBar({
 
   return (
     <div className="search-bar">
-      {!hasNoTitle ? <h3>Search {type}</h3> : null}
+      {!hasNoTitle ? <h3>Filter {type}</h3> : null}
 
       <select onChange={handleSearchTypeChange}>{renderSearchOptions()}</select>
-      <input
-        type={searchOption.type}
-        value={search}
-        placeholder={`Search ${type} by ${searchOption.title}`}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+
+      {searchOption.controlType === 'select' ? (
+        <select onChange={(e) => setSearch(e.target.value)}>
+          <option value=""></option>
+          {searchOption.options.map((option, index) => {
+            return (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            );
+          })}
+        </select>
+      ) : (
+        <input
+          type={searchOption.type}
+          value={search}
+          placeholder={`Filter ${type} by ${searchOption.title}`}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      )}
       <button type="button" onClick={handleSearch}>
         Search
       </button>

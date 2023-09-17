@@ -2,8 +2,18 @@
   display: flex;
   flex-direction: column;
   padding: 20px 0;
-  width: 50%;
-  gap: 20px;
+  width: 100%;
+  gap: 5px;
+  font-size: small;
+}
+
+.search-bar select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  font-size: small;
+  height: 40px;
 }
 
 .search-bar input {
@@ -11,8 +21,8 @@
   padding: 10px;
   border: 1px solid var(--primary-color);
   border-radius: 5px;
-  font-size: 1rem;
-  height: 50px;
+  font-size: small;
+  height: 40px;
 }
 
 .search-bar button {
@@ -21,11 +31,22 @@
   border: none;
   border-radius: 5px;
   padding: 10px;
-  font-size: 1rem;
+  font-size: small;
   cursor: pointer;
-  height: 50px;
+  height: 40px;
   width: 100%;
 }
 
-@media screen and (max-width: 578px) {
+@media screen and (max-width: 768px) {
+  .search-bar {
+    font-size: small;
+  }
+
+  .search-bar select {
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: small;
+    height: 40px;
+  }
 }

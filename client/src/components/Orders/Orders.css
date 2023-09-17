@@ -2,17 +2,21 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 50%;
-  gap: 20px;
+  align-items: flex-start;
+  width: 100%;
+  gap: 5px;
+  font-size: small;
   text-align: start;
 }
 
 .assign {
   display: flex;
-  gap: 10px;
+  gap: 5px;
   width: 100%;
+  height: 40px;
   border-radius: 5px;
   justify-content: space-between;
+  align-items: center;
   color: white;
   background-color: var(--primary-color);
 }
@@ -21,8 +25,7 @@
   width: 40%;
   text-align: center;
   margin: auto;
-  height: auto;
-  font-size: 1rem;
+  font-size: small;
 }
 
 .assign select {
@@ -31,55 +34,16 @@
   border: 1px solid var(--primary-color);
   border-radius: 5px;
   font-size: 1rem;
-  height: 50px;
+  height: 35px;
 }
 
-table {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  gap: 10px;
-}
-
-table tr {
-  width: 100vw;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-tbody {
-  display: block;
-  border: 2px solid var(--primary-color);
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-table td {
-  width: 10px;
+.assign button {
+  width: 20%;
   margin: 0;
-  border: none;
-  font-size: 1rem;
-  height: 50px;
-}
-
-table td:first-child {
-  width: 10vw;
-}
-
-table td:nth-child(2) {
-  width: 40vw;
-}
-
-table td:nth-child(3) {
-  width: 40vw;
-  text-align: right;
-}
-
-table td.order-total {
-  width: 10vw;
-  vertical-align: middle;
-  font-size: 2rem;
-  font-weight: bold;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  font-size: small;
+  height: 40px;
 }
 
 .bottom-container {
@@ -119,23 +83,37 @@ table td.order-total {
 }
 
 .modal-body {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
   gap: 20px;
   width: 100%;
   padding: 20px;
   border: none;
   overflow-y: scroll;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.modal-body .card {
+.modal-body .container {
   position: relative;
   display: flex;
+  text-align: center;
+  flex-direction: column;
   background-color: transparent;
   justify-content: space-between;
   padding: 0;
-  height: 300px;
+  border: 3px double var(--primary-color);
+  border-radius: 5px;
+}
+
+.modal-body .container:hover {
+  border: 3px double var(--secondary-color);
+}
+
+.modal-body .container .list-group {
+  display: flex;
+  justify-content: space-between;
+  transform: none;
+  width: 100%;
+  height: 100%;
 }
 
 .modal-body .card .card-title {
@@ -152,16 +130,25 @@ table td.order-total {
   color: white;
 }
 
-.modal-body .card .card-text {
+.modal-body .container .card-text {
   color: var(--primary-color);
   width: 100%;
-  font-size: 40px;
+  font-size: small;
   padding: 0 10px;
 }
 
-.modal-body .card img {
+.modal-body .container .card-text.price {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.modal-body .container .list-group .list-group-item {
   width: 100%;
-  height: 60%;
+}
+
+.modal-body .list-group-item img {
+  width: 100%;
+  height: 200px;
   object-fit: contain;
 }
 /* 
@@ -183,7 +170,6 @@ table td.order-total {
   display: flex;
   padding: 0;
 }
-
 
 .button-container .list-group {
   display: flex;
@@ -228,16 +214,20 @@ table td.order-total {
 
 .order-container {
   display: grid;
-  border: 0.5px solid var(--primary-color);
-  
+  border: 3px double var(--primary-color);
+
   border-radius: 5px;
   padding: 0;
   text-align: left;
   font-size: small;
 }
 
+.order-container:hover {
+  border: 3px double var(--secondary-color);
+}
+
 .order-container.selected {
-  border: 2px solid var(--secondary-color);
+  border: 3px solid var(--secondary-color);
 }
 
 .order-container .list-group:nth-child(odd) {
@@ -332,77 +322,58 @@ table td.order-total {
   border: none;
 }
 
-.card.pick-item {
+.container.pick-item {
   position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0;
-  padding: 10px 0;
-  width: 100%;
-  height: 100px;
-  background-color: var(--background-color);
-  border-radius: 5px;
-  border: 1px solid var(--primary-color);
-  color: var(--text-color);
-}
-
-.card.pick-item:hover {
-  transform: none;
-}
-
-.card.pick-item .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 0;
-  padding: 0;
-  width: 80%;
-  height: 100px;
-  background-color: transparent;
-  border: 1px solid var(--primary-color);
+  padding: 10px 0;
+  width: 100%;
+  background-color: var(--background-color);
+  border-radius: 5px;
+  border: 3px double var(--primary-color);
   color: var(--text-color);
 }
 
-.card.pick-item .card-img {
+.container.pick-item .card-img {
   margin: 15px;
   width: 70px;
   height: 70px;
   object-fit: contain;
 }
 
-.card.pick-item .list-group {
+.container.pick-item .list-group {
   position: relative;
-  display: flex;
+  display: grid;
   margin-bottom: 0;
-  font-size: 10px; /* fallback */
-  font-size: clamp(10px, 20vw, 15px);
+  font-size: medium;
+  align-items: center;
   width: 100%;
-  height: 50px;
-  background-color: rgba(91, 203, 205, 0.7);
   border-radius: 0;
-  color: white;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.card.pick-item .list-group-item {
+.container.pick-item .list-group-item {
   position: relative;
   display: flex;
   flex-direction: column;
-  font-size: 10px; /* fallback */
-  font-size: clamp(10px, 20vw, 15px);
-  text-align: center;
+  justify-content: center;
+  text-align: left;
   width: 100%;
-  height: 50px;
+  height: 100px;
+  gap: 5px;
   border: 0;
   border-radius: 0;
-  background-color: rgba(91, 203, 205, 0.7);
-  color: white;
+  color: var(--primary-color);
 }
 
-.card.pick-item .list-group-item p {
-  font-size: small;
-  margin: 0;
-  width: 100%;
+.container.pick-item .list-group-item:last-child .container {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .card.pick-item .list-group-item .item-heading {
@@ -425,7 +396,7 @@ table td.order-total {
   font-weight: bold;
   font-size: medium;
   width: 100%;
-  height: 50px;
+  height: 20px;
 }
 
 .packages {
@@ -551,6 +522,10 @@ table td.order-total {
 }
 
 @media screen and (max-width: 768px) {
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
+
   .packages .card {
     width: 100%;
     height: 100%;
@@ -585,6 +560,52 @@ table td.order-total {
     gap: 10px;
     width: 100%;
     border: none;
+  }
+
+  .container.pick-item .list-group {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .container.pick-item .list-group-item {
+    height: 50px;
+  }
+
+  .container.pick-item .list-group-item input {
+    height: 100px;
+    font-size: x-large;
+    text-align: center;
+  }
+
+  .container.pick-item .list-group-item:nth-child(1) {
+    grid-row: 1 / span 2;
+  }
+
+  .container.pick-item .list-group-item:nth-child(3) {
+    grid-row: 3 / span 1;
+    grid-column: 1 / span 2;
+  }
+
+  .container.pick-item .list-group-item:nth-child(4) {
+    grid-row: 4 / span 1;
+    grid-column: 1 / span 1;
+  }
+
+  .container.pick-item .list-group-item:nth-child(5) {
+    grid-row: 4 / span 1;
+    grid-column: 2 / span 1;
+  }
+
+  .container.pick-item .list-group-item:nth-child(6) {
+    grid-row: 3 / span 2;
+    grid-column: 2 / span 1;
+    height: 100px;
+  }
+
+  .container.pick-item .list-group-item:last-child {
+    grid-row: 5 / span 1;
+    grid-column: 1 / span 2;
+    text-align: center;
+    width: 100%;
   }
 
   .card.pick-item .card-img {

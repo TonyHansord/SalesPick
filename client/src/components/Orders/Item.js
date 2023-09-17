@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Card, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup, Container, Button } from 'react-bootstrap';
+import * as Icon from 'react-bootstrap-icons';
 
 function Item({ item, order, setOrderTotal }) {
   const [quantity, setQuantity] = useState(item.quantity);
@@ -43,45 +44,47 @@ function Item({ item, order, setOrderTotal }) {
   };
 
   return (
-    <Card className="pick-item">
-      <Card.Img src={item.product.product_image.url} alt={item.product.name} />
-      <Card.Body>
-        <Card.Title>{item.product.name}</Card.Title>
-        <ListGroup horizontal>
-          <p>
-            <span className="item-heading">Code: </span>
-            {item.product.code}
-          </p>
-        </ListGroup>
-      </Card.Body>
-      <div className="item-details"></div>
-      <div className="item-stock">
-        <span className="item-heading">Available: </span>
-        <p>{availableStock}</p>
-        <input
-          type="number"
-          min="0"
-          max={availableStock}
-          value={quantity}
-          onChange={(e) => {
-            setQuantity(e.target.value);
-          }}
-        />
-      </div>
-      <div className="item-price">
-        <p>
-          <span className="item-heading">Price: </span>
-          {item.product.price.toFixed(2)}
-        </p>
-        <p>
-          <span className="item-heading">Total: </span>
-          {(item.product.price * quantity).toFixed(2)}
-        </p>
-      </div>
-      <div className="item-actions">
-        <Card onClick={handleDeleteItem}>Delete</Card>
-      </div>
-    </Card>
+    <Container className="pick-item">
+      <ListGroup horizontal>
+        <ListGroup.Item>
+          <Card.Img
+            src={item.product.product_image.url}
+            alt={item.product.name}
+          />
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text>{item.product.code}</Card.Text>
+          </ListGroup.Item>
+          <ListGroup.Item>
+          <Card.Text>{item.product.name}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text>Available: {availableStock}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text>Price: ${item.product.price.toFixed(2)}</Card.Text>
+          <Card.Text>
+            Total: ${(item.product.price * quantity).toFixed(2)}
+          </Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <input
+            type="number"
+            min="0"
+            max={availableStock}
+            value={quantity}
+            onChange={(e) => {
+              setQuantity(e.target.value);
+            }}
+          />
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Button>
+            <Icon.Trash onClick={handleDeleteItem} />
+          </Button>
+        </ListGroup.Item>
+      </ListGroup>
+    </Container>
   );
 }
 

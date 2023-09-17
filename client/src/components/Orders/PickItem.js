@@ -1,32 +1,34 @@
-import { Card, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup, Container, Button } from 'react-bootstrap';
 
 function PickItem({ item, addItem }) {
   return (
-    <Card className="pick-item">
-      <Card.Img src={item.product.product_image?.url} />
-      <Card.Body>
-        <Card.Title>{item.product.name}</Card.Title>
-        <ListGroup horizontal>
-          <ListGroup.Item>
-            <p className="item-heading">Code</p>
-            <p>{item.product.code}</p>
+    <Container className="pick-item">
+      <ListGroup horizontal>
+        <ListGroup.Item>
+          <Card.Img src={item.product.product_image?.url} />
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text className="bold-detail">Code</Card.Text>
+          <Card.Text>{item.product.code}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text>{item.product.name}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text className="bold-detail">Assigned: </Card.Text>
+          <Card.Text>{item.assigned_quantity}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text className="bold-detail">Picked: </Card.Text>
+          <Card.Text>{item.picked_quantity}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Button onClick={() => addItem(item)} className="btn btn-primary">
+            +
+            </Button>
           </ListGroup.Item>
-          <ListGroup.Item>
-            <p className="item-heading">Assigned</p>
-            <p>{item.assigned_quantity}</p>
-          </ListGroup.Item>
-          <ListGroup.Item>
-            <p className="item-heading">Picked</p>
-            <p>{item.picked_quantity}</p>
-          </ListGroup.Item>
-        </ListGroup>
-      </Card.Body>
-      <Card.Footer>
-        <button className="btn btn-primary" onClick={() => addItem(item)}>
-          +
-        </button>
-      </Card.Footer>
-    </Card>
+      </ListGroup>
+    </Container>
   );
 }
 

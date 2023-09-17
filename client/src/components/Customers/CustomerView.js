@@ -3,16 +3,28 @@ import { Card } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Order from '../Orders/Order';
+import DetailsContainer from '../Utilities/DetailsContainer';
+import { ClockFill } from 'react-bootstrap-icons';
+import ActionContainer from '../Utilities/ActionContainer';
 
 function CustomerView({ user, customerID }) {
   const navigate = useNavigate();
   const params = useParams();
-  const [customer, setCustomer] = useState({});
+  const [customer, setCustomer] = useState({
+    name: '',
+    email: '',
+    phone_number: '',
+    address: {
+      street: '',
+      suburb: '',
+      state: '',
+      postcode: '',
+    },
+  });
   const [customerOrders, setCustomerOrders] = useState([]);
 
   console.log(params);
   let id = params.customer_id ? params.customer_id : customerID;
-
   useEffect(() => {
     fetch(`/api/customers/${id}`)
       .then((res) => res.json())
@@ -22,30 +34,8 @@ function CustomerView({ user, customerID }) {
         setCustomerOrders(data.orders);
       });
   }, [id]);
-
-  // for each order in customer.orders, render a row in the table
-  const renderOrders = (orders) => {
-    console.log(orders);
-
-    if (!orders) {
-      return (
-        <tr>
-          <td>No orders found</td>
-        </tr>
-      );
-    } else {
-      return orders.map((order) => {
-        return (
-          <Order
-            key={order.id}
-            order={order}
-            action={'sales'}
-            selectable={false}
-          />
-        );
-      });
-    }
-  };
+  console.log(customer);
+  const { street, state, suburb, postcode } = customer?.address;
 
   const handleClickNewOrder = () => {
     fetch('/api/orders', {
@@ -66,37 +56,70 @@ function CustomerView({ user, customerID }) {
       });
   };
 
+  const details = [
+    {
+      title: 'Name',
+      value: customer?.name,
+    },
+    {
+      title: 'Email',
+      value: customer?.email,
+    },
+    {
+      title: 'Phone',
+      value: customer?.phone_number,
+    },
+    {
+      title: 'Address',
+      value: `${street} ${suburb} ${state} ${postcode}`,
+    },
+  ];
+
+  const actions = [
+    {
+      title: 'Edit Customer',
+      method: () => {
+        console.log('Edit Customer');
+      },
+    },
+    {
+      title: 'New Order',
+      method: () => {
+        console.log('New Order');
+        handleClickNewOrder();
+      },
+    }
+  ];
+
+  // for each order in customer.orders, render a row in the table
+  const renderOrders = (orders) => {
+    console.log(orders);
+
+    if (!orders) {
+      return null;
+    } else {
+      return orders.map((order) => {
+        return (
+          <Order
+            key={order.id}
+            order={order}
+            action={'sales'}
+            selectable={false}
+          />
+        );
+      });
+    }
+  };
+
+ 
+
   return (
     <>
       <ViewTitleBar title={customer?.name} hasBackButton />
       <div className="main-container">
         <div className="top-container">
-          <div className="details-container">
-            <h3>{customer.name}</h3>
-            <div className="details">
-              <p>
-                <span className="bold-detail">ID: </span>
-                {customer.id}
-              </p>
-              <p>
-                <span className="bold-detail">Address: </span>
-                {`${customer.address?.street} ${customer.address?.suburb} ${customer.address?.state} ${customer.address?.postcode}`}
-              </p>
-              <p>
-                <span className="bold-detail">Phone: </span>
-                {customer.phone_number}
-              </p>
-              <p>
-                <span className="bold-detail">Email: </span>
-                {customer.email}
-              </p>
-            </div>
-          </div>
-          <div className="action-container">
-            <Card className="card med" onClick={handleClickNewOrder}>
-              <Card.Title>New Order</Card.Title>
-            </Card>
-          </div>
+          <DetailsContainer data={details} />
+          <ActionContainer actions={actions} cardSize={'med'} />
         </div>
         <div className="bottom-container">
           <div className="orders-container">

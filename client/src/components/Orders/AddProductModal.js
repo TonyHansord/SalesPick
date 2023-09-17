@@ -1,5 +1,5 @@
 import SearchBar from '../Utilities/SearchBar';
-import { Modal, Card } from 'react-bootstrap';
+import { Modal, Card, ListGroup, Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 function AddProductModal({ show, handleClose, orderID, order }) {
@@ -36,14 +36,38 @@ function AddProductModal({ show, handleClose, orderID, order }) {
 
   const renderProducts = () => {
     console.log(searchResults);
-    return searchResults.map((product) => {
+    return searchResults.map((product, index) => {
       return (
-        <Card key={product.id} id={product.id} onClick={handleAddItem}>
-          <Card.Title>{product.name}</Card.Title>
-          <img src={product.product_image.url} alt={product.name} />
-          <Card.Text>$ {product.price}</Card.Text>
-          {/* <Card.Text>{product.code}</Card.Text> */}
-        </Card>
+        <Container
+          key={index}
+          className="product-card"
+          id={product.id}
+          onClick={handleAddItem}
+        >
+          <ListGroup>
+            <ListGroup.Item>
+              <Card.Title>{product.name}</Card.Title>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <img src={product.product_image.url} alt={product.name} />
+            </ListGroup.Item>
+          </ListGroup>
+          <ListGroup horizontal>
+            <ListGroup.Item>
+              <Card.Text>Code: {product.code}</Card.Text>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Card.Text className='price'>${product.price}</Card.Text>
+            </ListGroup.Item>
+          </ListGroup>
+          <ListGroup horizontal>
+            <ListGroup.Item>
+              <Card.Text>
+                Available: {product.current_stock - product.assigned_stock}
+              </Card.Text>
+            </ListGroup.Item>
+            </ListGroup>
+        </Container>
       );
     });
   };
