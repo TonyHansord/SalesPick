@@ -53,6 +53,7 @@ class OrdersController < ApplicationController
   def complete_order
     @order = Order.find_by_id(params[:id])
 
+    puts check_all_items_picked
     if check_all_items_picked
       @order.items.each do |item|
         product = Product.find_by_id(item.product_id)
@@ -61,7 +62,7 @@ class OrdersController < ApplicationController
       @order.update(status: params[:status])
       render json: { message: "Order Completed" }
     else
-      render json: { message: "Not all items have been picked " }
+      render json: { error: "Not all items have been picked " }
     end
   end
 
@@ -78,12 +79,11 @@ class OrdersController < ApplicationController
   end
 
   def check_all_items_picked
-    order_complete = true
     @order.items.each do |item|
       if item.picked_quantity < item.assigned_quantity
-        order_complete = false
+        return false
       end
     end
-    order_complete
+    return true
   end
 end

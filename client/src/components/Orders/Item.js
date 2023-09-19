@@ -44,7 +44,7 @@ function Item({ item, order, setOrderTotal }) {
   };
 
   return (
-    <Container className="pick-item">
+    <Container id='item' className="pick-item">
       <ListGroup horizontal>
         <ListGroup.Item>
           <Card.Img
@@ -63,6 +63,8 @@ function Item({ item, order, setOrderTotal }) {
         </ListGroup.Item>
         <ListGroup.Item>
           <Card.Text>Price: ${item.product.price.toFixed(2)}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
           <Card.Text>
             Total: ${(item.product.price * quantity).toFixed(2)}
           </Card.Text>

@@ -1,5 +1,6 @@
 :root {
-  --background-color: white;
+  --background-color: rgb(154, 193, 190);
+  --white-color: rgb(255, 255, 255);
   --primary-color: rgb(64, 89, 87);
   --secondary-color: rgb(38, 164, 160);
   --text-color: #282c34;
@@ -10,6 +11,7 @@
 
 body {
   background-color: var(--background-color);
+  font-family: 'Roboto', sans-serif;
 }
 
 .App {
@@ -27,7 +29,6 @@ body {
   height: 100vh;
   gap: 10vw;
   margin-top: 10vh;
-  background-color: var(--background-color);
 }
 
 .login-view form {
@@ -49,7 +50,7 @@ body {
 }
 
 .form-group label {
-  color: var(--background-color);
+  color: var(--white-color);
   font-size: 1rem;
   text-align: center;
   width: 20%;
@@ -89,7 +90,7 @@ body {
 
 .btn:hover {
   color: var(--primary-color);
-  background-color: var(--background-color);
+  background-color: var(--white-color);
   border: 1px solid var(--primary-color);
 }
 
@@ -116,11 +117,10 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
   height: 100vh;
-  background-color: var(--background-color);
 }
 
 .title-bar {
-  color: var(--background-color);
+  color: var(--white-color);
   background-color: var(--primary-color);
   display: flex;
   position: relative;
@@ -141,7 +141,7 @@ body {
   margin: 5px;
   padding: 10px;
   background-color: transparent;
-  color: var(--background-color);
+  color: var(--white-color);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -152,7 +152,7 @@ body {
 }
 
 #message-bar {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: var(--main-view-width);
   height: 50px;
@@ -242,7 +242,7 @@ select {
   font-size: 2vw;
   padding: 0;
   border-radius: 5px;
-  background-color: var(--background-color);
+  background-color: var(--white-color);
 }
 
 .list-container table {
@@ -288,6 +288,39 @@ select {
   justify-content: center;
 }
 
+#users {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: 5px;
+  padding: 0;
+}
+#users .list-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: 100%;
+  font-size: medium;
+  text-align: start;
+  color: var(--primary-color);
+}
+
+#users .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  border: 3px solid var(--primary-color);
+  border-radius: 5px;
+  color: var(--white-color);
+  padding: 20px;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
 .bold-detail {
   font-weight: bold;
 }
@@ -331,6 +364,10 @@ select {
     position: fixed;
     width: 100vw;
     top: 70px;
+  }
+
+  #user-container .list-group .list-group-item {
+    flex-direction: column;
   }
   .main-view {
     margin-left: 0;

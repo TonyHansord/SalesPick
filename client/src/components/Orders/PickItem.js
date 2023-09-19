@@ -2,7 +2,7 @@ import { Card, ListGroup, Container, Button } from 'react-bootstrap';
 
 function PickItem({ item, addItem }) {
   return (
-    <Container className="pick-item">
+    <Container id='pick-item' className="pick-item">
       <ListGroup horizontal>
         <ListGroup.Item>
           <Card.Img src={item.product.product_image?.url} />

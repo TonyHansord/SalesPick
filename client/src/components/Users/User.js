@@ -1,3 +1,4 @@
+import { Container, ListGroup, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 function User({ user, setSelectedUser }) {
@@ -9,15 +10,9 @@ function User({ user, setSelectedUser }) {
   };
 
   return (
-    <tr onClick={handleClickUser}>
-      <td>{user.username}</td>
-      <td>{user.first_name}</td>
-      <td>{user.last_name}</td>
-      <td>{user.role.charAt(0).toUpperCase() + user.role.slice(1)}</td>
-      {/* <td>
-       
-      </td> */}
-    </tr>
+    <Card className="card med" onClick={handleClickUser}>
+      <Card.Title>{user.full_name}</Card.Title>
+    </Card>
   );
 }
 

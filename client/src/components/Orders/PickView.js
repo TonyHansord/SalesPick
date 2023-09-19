@@ -104,7 +104,7 @@ function PickView() {
               console.log(data);
               displayMessage(data.error, 'error');
             } else {
-              displayMessage('Order completed', 'success');
+              displayMessage(data.message, 'success');
               setTimeout(() => {
                 navigate('/picking');
               }, 3000);

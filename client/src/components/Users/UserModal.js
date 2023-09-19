@@ -2,7 +2,13 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 
 function UserModal({ show, handleClose, setUsers }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    username: '',
+    password: '',
+    role: 'admin',
+  });
 
   const handleAddUser = (e) => {
     e.preventDefault();

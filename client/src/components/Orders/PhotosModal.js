@@ -1,4 +1,5 @@
-import { Modal, Form, Card, Button } from 'react-bootstrap';
+import { Modal, Form, Card, Button, Container } from 'react-bootstrap';
+import * as Icon from 'react-bootstrap-icons';
 
 function PhotosModal({ show, handleClose, order, fetchOrder }) {
   const renderPhotos = () => {
@@ -7,10 +8,12 @@ function PhotosModal({ show, handleClose, order, fetchOrder }) {
     return order.order_images.length ? (
       order.order_images.map((photo, index) => {
         return (
-          <Card key={index} id={index} className="orderPhoto">
+          <Container key={index} id={index} className="orderPhoto">
             <Card.Img src={photo} />
-            <Button onClick={handleRemovePhoto}>Remove</Button>
-          </Card>
+            <Button onClick={handleRemovePhoto}>
+              <Icon.TrashFill />
+            </Button>
+          </Container>
         );
       })
     ) : (
@@ -57,19 +60,18 @@ function PhotosModal({ show, handleClose, order, fetchOrder }) {
       <Modal.Header closeButton>
         <Modal.Title>Photos</Modal.Title>
       </Modal.Header>
-
+      <Form.Group controlId="orderPhotos">
+        <Form.Control
+          type="file"
+          accept="image/*"
+          multiple={false}
+          value={''}
+          onChange={(e) => {
+            handleAddPhoto(e);
+          }}
+        />
+      </Form.Group>
       <Modal.Body>
-        <Form.Group controlId="orderPhotos">
-          <Form.Control
-            type="file"
-            accept="image/*"
-            multiple={false}
-            value={''}
-            onChange={(e) => {
-              handleAddPhoto(e);
-            }}
-          />
-        </Form.Group>
         <div className="photos">{renderPhotos()}</div>
       </Modal.Body>
     </Modal>
