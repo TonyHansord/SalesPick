@@ -44,7 +44,9 @@ Rails.application.routes.draw do
   get "/api/users", to: "users#index"
   get "/api/user", to: "users#show"
   post "/api/users", to: "users#create"
+  get "/api/users/:id", to: "users#get_user"
   patch "/api/users/:id", to: "users#update"
+  patch "/api/users/:id/password", to: "users#update_password"
   delete "/api/users/:id", to: "users#destroy"
 
   post "/api/login", to: "sessions#create"

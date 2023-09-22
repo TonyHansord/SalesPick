@@ -1,5 +1,4 @@
 import * as Icon from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
 
 function ViewTitleBar({ title, hasBackButton }) {
   const goBack = () => {

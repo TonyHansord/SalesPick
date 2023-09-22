@@ -71,9 +71,7 @@ function PhotosModal({ show, handleClose, order, fetchOrder }) {
           }}
         />
       </Form.Group>
-      <Modal.Body>
-        <div className="photos">{renderPhotos()}</div>
-      </Modal.Body>
+      <Modal.Body className="gallery">{renderPhotos()}</Modal.Body>
     </Modal>
   );
 }

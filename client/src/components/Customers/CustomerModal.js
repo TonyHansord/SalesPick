@@ -1,7 +1,15 @@
 import { Modal, Form } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
-function CustomerModal({ show, handleClose, fetchCustomers }) {
+import { MessageContext } from '../../App';
+
+function CustomerModal({
+  show,
+  handleClose,
+  fetchCustomers,
+  customerData,
+  getCustomer,
+}) {
   const [customer, setCustomer] = useState({
     name: '',
     street: '',
@@ -12,12 +20,34 @@ function CustomerModal({ show, handleClose, fetchCustomers }) {
     email: '',
   });
 
+  const { displayMessage } = useContext(MessageContext);
+
+  useEffect(() => {
+    if (customerData) {
+      setCustomer({
+        name: customerData.name,
+        street: customerData.address.street,
+        suburb: customerData.address.suburb,
+        state: customerData.address.state,
+        postcode: customerData.address.postcode,
+        phone: customerData.phone_number,
+        email: customerData.email,
+      });
+    }
+  }, [customerData]);
+
   const handleSubmit = (e) => {
+    const endpoint = customerData
+      ? `/api/customers/${customerData.id}`
+      : '/api/customers';
+
+    const method = customerData ? 'PATCH' : 'POST';
+
     e.preventDefault();
     console.log('submit');
 
-    fetch('/api/customers', {
-      method: 'POST',
+    fetch(endpoint, {
+      method: method,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -35,8 +65,8 @@ function CustomerModal({ show, handleClose, fetchCustomers }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        fetchCustomers();
+        displayMessage(data.message, 'success');
+        customerData ? getCustomer() : fetchCustomers();
       });
     handleClose();
   };

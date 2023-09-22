@@ -1,4 +1,4 @@
-import { Container, ListGroup, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 function User({ user, setSelectedUser }) {

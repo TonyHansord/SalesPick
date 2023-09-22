@@ -24,7 +24,6 @@ function App() {
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState({});
-  const [selectedUser, setSelectedUser] = useState({});
   const [message, setMessage] = useState('');
   const [showMessageBar, setShowMessageBar] = useState(false);
   const [messageType, setMessageType] = useState('success');
@@ -124,7 +123,7 @@ function App() {
                 setShowMessageBar={setShowMessageBar}
                 messageType={messageType}
               />
-
+              
               <Routes>
                 <Route
                   path="/"
@@ -156,12 +155,9 @@ function App() {
                 />
                 <Route
                   path="/users"
-                  element={<UserManagement setSelectedUser={setSelectedUser} />}
+                  element={<UserManagement />}
                 />
-                <Route
-                  path="/users/:id"
-                  element={<UserView user={selectedUser} />}
-                />
+                <Route path="/users/:id" element={<UserView />} />
               </Routes>
             </div>
           </MessageContext.Provider>

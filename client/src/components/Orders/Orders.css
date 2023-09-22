@@ -82,7 +82,7 @@
   padding: 20px;
 }
 
-.modal-body {
+.modal-body.gallery {
   display: grid;
   gap: 20px;
   width: 100%;
@@ -169,6 +169,7 @@
 .button-container {
   display: flex;
   padding: 0;
+  background-color: transparent;
 }
 
 .button-container .list-group {
@@ -188,20 +189,21 @@
   padding: 15px 0;
   width: 100%;
   border: none;
+  background-color: transparent;
   color: var(--primary-color);
 }
 
 .button-container .btn {
   font-size: small;
   width: 100%;
-  background-color: var(--background-color);
+  background-color: var(--white-color);
   color: var(--primary-color);
   border: 1px solid var(--primary-color);
 }
 .button.container .btn:active,
 .button-container .btn.active {
   background-color: var(--primary-color);
-  color: var(--background-color);
+  color: var(--white-color);
 }
 
 #order-list {

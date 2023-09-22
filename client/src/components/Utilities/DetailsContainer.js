@@ -1,20 +1,25 @@
+import { ListGroup } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
+
 function DetailsContainer({ data, image }) {
   const renderDetails = () => {
     return data.map((item) => {
       return (
-        <p key={item.title}>
-          <span className="item-heading">{item.title}: </span>
-          {item.value}
-        </p>
+        <ListGroup.Item>
+          <Card.Text className="bold-detail" key={item.title}>
+            {item.title}:{' '}
+          </Card.Text>
+          <Card.Text key={item.value}>{item.value}</Card.Text>
+        </ListGroup.Item>
       );
     });
   };
 
   return (
-    <div className="details-container">
+    <Container id="details-container">
       {image ? <img src={image} alt="product" /> : null}
-      <div className="details">{renderDetails()}</div>
-    </div>
+      <ListGroup className="details">{renderDetails()}</ListGroup>
+    </Container>
   );
 }
 

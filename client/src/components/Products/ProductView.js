@@ -1,15 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
 import DetailsContainer from '../Utilities/DetailsContainer';
 import ActionContainer from '../Utilities/ActionContainer';
-import { Card, Button, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 import ProductModal from './ProductModal';
 import MessageModal from '../Utilities/MessageModal';
 
 function ProductView() {
   const params = useParams();
-  const navigate = useNavigate();
 
   const [product, setProduct] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -99,7 +98,7 @@ function ProductView() {
             data={details}
             image={product?.product_image?.url}
           />
-          <ActionContainer actions={actions} cardSize={'sml'} />
+          <ActionContainer actions={actions} cardSize={'med'} />
         </div>
         <div className="bottom-container">
           <Card>

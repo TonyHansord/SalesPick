@@ -1,11 +1,10 @@
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import { Card } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Order from '../Orders/Order';
 import DetailsContainer from '../Utilities/DetailsContainer';
-import { ClockFill } from 'react-bootstrap-icons';
 import ActionContainer from '../Utilities/ActionContainer';
+import CustomerModal from './CustomerModal';
 
 function CustomerView({ user, customerID }) {
   const navigate = useNavigate();
@@ -25,7 +24,8 @@ function CustomerView({ user, customerID }) {
 
   console.log(params);
   let id = params.customer_id ? params.customer_id : customerID;
-  useEffect(() => {
+
+  const getCustomer = useCallback(() => {
     fetch(`/api/customers/${id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -34,8 +34,17 @@ function CustomerView({ user, customerID }) {
         setCustomerOrders(data.orders);
       });
   }, [id]);
+
+  useEffect(() => {
+    getCustomer();
+  }, [getCustomer]);
+
   console.log(customer);
   const { street, state, suburb, postcode } = customer?.address;
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
 
   const handleClickNewOrder = () => {
     fetch('/api/orders', {
@@ -80,6 +89,7 @@ function CustomerView({ user, customerID }) {
       title: 'Edit Customer',
       method: () => {
         console.log('Edit Customer');
+        handleShowModal();
       },
     },
     {
@@ -88,7 +98,7 @@ function CustomerView({ user, customerID }) {
         console.log('New Order');
         handleClickNewOrder();
       },
-    }
+    },
   ];
 
   // for each order in customer.orders, render a row in the table
@@ -111,8 +121,6 @@ function CustomerView({ user, customerID }) {
     }
   };
 
- 
-
   return (
     <>
       <ViewTitleBar title={customer?.name} hasBackButton />
@@ -124,11 +132,16 @@ function CustomerView({ user, customerID }) {
         <div className="bottom-container">
           <div className="orders-container">
             <h3>Orders</h3>
-
             {renderOrders(customerOrders)}
           </div>
         </div>
       </div>
+      <CustomerModal
+        show={showModal}
+        customerData={customer}
+        getCustomer={getCustomer}
+        handleClose={handleCloseModal}
+      />
     </>
   );
 }

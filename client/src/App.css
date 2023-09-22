@@ -237,12 +237,11 @@ select {
   gap: 20px;
 }
 
-.list-container,
 .bottom-container {
   font-size: 2vw;
   padding: 0;
   border-radius: 5px;
-  background-color: var(--white-color);
+  background-color: transparent;
 }
 
 .list-container table {
@@ -269,23 +268,42 @@ select {
   border: 1px solid var(--primary-color);
 }
 
-.details-container img {
-  width: 200px;
-  height: 200px;
+#details-container img {
+  width: 150px;
+  height: 150px;
   object-fit: cover;
 }
 
-.details-container {
+#details-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 100%;
 }
 
-.details-container .details {
+#details-container .details {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
+  background-color: transparent;
+}
+
+#details-container .details .list-group-item {
+  display: flex;
+  color: var(--text-color);
+  font-size: medium;
+  gap: 10px;
+  margin: 0;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+}
+
+#details-container .details .list-group-item:first-child {
+  width: 100%;
+  font-size: medium;
+  margin: 0;
 }
 
 #users {

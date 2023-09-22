@@ -17,6 +17,12 @@ class CustomersController < ApplicationController
     render json: @customer
   end
 
+  def update
+    @customer = Customer.find_by_id(params[:id])
+    @customer.update(customer_params)
+    render json: { message: "Customer Updated" }
+  end
+
   private
 
   def customer_params

@@ -16,20 +16,37 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_user
+    user = User.find(params[:id])
+    render json: user
+  end
+
   def create
     user = User.create!(user_params)
     render json: user, status: :created
   end
 
+  def update
+    user = User.find(params[:id])
+    user.update(user_params)
+    render json: { message: "User Updated" }
+  end
+
+  def update_password
+    user = User.find(params[:id])
+    user.update(:password => params[:password], :password_confirmation => params[:password_confirmation])
+    render json: { message: "Password Updated" }
+  end
+
   def destroy
     user = User.find(params[:id])
     user.destroy
-    head :no_content
+    render json: { message: "User Deleted" }
   end
 
   private
 
   def user_params
-    params.permit(:first_name, :last_name, :username, :password, :password_confirmation, :role)
+    params.permit(:id, :first_name, :last_name, :username, :password, :password_confirmation, :role)
   end
 end

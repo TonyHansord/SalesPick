@@ -113,7 +113,7 @@ function AddProductModal({ show, handleClose, orderID, order }) {
         searchOptions={searchOptions}
         setSearchResults={setSearchResults}
       />
-      <Modal.Body>{renderProducts()}</Modal.Body>
+      <Modal.Body className='gallery'>{renderProducts()}</Modal.Body>
     </Modal>
   );
 }
