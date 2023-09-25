@@ -217,7 +217,7 @@
 .order-container {
   display: grid;
   border: 3px double var(--primary-color);
-  background-color: var(--secondary-color);
+  background-color: var(--white-color);
   border-radius: 5px;
   padding: 0;
   text-align: left;
@@ -255,7 +255,7 @@
   padding: 15px;
   width: 100%;
   border: none;
-  color: var(--white-color);
+  color: var(--primary-color);
   background-color: transparent;
 }
 
@@ -266,7 +266,7 @@
 .order-total {
   font-size: xx-large;
   font-weight: bold;
-  color: var(--white-color);
+  color: var(--primary-color);
 }
 
 .priority {
@@ -299,15 +299,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--white-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
   font-size: small;
-  border: none;
   padding: 5px;
 }
 
 .order.pending {
   background-color: var(--white-color);
   color: var(--primary-color);
+ 
 }
 
 .order.in-progress {

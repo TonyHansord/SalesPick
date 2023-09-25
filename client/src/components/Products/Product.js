@@ -1,32 +1,41 @@
 import { useNavigate } from 'react-router-dom';
+import { Container, ListGroup, Card } from 'react-bootstrap';
 
 function Product({ product }) {
   const navigate = useNavigate();
 
   return (
-    <div onClick={() => navigate(`${product.id}`)} className="product">
-      <img src={product.product_image?.url} alt={product.name} />
-      <div className="product-info-container">
-        <div className="product-info">
-          <p className="product-code">
-            <span>Code: </span>
+    <Container onClick={() => navigate(`${product.id}`)} className="product">
+      <ListGroup horizontal className="product-info-container">
+        <ListGroup.Item>
+          <img src={product.product_image?.url} alt={product.name} />
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text>
+            <span className='bold-detail'>Code: </span>
             {product.code}
-          </p>
-          <p className="product-name">{product.name}​</p>
-        </div>
-        <div className="product-price-stock">
-          <p className="product-price">{product.price}</p>
-          <p className="product-stock">
-            <span>In Stock: </span>
+          </Card.Text>
+          </ListGroup.Item>
+          <ListGroup.Item>
+          <Card.Text>{product.name}​</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text className="product-price">${product.price}</Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text>
+            <span className='bold-detail'>In Stock: </span>
             {product.current_stock}
-          </p>
-          <p className="product-stock">
-            <span>Assigned: </span>
+          </Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Card.Text>
+            <span className='bold-detail'>Assigned: </span>
             {product.assigned_stock}
-          </p>
-        </div>
-      </div>
-    </div>
+          </Card.Text>
+        </ListGroup.Item>
+      </ListGroup>
+    </Container>
   );
 }
 

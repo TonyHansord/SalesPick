@@ -10,20 +10,24 @@ function ProductList() {
   const searchOptions = [
     {
       title: 'Product Code',
+      key: 'code',
       type: 'text',
     },
     {
       title: 'Product Name',
+      key: 'name',
       type: 'text',
     },
     {
       title: 'Product Category',
+      key: 'category',
       type: 'text',
     },
   ];
 
   const [productList, setProductList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [searchResults, setSearchResults] = useState(productList);
 
   useEffect(() => {
     fetch('/api/products')
@@ -31,11 +35,12 @@ function ProductList() {
       .then((data) => {
         console.log(data);
         setProductList(data);
+        setSearchResults(data);
       });
   }, []);
 
   const renderProducts = () => {
-    return productList.map((product, index) => {
+    return searchResults.map((product, index) => {
       return <Product key={index} product={product} />;
     });
   };
@@ -48,7 +53,12 @@ function ProductList() {
       <ViewTitleBar title="Products List" />
       <div className="main-container">
         <div className="top-container">
-          <SearchBar type="products" searchOptions={searchOptions} />
+          <SearchBar
+            type="products"
+            searchOptions={searchOptions}
+            setSearchResults={setSearchResults}
+            data={productList}
+          />
           <div className="action-container">
             <Card className="med" onClick={handleShowModal}>
               <Card.Title>New Product</Card.Title>

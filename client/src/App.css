@@ -4,6 +4,7 @@
   --primary-color: rgb(64, 89, 87);
   --secondary-color: rgb(38, 164, 160);
   --text-color: #282c34;
+  --secondary-text-color: rgb(108, 196, 189);
   --main-view-width: calc(100vw - 250px);
   --main-view-height: 100vh;
   --main-view-margin-left: 250px;
@@ -279,6 +280,8 @@ select {
   align-items: center;
   justify-content: center;
   width: 100%;
+  background-color: white;
+  border-radius: 5px;
 }
 
 #details-container .details {
@@ -341,6 +344,7 @@ select {
 
 .bold-detail {
   font-weight: bold;
+  color: var(--secondary-text-color);
 }
 
 .card {

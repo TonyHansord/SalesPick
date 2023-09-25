@@ -23,16 +23,6 @@ class ProductsController < ApplicationController
     render json: @product
   end
 
-  def destroy
-    @product = Product.find_by_id(params[:id])
-    if @product.current_stock == 0
-      @product.destroy
-      render json: { message: "Product deleted" }
-    else
-      render json: { message: "Product has stock. Clear the stock before deleting" }
-    end
-  end
-
   private
 
   def product_params

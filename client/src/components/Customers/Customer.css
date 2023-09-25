@@ -12,6 +12,7 @@
   flex-direction: column;
   border-radius: 5px;
   border: 3px double var(--primary-color);
+  color: var(--secondary-text-color);
   transform: none;
   padding: 0;
 }
@@ -22,7 +23,7 @@
 
 #customer-card .card-title {
   font-size: medium;
-  color: var(--primary-color);
+  color: var(--secondary-text-color);
   margin: 10px;
 }
 

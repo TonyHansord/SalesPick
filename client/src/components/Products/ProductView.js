@@ -5,16 +5,13 @@ import DetailsContainer from '../Utilities/DetailsContainer';
 import ActionContainer from '../Utilities/ActionContainer';
 import { Card, ListGroup } from 'react-bootstrap';
 import ProductModal from './ProductModal';
-import MessageModal from '../Utilities/MessageModal';
 
 function ProductView() {
   const params = useParams();
 
   const [product, setProduct] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const [showMessageModal, setShowMessageModal] = useState(false);
-  const [messageModalTitle, setMessageModalTitle] = useState('');
-  const [messageModalMessage, setMessageModalMessage] = useState('');
+
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -22,8 +19,6 @@ function ProductView() {
 
   const handleShowModal = () => setShowModal(true);
 
-  const handleShowMessageModal = () => setShowMessageModal(true);
-  const handleCloseMessageModal = () => setShowMessageModal(false);
 
   const details = [
     {
@@ -52,29 +47,7 @@ function ProductView() {
         handleShowModal();
       },
     },
-    {
-      title: 'Delete Product',
-      method: () => {
-        console.log('Delete Product');
-        setMessageModalTitle('Delete Product');
-        setMessageModalMessage('Are you sure you want to delete this product?');
-        handleShowMessageModal();
-      },
-    },
   ];
-
-  const handleDeleteProduct = () => {
-    fetch(`/api/products/${params.id}`, {
-      method: 'DELETE',
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setMessageModalTitle('');
-        setMessageModalMessage(data.message);
-        handleShowMessageModal();
-      });
-  };
 
   const getProductData = useCallback(() => {
     fetch(`/api/products/${params.id}`)
@@ -153,14 +126,6 @@ function ProductView() {
         productData={product}
         getProductData={getProductData}
       />
-      <MessageModal 
-        show={showMessageModal}
-        handleClose={handleCloseMessageModal}
-        title={messageModalTitle}
-        message={messageModalMessage}
-        handlePrimary={handleDeleteProduct}
-      />
-
     </div>
   );
 }

@@ -1,11 +1,10 @@
 import { Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-function User({ user, setSelectedUser }) {
+function User({ user }) {
   const navigate = useNavigate();
 
   const handleClickUser = () => {
-    setSelectedUser(user);
     navigate(`/users/${user.id}`);
   };
 

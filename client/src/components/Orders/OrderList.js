@@ -1,6 +1,6 @@
 import SearchBar from '../Utilities/SearchBar';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import { useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './Orders.css';
 import Order from './Order';
 import { Container, Form, Button, ListGroup } from 'react-bootstrap';
@@ -115,8 +115,7 @@ function OrderList({ action }) {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          setOrderList(data);
+          fetchOrders();
         });
     });
   };
@@ -148,79 +147,83 @@ function OrderList({ action }) {
 
   return (
     <>
-    
-        <ViewTitleBar title="Orders List" />
-        <div className="main-container">
-          <div className="top-container">
-            <SearchBar type="orders" searchOptions={searchOptions} setSearchResults={setSearchResults} data={orderList}/>
-            <div className="action-container assign-container">
-              <h3>Assign</h3>
-              <div className="assign">
-                <Form.Label>Priority</Form.Label>
-                <Form.Select
-                  id="select-priority"
-                  className="select"
-                  onChange={(e) => setSelectedPriority(e.target.selectedIndex)}
-                >
-                  <option value=""></option>
-                  <option value="Low">Low</option>
-                  <option value="Medium">Medium</option>
-                  <option value="High">High</option>
-                </Form.Select>
-                <button
-                  type="button"
-                  onClick={() => assignPriority(selectedPriority)}
-                >
-                  Assign
-                </button>
-              </div>
-              <div className="assign">
-                <Form.Label>User</Form.Label>
-                <Form.Select
-                  id="select-assigned-to"
-                  className="select"
-                  onChange={(e) => setSelectedUser(e.target.value)}
-                >
-                  <option value=""></option>
-                  {renderUsers()}
-                </Form.Select>
-                <button type="button" onClick={() => assignUser(selectedUser)}>
-                  Assign
-                </button>
-              </div>
+      <ViewTitleBar title="Orders List" />
+      <div className="main-container">
+        <div className="top-container">
+          <SearchBar
+            type="orders"
+            searchOptions={searchOptions}
+            setSearchResults={setSearchResults}
+            data={orderList}
+          />
+          <div className="action-container assign-container">
+            <h3>Assign</h3>
+            <div className="assign">
+              <Form.Label>Priority</Form.Label>
+              <Form.Select
+                id="select-priority"
+                className="select"
+                onChange={(e) => setSelectedPriority(e.target.selectedIndex)}
+              >
+                <option value=""></option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </Form.Select>
+              <button
+                type="button"
+                onClick={() => assignPriority(selectedPriority)}
+              >
+                Assign
+              </button>
+            </div>
+            <div className="assign">
+              <Form.Label>User</Form.Label>
+              <Form.Select
+                id="select-assigned-to"
+                className="select"
+                onChange={(e) => setSelectedUser(e.target.value)}
+              >
+                <option value=""></option>
+                {renderUsers()}
+              </Form.Select>
+              <button type="button" onClick={() => assignUser(selectedUser)}>
+                Assign
+              </button>
             </div>
           </div>
-          <Container className="button-container">
-            <ListGroup horizontal>
-              <ListGroup.Item>
-                <Button
-                  variant="secondary"
-                  className={selectIsActive ? 'active' : ''}
-                  onClick={() => {
-                    setSelectIsActive(!selectIsActive);
-                    if (selectIsActive) {
-                      setSelectedOrders([]);
-                    }
-                    fetchOrders();
-                    console.log(selectIsActive);
-                  }}
-                >
-                  Select
-                </Button>
-                <Button
-                  variant="secondary"
-                  className={showCompleted ? 'active' : ''}
-                  onClick={() => setShowCompleted(!showCompleted)}
-                >
-                  Show Completed
-                </Button>
-              </ListGroup.Item>
-            </ListGroup>
-          </Container>
-          <Container id="order-list" className="list-container">
-            {renderOrders()}
-          </Container>
         </div>
+        <Container className="button-container">
+          <ListGroup horizontal>
+            <ListGroup.Item>
+              <Button
+                variant="secondary"
+                className={selectIsActive ? 'active' : ''}
+                onClick={() => {
+                  setSelectIsActive(!selectIsActive);
+                  if (selectIsActive) {
+                    setSelectedOrders([]);
+                  }
+                  fetchOrders();
+                  console.log(selectIsActive);
+                }}
+              >
+                Select
+              </Button>
+              <Button
+                variant="secondary"
+                className={showCompleted ? 'active' : ''}
+                onClick={() => setShowCompleted(!showCompleted)}
+              >
+                Show Completed
+              </Button>
+            </ListGroup.Item>
+          </ListGroup>
+        </Container>
+        <Container id="order-list" className="list-container">
+          {renderOrders()}
+        </Container>
+      </div>
     </>
   );
 }

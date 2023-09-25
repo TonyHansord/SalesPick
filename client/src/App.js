@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect, createContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -19,6 +19,18 @@ import * as Icon from 'react-bootstrap-icons';
 import MessageBar from './components/Utilities/MessageBar';
 
 export const MessageContext = createContext();
+
+const ScrollToTop = () => {
+  // Extracts pathname property(key) from an object
+  const { pathname } = useLocation();
+
+  // Automatically scrolls to top whenever pathname changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 function App() {
   const [user, setUser] = useState({});
@@ -123,7 +135,7 @@ function App() {
                 setShowMessageBar={setShowMessageBar}
                 messageType={messageType}
               />
-              
+
               <Routes>
                 <Route
                   path="/"
@@ -153,10 +165,7 @@ function App() {
                     />
                   }
                 />
-                <Route
-                  path="/users"
-                  element={<UserManagement />}
-                />
+                <Route path="/users" element={<UserManagement />} />
                 <Route path="/users/:id" element={<UserView />} />
               </Routes>
             </div>
@@ -173,6 +182,7 @@ function App() {
           />
         </Routes>
       )}
+      <ScrollToTop />
     </div>
   );
 }
