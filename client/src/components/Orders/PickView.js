@@ -221,8 +221,8 @@ function PickView() {
           <div className="Items">
             <div className="items">{renderItems()}</div>
           </div>
-          <Button className="Packages" onClick={handleTogglePackages}>
-            Packages
+          <Button className="packages-btn" onClick={handleTogglePackages}>
+            {packagesHidden ? 'Show Packages' : 'Hide Packages'}
           </Button>
           <div className={packagesHidden ? 'packages hidden' : 'packages'}>
             {order.packages.length > 0 ? renderPackages() : ''}

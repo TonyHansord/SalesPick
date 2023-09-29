@@ -29,6 +29,7 @@ class ItemsController < ApplicationController
   def destroy
     @order = Order.find_by_id(params[:order_id])
     @item = Item.find_by_id(params[:id])
+    @item.product.update(assigned_stock: @item.product.assigned_stock - @item.quantity)
     @item.delete
     render json: @order
   end

@@ -1,11 +1,12 @@
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import './Orders.css';
-import { Card } from 'react-bootstrap';
 import AddProductModal from './AddProductModal';
 import Item from './Item';
 import { MessageContext } from '../../App';
+import DetailsContainer from '../Utilities/DetailsContainer';
+import ActionContainer from '../Utilities/ActionContainer';
 
 function SalesView() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,43 @@ function SalesView() {
 
   const params = useParams();
 
-  useEffect(() => {
+  const orderDetails = [
+    {
+      title: 'Order ID',
+      value: order.id,
+    },
+    {
+      title: 'Customer',
+      value: order.customer.name,
+    },
+    {
+      title: 'Status',
+      value: order.status,
+    },
+    {
+      title: 'Total',
+      value: `$ ${orderTotal?.toFixed(2)}`,
+    },
+  ];
+
+  const actions = [
+    {
+      title: 'Save Order',
+      method: () => {
+        console.log('Save Order');
+        handleSaveOrder();
+      },
+    },
+    {
+      title: 'Add Item',
+      method: () => {
+        console.log('Add Item');
+        handleShowModal();
+      },
+    },
+  ];
+
+  const fetchOrder = useCallback(() => {
     fetch(`/api/orders/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -33,6 +70,10 @@ function SalesView() {
       });
   }, [params.id]);
 
+  useEffect(() => {
+    fetchOrder();
+  }, [fetchOrder]);
+
   const renderItems = () => {
     return order.items.map((item) => {
       return (
@@ -41,6 +82,7 @@ function SalesView() {
           item={item}
           order={order}
           setOrderTotal={setOrderTotal}
+          fetchOrder={fetchOrder}
         />
       );
     });
@@ -68,40 +110,12 @@ function SalesView() {
       <ViewTitleBar title="Sales View" hasBackButton={true} />
       <div className="main-container">
         <div className="top-container">
-          <div className="details-container">
-            <div className="details">
-              <p>
-                <span className="bold-detail">OrderNum: </span>
-                {order.id}
-              </p>
-              <p>
-                <span className="bold-detail">Customer: </span>
-                {order.customer.name}
-              </p>
-              <p>
-                <span className="bold-detail">Status: </span>
-                {order.status}
-              </p>
-              <p>
-                <span className="bold-detail">Total: </span>
-                {`$ ${orderTotal?.toFixed(2)}`}
-              </p>
-            </div>
-          </div>
-          <div className="action-container">
-            <Card className="card med" onClick={handleSaveOrder}>
-              <Card.Title>Save</Card.Title>
-            </Card>
-            <Card className="card med" onClick={handleShowModal}>
-              <Card.Title>Add Item</Card.Title>
-            </Card>
-          </div>
+          <DetailsContainer data={orderDetails} />
+          <ActionContainer actions={actions} />
         </div>
         <div className="bottom-container">
-          <div className="Items">
-            <div className="items">
-              {order.items.length !== 0 ? renderItems() : <p>No items</p>}
-            </div>
+          <div className="items">
+            {order.items.length !== 0 ? renderItems() : <p>No items</p>}
           </div>
         </div>
       </div>

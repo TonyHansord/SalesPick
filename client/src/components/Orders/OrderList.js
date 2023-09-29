@@ -85,7 +85,11 @@ function OrderList({ action }) {
   };
 
   const renderOrders = () => {
-    return searchResults.map((order) => {
+    const nonCompletedResults = searchResults.filter((order) => {
+      return order.status !== 'complete';
+    });
+    const results = showCompleted ? searchResults : nonCompletedResults;
+    return results.map((order) => {
       return (
         <Order
           key={order.id}
@@ -215,7 +219,7 @@ function OrderList({ action }) {
                 className={showCompleted ? 'active' : ''}
                 onClick={() => setShowCompleted(!showCompleted)}
               >
-                Show Completed
+                {showCompleted ? 'Hide Completed' : 'Show Completed'}
               </Button>
             </ListGroup.Item>
           </ListGroup>

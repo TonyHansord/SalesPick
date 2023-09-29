@@ -19,4 +19,8 @@ class Order < ApplicationRecord
   def order_total
     items.map { |item| item.product.price * item.quantity }.sum.round(2)
   end
+
+  def customer_name
+    customer.name
+  end
 end

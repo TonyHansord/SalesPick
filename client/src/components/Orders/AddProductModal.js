@@ -42,7 +42,7 @@ function AddProductModal({ show, handleClose, orderID, order }) {
           key={index}
           className="product-card"
           id={product.id}
-          onClick={handleAddItem}
+          onClick={() => handleAddItem(product.id)}
         >
           <ListGroup>
             <ListGroup.Item>
@@ -72,11 +72,8 @@ function AddProductModal({ show, handleClose, orderID, order }) {
     });
   };
 
-  const handleAddItem = (e) => {
-    console.log(e.target.parentElement.id);
-
-    const targetID = parseInt(e.target.parentElement.id);
-    console.log(targetID);
+  const handleAddItem = (id) => {
+    console.log(id);
 
     fetch('/api/items', {
       method: 'POST',
@@ -85,7 +82,7 @@ function AddProductModal({ show, handleClose, orderID, order }) {
       },
 
       body: JSON.stringify({
-        product_id: targetID,
+        product_id: id,
         quantity: 1,
         order_id: orderID,
         assigned_quantity: 0,

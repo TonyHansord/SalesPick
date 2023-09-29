@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Card, ListGroup, Container, Button } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
 
-function Item({ item, order, setOrderTotal }) {
+function Item({ item, order, setOrderTotal, fetchOrder }) {
   const [quantity, setQuantity] = useState(item.quantity);
   const availableStock =
     item.product.current_stock -
@@ -35,11 +35,18 @@ function Item({ item, order, setOrderTotal }) {
     console.log(item);
     fetch(`/api/items/${item.id}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        order_id: order.id,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setOrderTotal(data.order_total);
+        fetchOrder();
       });
   };
 

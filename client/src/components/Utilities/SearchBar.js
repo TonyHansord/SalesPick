@@ -12,6 +12,7 @@ function SearchBar({
   const [searchOption, setSearchOption] = useState(searchOptions[0]);
 
   const handleSearch = () => {
+    setSearchResults(data)
     const searchKey = searchOption.key;
 
     const results = data.filter((item) => {

@@ -1,5 +1,6 @@
-import { Card, ListGroup, Button, Form } from 'react-bootstrap';
+import { Card, ListGroup, Button, Form, Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import * as Icon from 'react-bootstrap-icons';
 
 function Package({
   pack,
@@ -60,21 +61,27 @@ function Package({
   };
 
   return (
-    <Card className="package">
-      <ListGroup>
+    <Container className="package">
+      <ListGroup horizontal>
         <ListGroup.Item>
-          <div className="package-id">Package ID: {pack.id}</div>
+          <Card.Text className="bold-detail">
+            Package ID:
+            {pack.id}
+          </Card.Text>
+        </ListGroup.Item>
+        <ListGroup.Item>
           <Button onClick={() => setActivePackage(pack.id)}>
             Set as Active
           </Button>
           <Button onClick={() => deletePackage(pack.id)}>Delete Package</Button>
         </ListGroup.Item>
       </ListGroup>
-      <ListGroup>
-        <ListGroup.Item>
-          <Form onSubmit={handleUpdateDimensions}>
+
+      <Form onSubmit={handleUpdateDimensions}>
+        <ListGroup>
+          <ListGroup.Item>
             <Form.Group className="form-group" controlId="packageHeight">
-              <Form.Label>Height</Form.Label>
+              <Form.Label className='bold-detail'>Height</Form.Label>
               <Form.Control
                 type="text"
                 value={height}
@@ -84,7 +91,7 @@ function Package({
               ></Form.Control>
             </Form.Group>
             <Form.Group className="form-group" controlId="packageWidth">
-              <Form.Label>Width</Form.Label>
+              <Form.Label className='bold-detail'>Width</Form.Label>
               <Form.Control
                 type="text"
                 value={width}
@@ -94,7 +101,7 @@ function Package({
               ></Form.Control>
             </Form.Group>
             <Form.Group className="form-group" controlId="packageLength">
-              <Form.Label>Length</Form.Label>
+              <Form.Label className='bold-detail'>Length</Form.Label>
               <Form.Control
                 type="text"
                 value={length}
@@ -104,7 +111,7 @@ function Package({
               ></Form.Control>
             </Form.Group>
             <Form.Group className="form-group" controlId="packageWeight">
-              <Form.Label>Weight</Form.Label>
+              <Form.Label className='bold-detail'>Weight</Form.Label>
               <Form.Control
                 type="text"
                 value={weight}
@@ -113,39 +120,42 @@ function Package({
                 }}
               ></Form.Control>
             </Form.Group>
+          </ListGroup.Item>
+          <ListGroup.Item>
             <Button type="submit">Update</Button>
-          </Form>
-        </ListGroup.Item>
-      </ListGroup>
-      <div className="package-items">
-        <ListGroup>
-          {pack.package_items.map((item) => {
-            console.log(`orderItems:`);
-            console.log(orderItems);
-            console.log(item);
-            const orderItem = orderItems.find(
-              (orderItem) => orderItem.product.name === item.product_name
-            );
-            console.log(orderItem);
+          </ListGroup.Item>
+        </ListGroup>
+      </Form>
 
-            return (
+      <ListGroup>
+        {pack.package_items.map((item) => {
+          console.log(`orderItems:`);
+          console.log(orderItems);
+          console.log(item);
+          const orderItem = orderItems.find(
+            (orderItem) => orderItem.product.name === item.product_name
+          );
+          console.log(orderItem);
+
+          return (
+            <>
               <ListGroup.Item key={item.id}>
                 <Card.Text>{item.product_name}</Card.Text>
-                <Card.Text>{item.quantity}</Card.Text>
+                <Card.Text>Qty:{item.quantity}</Card.Text>
                 <Button
                   onClick={() => {
                     console.log(item.id);
                     handleRemoveItem(orderItem.id, item.id);
                   }}
                 >
-                  Remove
+                  <Icon.Trash />
                 </Button>
               </ListGroup.Item>
-            );
-          })}
-        </ListGroup>
-      </div>
-    </Card>
+            </>
+          );
+        })}
+      </ListGroup>
+    </Container>
   );
 }
 
