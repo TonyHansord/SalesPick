@@ -54,8 +54,9 @@ function CustomerView({ user, customerID }) {
       },
       body: JSON.stringify({
         customer_id: customer.id,
-        user_id: user.id,
+        // user_id: user.id,
         status: 0,
+        priority: 0,
       }),
     })
       .then((res) => res.json())

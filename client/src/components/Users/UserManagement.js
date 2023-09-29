@@ -21,34 +21,13 @@ function UserManagement() {
       });
   }, []);
 
-  const searchOptions = [
-    {
-      title: 'Username',
-      type: 'text',
-    },
-    {
-      title: 'First Name',
-      type: 'text',
-    },
-    {
-      title: 'Last Name',
-      type: 'text',
-    },
-    {
-      title: 'Role',
-      type: 'text',
-    },
-  ];
-
   const renderUsers = (role) => {
     return users
       .filter((user) => {
         return user.role === role;
       })
       .map((user) => {
-        return (
-          <User key={user.id} user={user} />
-        );
+        return <User key={user.id} user={user} />;
       });
   };
 
@@ -57,9 +36,8 @@ function UserManagement() {
       <ViewTitleBar title="User Management" />
       <div className="main-container">
         <div className="top-container">
-          <SearchBar type="Users" searchOptions={searchOptions} />
           <div className="action-container">
-            <Card className="card med" onClick={handleShowModal}>
+            <Card className="card sml" onClick={handleShowModal}>
               <Card.Title>New User</Card.Title>
             </Card>
           </div>
@@ -68,9 +46,9 @@ function UserManagement() {
           <h3>Admin</h3>
           <ListGroup horizontal>{renderUsers('admin')}</ListGroup>
           <h3>Sales</h3>
-          {renderUsers('sales')}
+          <ListGroup horizontal>{renderUsers('sales')}</ListGroup>
           <h3>Warehouse</h3>
-          {renderUsers('warehouse')}
+          <ListGroup horizontal>{renderUsers('warehouse')}</ListGroup>
         </Container>
       </div>
       <UserModal

@@ -81,7 +81,7 @@ function App() {
     {
       title: 'Orders',
       url: '/orders',
-      viewableToRole: ['admin', 'sales', 'warehouse'],
+      viewableToRole: ['admin', 'sales'],
       icon: <Icon.Cart />,
     },
     {

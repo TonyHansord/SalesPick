@@ -6,6 +6,15 @@ import Order from './Order';
 import { Container, Form, Button, ListGroup } from 'react-bootstrap';
 
 function OrderList({ action }) {
+  const [orderList, setOrderList] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [selectedOrders, setSelectedOrders] = useState([]);
+  const [selectedUser, setSelectedUser] = useState([]);
+  const [searchResults, setSearchResults] = useState(orderList);
+  const [selectedPriority, setSelectedPriority] = useState(0);
+  const [selectIsActive, setSelectIsActive] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(false);
+
   const searchOptions = [
     {
       title: 'Priority',
@@ -14,7 +23,13 @@ function OrderList({ action }) {
       controlType: 'select',
       options: ['Low', 'Medium', 'High'],
     },
-
+    {
+      title: 'User',
+      key: 'user',
+      type: 'text',
+      controlType: 'select',
+      options: users.map((user) => user.full_name),
+    },
     {
       title: 'Order ID',
       key: 'id',
@@ -38,18 +53,9 @@ function OrderList({ action }) {
       key: 'status',
       type: 'text',
       controlType: 'select',
-      options: ['pending', 'in_progress', 'complete'],
+      options: ['Pending', 'In Progress', 'Complete'],
     },
   ];
-
-  const [orderList, setOrderList] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [selectedOrders, setSelectedOrders] = useState([]);
-  const [selectedUser, setSelectedUser] = useState([]);
-  const [searchResults, setSearchResults] = useState(orderList);
-  const [selectedPriority, setSelectedPriority] = useState(0);
-  const [selectIsActive, setSelectIsActive] = useState(false);
-  const [showCompleted, setShowCompleted] = useState(false);
 
   const fetchOrders = useCallback(() => {
     fetch('/api/orders')
@@ -125,9 +131,12 @@ function OrderList({ action }) {
   };
 
   const assignUser = (user_name) => {
-    let user = users.find((user) => {
-      return user.full_name === user_name;
-    });
+    let user =
+      user_name !== ''
+        ? users.find((user) => {
+            return user.full_name === user_name;
+          })
+        : null;
 
     console.log(user);
     console.log(selectedOrders);
@@ -139,12 +148,13 @@ function OrderList({ action }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user_id: user.id,
+          user_id: user ? user.id : null,
         }),
       })
         .then((res) => res.json())
         .then((data) => {
           setOrderList(data);
+          fetchOrders();
         });
     });
   };

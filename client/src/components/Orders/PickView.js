@@ -43,7 +43,10 @@ function PickView() {
     },
     {
       title: 'Status',
-      value: order.status,
+      value:
+        order.status === 'in_progress'
+          ? 'in progress'.toUpperCase()
+          : order.status.toUpperCase(),
     },
     {
       title: 'Package Number',

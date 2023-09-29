@@ -1,8 +1,14 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ListGroup, Card, Container } from 'react-bootstrap';
 
-function Order({ order, setSelectedOrders, action, selectable, selectIsActive }) {
+function Order({
+  order,
+  setSelectedOrders,
+  action,
+  selectable,
+  selectIsActive,
+}) {
   const formattedDate = new Date(order.created_at).toLocaleDateString();
   const [statusClass, setStatusClass] = useState('');
   const [priorityClass, setPriorityClass] = useState('');
@@ -103,13 +109,17 @@ function Order({ order, setSelectedOrders, action, selectable, selectIsActive })
         </ListGroup.Item>
         <ListGroup.Item>
           <Card.Text className="bold-detail">Assigned To:</Card.Text>
-          <Card.Text>{order.user.full_name}</Card.Text>
+          <Card.Text>{order.user?.full_name}</Card.Text>
         </ListGroup.Item>
       </ListGroup>
       <ListGroup horizontal>
         <ListGroup.Item>
           <Container className={statusClass}>
-            <Card.Text>{order.status}</Card.Text>
+            <Card.Text>
+              {order.status === 'in_progress'
+                ? 'in progress'.toUpperCase()
+                : order.status.toUpperCase()}
+            </Card.Text>
           </Container>
         </ListGroup.Item>
       </ListGroup>

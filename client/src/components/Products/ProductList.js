@@ -7,27 +7,32 @@ import './Product.css';
 import ProductModal from './ProductModal';
 
 function ProductList() {
+  const [productList, setProductList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [searchResults, setSearchResults] = useState(productList);
+  const [productCategories, setProductCategories] = useState([]);
+
   const searchOptions = [
     {
       title: 'Product Code',
       key: 'code',
       type: 'text',
+      controlType: 'input',
     },
     {
       title: 'Product Name',
       key: 'name',
       type: 'text',
+      controlType: 'input',
     },
     {
       title: 'Product Category',
       key: 'category',
       type: 'text',
+      controlType: 'select',
+      options: productCategories,
     },
   ];
-
-  const [productList, setProductList] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [searchResults, setSearchResults] = useState(productList);
 
   useEffect(() => {
     fetch('/api/products')
@@ -36,6 +41,10 @@ function ProductList() {
         console.log(data);
         setProductList(data);
         setSearchResults(data);
+
+        const categories = data.map((product) => product.category);
+        const uniqueCategories = [...new Set(categories)];
+        setProductCategories(uniqueCategories);
       });
   }, []);
 

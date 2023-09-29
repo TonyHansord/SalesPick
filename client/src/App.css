@@ -66,6 +66,16 @@ body {
   font-size: 5vw;
 }
 
+.login-view .btn {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.login-view .btn:hover {
+  background-color: var(--white-color) !important;
+  color: var(--primary-color);
+}
+
 .form-group input {
   width: 80%;
   border: 1px solid var(--primary-color);
@@ -323,7 +333,7 @@ select {
 #users {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
   gap: 5px;
   padding: 0;
@@ -332,6 +342,7 @@ select {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 5px;
   width: 100%;
   font-size: medium;

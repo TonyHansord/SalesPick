@@ -1,5 +1,5 @@
 class PackageItem < ApplicationRecord
-    belongs_to :product, dependent: :destroy
+    belongs_to :product
     belongs_to :package
 
     def product_name

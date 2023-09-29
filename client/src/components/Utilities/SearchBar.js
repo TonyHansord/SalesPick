@@ -14,10 +14,14 @@ function SearchBar({
   const handleSearch = () => {
     setSearchResults(data)
     const searchKey = searchOption.key;
+    console.log(searchKey)
 
     const results = data.filter((item) => {
+      console.log(item)
       if (searchKey === 'id') {
         return item[searchKey] === parseInt(search);
+      } else if (searchKey === 'user') {
+        return item[searchKey].full_name.includes(search);
       } else {
         return item[searchKey].includes(search);
       }
