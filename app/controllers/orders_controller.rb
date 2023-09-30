@@ -68,8 +68,19 @@ class OrdersController < ApplicationController
 
   def destroy
     @order = Order.find_by_id(params[:id])
-    @order.destroy
-    render json: @order
+    if @order.status == "complete"
+      render json: { error: "You can't delete a complete order" }
+    else
+      @order.packages.each do |package|
+        package.destroy
+      end
+      @order.items.each do |item|
+        product = Product.find_by_id(item.product_id)
+        product.update(assigned_stock: product.assigned_stock - item.quantity)
+      end
+      @order.destroy
+      render json: { message: "Order Deleted" }
+    end
   end
 
   private

@@ -1,18 +1,33 @@
 import { Modal, Form, Card, Button, Container, Spinner } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function PhotosModal({ show, handleClose, order, fetchOrder }) {
   const [spinner, setSpinner] = useState(true);
   const [showGallery, setShowGallery] = useState(false);
 
+  const handleShowSpinner = () => {
+    setSpinner(true);
+    setShowGallery(false);
+  };
+
+  const handleHideSpinner = () => {
+    setSpinner(false);
+    setShowGallery(true);
+  };
+
   const handleShowGallery = (index) => {
     if (index === order.order_images.length - 1) {
       console.log('last photo');
-      setSpinner(false);
-      setShowGallery(true);
+      handleHideSpinner();
     }
   };
+
+  useEffect(() => {
+    if (!order.order_images.length) {
+      handleHideSpinner();
+    }
+  }, [order]);
 
   const renderPhotos = () => {
     console.log(order.order_images);
@@ -37,8 +52,7 @@ function PhotosModal({ show, handleClose, order, fetchOrder }) {
   const handleAddPhoto = (e) => {
     console.log(e.target.files[0]);
 
-    setSpinner(true);
-    setShowGallery(false);
+    handleShowSpinner();
     const formData = new FormData();
     formData.append('order_images', e.target.files[0]);
 
@@ -55,6 +69,7 @@ function PhotosModal({ show, handleClose, order, fetchOrder }) {
   };
 
   const handleRemovePhoto = (e) => {
+    handleShowSpinner();
     console.log(e.target.parentElement.id);
 
     const targetID = parseInt(e.target.parentElement.id);
@@ -90,7 +105,7 @@ function PhotosModal({ show, handleClose, order, fetchOrder }) {
         <div className="gallery" hidden={!showGallery}>
           {renderPhotos()}
         </div>
-        <div hidden={!spinner}>
+        <div id='spinner-container' hidden={!spinner}>
           <Spinner animation="border" role="status" />
         </div>
       </Modal.Body>

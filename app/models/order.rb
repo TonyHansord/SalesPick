@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :customer
-  has_many :items
+  has_many :items, dependent: :destroy
   has_many :products, through: :items
   has_many :packages, dependent: :destroy
   has_many :package_items, through: :packages

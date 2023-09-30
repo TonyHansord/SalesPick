@@ -143,6 +143,11 @@
   padding: 0 10px;
 }
 
+.modal-body .container .btn{
+ border-radius: 0;
+ border: 1px solid var(--secondary-color);
+}
+
 .modal-body .container .card-text.price {
   font-weight: bold;
   font-size: x-large;
@@ -157,6 +162,21 @@
   height: 200px;
   object-fit: contain;
 }
+
+.modal-body #spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-body #spinner-container .spinner-border {
+  width: 75px;
+  height: 75px;
+  color: var(--secondary-color);
+}
+
 /* 
 .modal-body .card:hover .card-title {
   display: flex;

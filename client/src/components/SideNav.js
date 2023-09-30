@@ -2,7 +2,8 @@ import './SideNav.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import * as Icon from 'react-bootstrap-icons';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
+import logo from '../logo.png';
 
 function SideNav({ sections, setIsLoggedIn, user, setUser }) {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
@@ -69,18 +70,17 @@ function SideNav({ sections, setIsLoggedIn, user, setUser }) {
       >
         <div className="nav-links">{renderNavLinks()}</div>
 
-        <Link to="/" className="login" onClick={handleLogout}>
-          <span className="d-sm-inline">
-            <Button className="btn-outline-secondary btn-sm nav-section">
-              Logout
-            </Button>
-          </span>
+        <Link to="/" className="login nav-link" onClick={handleLogout}>
+          <div className="nav-item">
+            <Icon.BoxArrowLeft className="nav-icon" />
+            <h4>Logout</h4>
+          </div>
         </Link>
       </div>
 
       <div id="user">
         <Icon.PersonCircle className="user-icon" />
-        <span className="user-name">{user.username}</span>
+        <h4 className="user-name">{user.username}</h4>
       </div>
     </nav>
   );

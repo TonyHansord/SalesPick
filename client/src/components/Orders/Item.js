@@ -51,7 +51,7 @@ function Item({ item, order, setOrderTotal, fetchOrder }) {
   };
 
   return (
-    <Container id='item' className="pick-item">
+    <Container id="item" className="pick-item">
       <ListGroup horizontal>
         <ListGroup.Item>
           <Card.Img
@@ -61,8 +61,8 @@ function Item({ item, order, setOrderTotal, fetchOrder }) {
         </ListGroup.Item>
         <ListGroup.Item>
           <Card.Text>{item.product.code}</Card.Text>
-          </ListGroup.Item>
-          <ListGroup.Item>
+        </ListGroup.Item>
+        <ListGroup.Item>
           <Card.Text>{item.product.name}</Card.Text>
         </ListGroup.Item>
         <ListGroup.Item>
@@ -88,8 +88,8 @@ function Item({ item, order, setOrderTotal, fetchOrder }) {
           />
         </ListGroup.Item>
         <ListGroup.Item>
-          <Button>
-            <Icon.Trash onClick={handleDeleteItem} />
+          <Button onClick={handleDeleteItem}>
+            <Icon.Trash />
           </Button>
         </ListGroup.Item>
       </ListGroup>

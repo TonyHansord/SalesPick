@@ -61,6 +61,12 @@ function SalesView() {
         handleShowModal();
       },
     },
+    {
+      title: 'Delete Order',
+      method: () => {
+        handleDeleteOrder();
+      },
+    },
   ];
 
   const fetchOrder = useCallback(() => {
@@ -105,6 +111,21 @@ function SalesView() {
       .then((data) => {
         console.log(data);
         displayMessage('Order saved', 'success');
+      });
+  };
+
+  const handleDeleteOrder = () => {
+    fetch(`/api/orders/${params.id}`, {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          displayMessage(data.error, 'error');
+        } else {
+          displayMessage(data.message, 'success');
+          window.history.back();
+        }
       });
   };
 
