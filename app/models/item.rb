@@ -7,4 +7,6 @@ class Item < ApplicationRecord
   validates :product_id, presence: true
   validates :order_id, presence: true
   validates :product_id, uniqueness: { scope: :order_id, message: "already exists in this order" }
+
+  default_scope { order(id: :asc) }
 end

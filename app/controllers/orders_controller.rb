@@ -53,16 +53,19 @@ class OrdersController < ApplicationController
   def complete_order
     @order = Order.find_by_id(params[:id])
 
-    puts check_all_items_picked
-    if check_all_items_picked
-      @order.items.each do |item|
-        product = Product.find_by_id(item.product_id)
-        product.update(current_stock: product.current_stock - item.picked_quantity, assigned_stock: product.assigned_stock - item.picked_quantity)
-      end
-      @order.update(status: params[:status])
-      render json: { message: "Order Completed" }
+    if @order.status == "complete"
+      render json: { error: "Order already completed" }
     else
-      render json: { error: "Not all items have been picked " }
+      if check_all_items_picked
+        @order.items.each do |item|
+          product = Product.find_by_id(item.product_id)
+          product.update(current_stock: product.current_stock - item.picked_quantity, assigned_stock: product.assigned_stock - item.picked_quantity)
+        end
+        @order.update(status: params[:status])
+        render json: { message: "Order Completed" }
+      else
+        render json: { error: "Not all items have been picked " }
+      end
     end
   end
 

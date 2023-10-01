@@ -75,9 +75,13 @@ function PickView() {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            setCurrentPackageID(data.id);
-            displayMessage('Package generated', 'success');
-            fetchOrder();
+            if (data.error) {
+              displayMessage(data.error, 'error');
+            } else {
+              setCurrentPackageID(data.id);
+              displayMessage(data.message, 'success');
+              fetchOrder();
+            }
           });
       },
     },
@@ -154,12 +158,8 @@ function PickView() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.error) {
-          displayMessage(data.error, 'error');
-        } else {
-          console.log(data);
-          fetchOrder();
-        }
+        data.error ? displayMessage(data.error, 'error') : console.log(data);
+        fetchOrder();
       });
   };
 
@@ -178,6 +178,9 @@ function PickView() {
     })
       .then((res) => res.json())
       .then((data) => {
+        data.error
+          ? displayMessage(data.error, 'error')
+          : displayMessage(data.message, 'success');
         fetchOrder();
       });
   };
