@@ -1,11 +1,12 @@
 import { Card, ListGroup, Container, Button } from 'react-bootstrap';
+import defaultImg from '../../defaultImg.png';
 
 function PickItem({ item, addItem }) {
   return (
     <Container id='pick-item' className="pick-item">
       <ListGroup horizontal>
         <ListGroup.Item>
-          <Card.Img src={item.product.product_image?.url} />
+          <Card.Img src={item.product.product_image ? item.product.product_image.url : defaultImg} />
         </ListGroup.Item>
         <ListGroup.Item>
           <Card.Text className="bold-detail">Code</Card.Text>

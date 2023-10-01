@@ -1,6 +1,7 @@
 import SearchBar from '../Utilities/SearchBar';
 import { Modal, Card, ListGroup, Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import defaultImg from '../../defaultImg.png';
 
 function AddProductModal({ show, handleClose, orderID, order }) {
   const [searchResults, setSearchResults] = useState([]);
@@ -49,7 +50,12 @@ function AddProductModal({ show, handleClose, orderID, order }) {
               <Card.Title>{product.name}</Card.Title>
             </ListGroup.Item>
             <ListGroup.Item>
-              <img src={product.product_image.url} alt={product.name} />
+              <img
+                src={
+                  product.product_image ? product.product_image.url : defaultImg
+                }
+                alt={product.name}
+              />
             </ListGroup.Item>
           </ListGroup>
           <ListGroup horizontal>
@@ -57,7 +63,7 @@ function AddProductModal({ show, handleClose, orderID, order }) {
               <Card.Text>Code: {product.code}</Card.Text>
             </ListGroup.Item>
             <ListGroup.Item>
-              <Card.Text className='price'>${product.price}</Card.Text>
+              <Card.Text className="price">${product.price}</Card.Text>
             </ListGroup.Item>
           </ListGroup>
           <ListGroup horizontal>
@@ -66,7 +72,7 @@ function AddProductModal({ show, handleClose, orderID, order }) {
                 Available: {product.current_stock - product.assigned_stock}
               </Card.Text>
             </ListGroup.Item>
-            </ListGroup>
+          </ListGroup>
         </Container>
       );
     });
@@ -110,7 +116,7 @@ function AddProductModal({ show, handleClose, orderID, order }) {
         searchOptions={searchOptions}
         setSearchResults={setSearchResults}
       />
-      <Modal.Body className='gallery'>{renderProducts()}</Modal.Body>
+      <Modal.Body className="gallery">{renderProducts()}</Modal.Body>
     </Modal>
   );
 }

@@ -1,7 +1,7 @@
 import Product from './Product';
 import SearchBar from '../Utilities/SearchBar';
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import './Product.css';
 import ProductModal from './ProductModal';
@@ -34,7 +34,7 @@ function ProductList() {
     },
   ];
 
-  useEffect(() => {
+  const fetchProducts = useCallback(() => {
     fetch('/api/products')
       .then((res) => res.json())
       .then((data) => {
@@ -47,6 +47,10 @@ function ProductList() {
         setProductCategories(uniqueCategories);
       });
   }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const renderProducts = () => {
     return searchResults.map((product, index) => {
@@ -83,6 +87,7 @@ function ProductList() {
         show={showModal}
         handleCloseModal={handleCloseModal}
         setProductList={setProductList}
+        fetchProducts={fetchProducts}
       />
     </>
   );

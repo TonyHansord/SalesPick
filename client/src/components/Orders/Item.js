@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, ListGroup, Container, Button } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
+import defaultImg from '../../defaultImg.png';
 
 function Item({ item, order, setOrderTotal, fetchOrder }) {
   const [quantity, setQuantity] = useState(item.quantity);
@@ -55,7 +56,7 @@ function Item({ item, order, setOrderTotal, fetchOrder }) {
       <ListGroup horizontal>
         <ListGroup.Item>
           <Card.Img
-            src={item.product.product_image.url}
+            src={item.product.product_image ? item.product.product_image.url : defaultImg}
             alt={item.product.name}
           />
         </ListGroup.Item>

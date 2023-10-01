@@ -7,6 +7,7 @@ function ProductModal({
   setProductList,
   productData,
   getProductData,
+  fetchProducts,
 }) {
   const [product, setProduct] = useState({
     productCode: '',
@@ -49,6 +50,7 @@ function ProductModal({
       .then((data) => {
         console.log(data);
         setProductList((productList) => [...productList, data]);
+        fetchProducts();
       });
   };
 
@@ -89,6 +91,7 @@ function ProductModal({
 
     productData ? editProduct(formData) : addProduct(formData);
 
+    
     handleCloseModal();
   };
 

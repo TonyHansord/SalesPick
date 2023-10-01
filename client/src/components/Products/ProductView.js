@@ -5,6 +5,7 @@ import DetailsContainer from '../Utilities/DetailsContainer';
 import ActionContainer from '../Utilities/ActionContainer';
 import { Card, ListGroup } from 'react-bootstrap';
 import ProductModal from './ProductModal';
+import defaultImg from '../../defaultImg.png';
 
 function ProductView() {
   const params = useParams();
@@ -69,7 +70,7 @@ function ProductView() {
         <div className="top-container">
           <DetailsContainer
             data={details}
-            image={product?.product_image?.url}
+            image={product?.product_image ? product?.product_image.url : defaultImg}
           />
           <ActionContainer actions={actions} cardSize={'med'} />
         </div>
