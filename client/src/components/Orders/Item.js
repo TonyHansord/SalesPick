@@ -56,26 +56,32 @@ function Item({ item, order, setOrderTotal, fetchOrder }) {
       <ListGroup horizontal>
         <ListGroup.Item>
           <Card.Img
-            src={item.product.product_image ? item.product.product_image.url : defaultImg}
+            src={
+              item.product.product_image
+                ? item.product.product_image.url
+                : defaultImg
+            }
             alt={item.product.name}
           />
         </ListGroup.Item>
         <ListGroup.Item>
+          <Card.Text className="bold-detail">Code:</Card.Text>
           <Card.Text>{item.product.code}</Card.Text>
         </ListGroup.Item>
         <ListGroup.Item>
           <Card.Text>{item.product.name}</Card.Text>
         </ListGroup.Item>
         <ListGroup.Item>
-          <Card.Text>Available: {availableStock}</Card.Text>
+          <Card.Text className="bold-detail">Available:</Card.Text>
+          <Card.Text>{availableStock}</Card.Text>
         </ListGroup.Item>
         <ListGroup.Item>
-          <Card.Text>Price: ${item.product.price.toFixed(2)}</Card.Text>
+          <Card.Text className="bold-detail">Price:</Card.Text>
+          <Card.Text>${item.product.price.toFixed(2)}</Card.Text>
         </ListGroup.Item>
         <ListGroup.Item>
-          <Card.Text>
-            Total: ${(item.product.price * quantity).toFixed(2)}
-          </Card.Text>
+          <Card.Text className="bold-detail">Total:</Card.Text>
+          <Card.Text>${(item.product.price * quantity).toFixed(2)}</Card.Text>
         </ListGroup.Item>
         <ListGroup.Item>
           <input
