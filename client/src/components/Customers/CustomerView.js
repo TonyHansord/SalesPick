@@ -131,10 +131,8 @@ function CustomerView({ user, customerID }) {
           <ActionContainer actions={actions} cardSize={'med'} />
         </div>
         <div className="bottom-container">
-          <div className="orders-container">
-            <h3>Orders</h3>
-            {renderOrders(customerOrders)}
-          </div>
+          <h3>Orders</h3>
+          {renderOrders(customerOrders)}
         </div>
       </div>
       <CustomerModal

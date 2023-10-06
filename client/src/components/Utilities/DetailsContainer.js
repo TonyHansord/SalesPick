@@ -16,7 +16,7 @@ function DetailsContainer({ data, image }) {
   };
 
   return (
-    <Container id="details-container">
+    <Container id="details-container" className='styled-card'>
       {image ? <img src={image} alt="product" /> : null}
       <ListGroup className="details">{renderDetails()}</ListGroup>
     </Container>

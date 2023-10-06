@@ -242,20 +242,15 @@
 
 .order-container {
   display: grid;
-  border: 3px solid transparent;
-  background-color: var(--white-color);
   border-radius: 5px;
   padding: 0;
   text-align: left;
   font-size: small;
-  box-shadow: 0 0 20px 0 rgba(63, 63, 63, 0.5);
 }
 
 .order-container:hover {
   border: 3px double var(--secondary-color);
 }
-
-
 
 .order-container.selected {
   border: 3px solid var(--secondary-color);
@@ -284,11 +279,12 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  border: none;
   gap: 10px;
   padding: 15px;
   width: 100%;
   color: var(--primary-color);
-  background-color: white;
+  background-color: transparent;
 }
 
 .order-container .list-group:nth-child(1) .list-group-item:nth-child(3) {
@@ -366,11 +362,13 @@
   margin: 0;
   padding: 10px 0;
   width: 100%;
-  background-color: var(--white-color);
   border-radius: 5px;
-  border: 1px solid var(--primary-color);
   color: var(--text-color);
-  box-shadow: 0 10px 20px 0 rgba(63, 63, 63, 0.5);
+  border: 3px solid transparent;
+  background-color: rgba(252, 255, 254, 0.496);
+  box-shadow: 0 0 20px 0 rgba(58, 59, 58, 0.494);
+  backdrop-filter: blur(10px);
+  --webkit-backdrop-filter: blur(5px);
 }
 
 .container.pick-item .card-img {
@@ -405,6 +403,7 @@
   height: auto;
   border: 0;
   border-radius: 0;
+  background-color: transparent;
   color: var(--primary-color);
 }
 
@@ -434,9 +433,7 @@
   cursor: auto;
   justify-content: space-evenly;
   align-items: flex-start;
-  background-color: var(--white-color);
   border-radius: 5px;
-  border: 1px solid var(--primary-color);
   color: var(--text-color);
 }
 
@@ -458,7 +455,6 @@
   width: 100%;
   text-align: center;
   border-radius: 0;
-  font-size: small;
 }
 
 .packages .list-group {
@@ -469,6 +465,7 @@
   border: none;
   border-radius: 0;
   grid-template-columns: 2fr 1fr;
+  background-color: transparent;
 }
 
 .packages .list-group-item {
@@ -476,6 +473,7 @@
   justify-content: flex-start;
   border: 0;
   border-radius: 0;
+  background-color: transparent;
   padding: 0;
 }
 
@@ -487,7 +485,7 @@
 }
 
 .packages .list-group .list-group-item {
-  background-color: var(--white-color);
+  background-color: transparent;
   text-align: center;
   align-items: center;
 }
@@ -501,6 +499,9 @@
 .packages .list-group-item .btn {
   font-size: small;
   margin: 10px;
+  padding: 5px;
+  width: 100%;
+  height: 50px;
   background-color: var(--secondary-text-color);
   color: var(--white-color);
 }
@@ -523,7 +524,7 @@
   width: 100%;
   justify-content: center;
   margin: 0;
-  background-color: var(--white-color);
+  background-color: transparent;
 }
 
 .packages form .form-group label {
@@ -540,6 +541,8 @@
   width: 30%;
   text-align: left;
   font-size: small;
+  border: 1px solid var(--secondary-color);
+  background-color: transparent ;
 }
 
 .packages form .btn {

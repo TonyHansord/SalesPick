@@ -61,7 +61,7 @@ function Package({
   };
 
   return (
-    <Container className="package">
+    <Container className="package styled-card">
       <ListGroup horizontal>
         <ListGroup.Item>
           <Card.Text className="bold-detail">

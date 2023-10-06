@@ -12,7 +12,7 @@ function Customer({ customer, setSelectedCustomer }) {
   };
 
   return (
-    <Container id="customer-card" onClick={renderCustomerView}>
+    <Container id="customer-card" className='styled-card' onClick={renderCustomerView}>
       <ListGroup horizontal>
         <ListGroup.Item>
           <Card.Title>{customer.name}</Card.Title>

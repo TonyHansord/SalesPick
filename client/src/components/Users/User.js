@@ -9,7 +9,7 @@ function User({ user }) {
   };
 
   return (
-    <Card className="card med" onClick={handleClickUser}>
+    <Card className="card med styled-card" onClick={handleClickUser}>
       <Card.Title>{user.full_name}</Card.Title>
     </Card>
   );

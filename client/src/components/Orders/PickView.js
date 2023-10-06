@@ -158,7 +158,7 @@ function PickView() {
     })
       .then((res) => res.json())
       .then((data) => {
-        data.error ? displayMessage(data.error, 'error') : console.log(data);
+        data.error ? displayMessage(data.error, 'error') : displayMessage(data.message, 'success');
         fetchOrder();
       });
   };

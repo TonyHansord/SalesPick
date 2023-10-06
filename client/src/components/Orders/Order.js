@@ -72,7 +72,7 @@ function Order({
 
   return (
     <Container
-      className={`order-container ${selectedClass}`}
+      className={`order-container ${selectedClass} styled-card`}
       onClick={handleOrderWasClicked}
     >
       <ListGroup horizontal>

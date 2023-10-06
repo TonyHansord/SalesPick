@@ -23,4 +23,5 @@ class Order < ApplicationRecord
   def customer_name
     customer.name
   end
+
 end

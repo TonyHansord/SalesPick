@@ -25,7 +25,7 @@ class PackageItemsController < ApplicationController
         # Update the picked quantity of the item
         update_picked_quantity
         update_dimensions
-        render json: @package_item, status: :created
+        render json: { message: 'Item added' }, status: :created
         return
       else
         render json: { error: "Can not overpick" }, status: :unprocessable_entity
@@ -37,7 +37,7 @@ class PackageItemsController < ApplicationController
       # Update the picked quantity of the item
       update_picked_quantity
       update_dimensions
-      render json: @package_item, status: :created
+      render json: { message: 'Item added' }, status: :created
     end
   end
 

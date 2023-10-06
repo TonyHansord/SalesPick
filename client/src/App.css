@@ -256,16 +256,29 @@ select {
   display: flex;
   flex-direction: column;
   width: var(--main-view-width);
-  height: 100%;
+  height: calc(100% + 50px);
   padding: 20px;
   gap: 20px;
+}
+
+.list-container {
+  padding-bottom: 50px;
 }
 
 .bottom-container {
   font-size: 2vw;
   padding: 0;
+  padding-bottom: 50px;
   border-radius: 5px;
   background-color: transparent;
+}
+
+.styled-card {
+  border: 3px solid transparent;
+  background-color: rgba(252, 255, 254, 0.496);
+  box-shadow: 0 0 20px 0 rgba(58, 59, 58, 0.494);
+  backdrop-filter: blur(10px);
+  --webkit-backdrop-filter: blur(5px);
 }
 
 .list-container table {
@@ -307,7 +320,6 @@ select {
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: white;
   border-radius: 5px;
 }
 
@@ -401,8 +413,8 @@ select {
 }
 
 .card.lrg {
-  width: 15rem;
-  height: 15rem;
+  width: 15vw;
+  height: 15vw;
 }
 
 @media screen and (max-width: 768px) {

@@ -6,7 +6,7 @@ function Product({ product }) {
   const navigate = useNavigate();
 
   return (
-    <Container onClick={() => navigate(`${product.id}`)} className="product">
+    <Container onClick={() => navigate(`${product.id}`)} className="product styled-card">
       <ListGroup horizontal className="product-info-container">
         <ListGroup.Item>
           <img

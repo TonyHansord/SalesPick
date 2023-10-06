@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   wrap_parameters format: []
 
   def index
-    @orders = Order.all
+    @orders = Order.all.select { |order| order.items.count > 0 }       
     render json: @orders
   end
 
