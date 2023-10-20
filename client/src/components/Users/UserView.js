@@ -39,7 +39,7 @@ function UserView() {
     },
     {
       title: 'Role',
-      value: user.role,
+      value: user.role.charAt(0).toUpperCase() + user.role.slice(1),
     },
   ];
 

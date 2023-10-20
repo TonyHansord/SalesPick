@@ -6,7 +6,7 @@ import { Card, Container } from 'react-bootstrap';
 import './Product.css';
 import ProductModal from './ProductModal';
 
-function ProductList() {
+function ProductList({ role }) {
   const [productList, setProductList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [searchResults, setSearchResults] = useState(productList);
@@ -73,9 +73,11 @@ function ProductList() {
             data={productList}
           />
           <div className="action-container">
-            <Card className="med" onClick={handleShowModal}>
-              <Card.Title>New Product</Card.Title>
-            </Card>
+            {role !== 'warehouse' && (
+              <Card className="med" onClick={handleShowModal}>
+                <Card.Title>New Product</Card.Title>
+              </Card>
+            )}
           </div>
         </div>
         <Container id="product-list" className="list-container">

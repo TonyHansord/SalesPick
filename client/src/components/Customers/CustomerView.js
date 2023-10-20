@@ -6,7 +6,7 @@ import DetailsContainer from '../Utilities/DetailsContainer';
 import ActionContainer from '../Utilities/ActionContainer';
 import CustomerModal from './CustomerModal';
 
-function CustomerView({ user, customerID }) {
+function CustomerView({ customerID }) {
   const navigate = useNavigate();
   const params = useParams();
   const [customer, setCustomer] = useState({
@@ -54,7 +54,6 @@ function CustomerView({ user, customerID }) {
       },
       body: JSON.stringify({
         customer_id: customer.id,
-        // user_id: user.id,
         status: 0,
         priority: 0,
       }),

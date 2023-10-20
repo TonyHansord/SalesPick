@@ -148,7 +148,7 @@ function App() {
                   element={<OrderList action="picking" />}
                 />
                 <Route path="/picking/:id" element={<PickView />} />
-                <Route path="/products" element={<ProductList />} />
+                <Route path="/products" element={<ProductList role={user.role}/>} />
                 <Route path="/products/:id" element={<ProductView />} />
                 <Route
                   path="/customers"
@@ -160,7 +160,6 @@ function App() {
                   path="/customers/:customer_id"
                   element={
                     <CustomerView
-                      user={user}
                       customerID={selectedCustomer.id}
                     />
                   }
