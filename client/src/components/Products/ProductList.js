@@ -73,7 +73,7 @@ function ProductList({ role }) {
             data={productList}
           />
           <div className="action-container">
-            {role !== 'warehouse' && (
+            {role === 'admin' && (
               <Card className="med" onClick={handleShowModal}>
                 <Card.Title>New Product</Card.Title>
               </Card>

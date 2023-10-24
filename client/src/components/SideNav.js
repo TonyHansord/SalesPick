@@ -2,8 +2,6 @@ import './SideNav.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import * as Icon from 'react-bootstrap-icons';
-import { Button, Image } from 'react-bootstrap';
-import logo from '../logo.png';
 
 function SideNav({ sections, setIsLoggedIn, user, setUser }) {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);

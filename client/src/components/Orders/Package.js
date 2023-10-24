@@ -1,6 +1,8 @@
 import { Card, ListGroup, Button, Form, Container } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import * as Icon from 'react-bootstrap-icons';
+import { MessageContext } from '../../App';
+
 
 function Package({
   pack,
@@ -13,6 +15,8 @@ function Package({
   const [width, setWidth] = useState(pack.width);
   const [length, setLength] = useState(pack.length);
   const [weight, setWeight] = useState(pack.weight);
+
+  const { displayMessage } = useContext(MessageContext);
 
   useEffect(() => {
     setHeight(pack.height);
@@ -38,6 +42,7 @@ function Package({
     })
       .then((res) => res.json())
       .then((data) => {
+        displayMessage('Package dimensions updated', 'success');
         fetchOrder();
       });
   };
@@ -56,6 +61,7 @@ function Package({
     })
       .then((res) => res.json())
       .then((data) => {
+        displayMessage('Item removed from package', 'success');
         fetchOrder();
       });
   };

@@ -18,9 +18,10 @@ function UserView() {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { displayMessage } = useContext(MessageContext);
+  const { displayMessage } = useContext(MessageContext); // Display global messages
 
   useEffect(() => {
+    // Fetch user data
     fetch(`/api/users/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -43,7 +44,10 @@ function UserView() {
     },
   ];
 
-  const actions = [
+  const actions = [ 
+
+    // List of actions to be displayed in the ActionContainer
+
     {
       title: 'Edit User',
       method: () => {

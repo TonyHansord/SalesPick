@@ -19,9 +19,11 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find_by_id(params[:id])
+    # Check if order is complete
     if @order.status == "complete"
       render json: { error: "You can't amend a complete order" }
     else
+      # Update the order
       @items = @order.items
       @items.each do |item|
         @product = Product.find_by_id(item.product_id)
@@ -56,8 +58,10 @@ class OrdersController < ApplicationController
     if @order.status == "complete"
       render json: { error: "Order already completed" }
     else
+      # Check if all items have been picked
       if check_all_items_picked
         @order.items.each do |item|
+          # Update the stock levels
           product = Product.find_by_id(item.product_id)
           product.update(current_stock: product.current_stock - item.picked_quantity, assigned_stock: product.assigned_stock - item.picked_quantity)
         end

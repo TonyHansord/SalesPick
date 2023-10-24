@@ -74,7 +74,7 @@ function CustomerModal({
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>New Customer</Modal.Title>
+        <Modal.Title>{customerData ? 'Edit Customer' : 'New Customer'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form id="new-customer-form" onSubmit={handleSubmit}>
