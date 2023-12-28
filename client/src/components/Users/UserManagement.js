@@ -1,25 +1,16 @@
 import ViewTitleBar from '../Utilities/ViewTitleBar';
-import SearchBar from '../Utilities/SearchBar';
 import { Card, Container, ListGroup } from 'react-bootstrap';
 import User from './User';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { UserModal } from './UserModal';
+import { useFetch } from '../../hooks/useFetch';
 
 function UserManagement() {
-  const [users, setUsers] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const { data: users } = useFetch('/api/users');
 
+  const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
-
-  useEffect(() => {
-    fetch('/api/users')
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setUsers(data);
-      });
-  }, []);
 
   const renderUsers = (role) => {
     return users
@@ -44,17 +35,16 @@ function UserManagement() {
         </div>
         <Container id="users" className="bottom-container">
           <h3>Admin</h3>
-          <ListGroup horizontal>{renderUsers('admin')}</ListGroup>
+          <ListGroup horizontal>{users && renderUsers('admin')}</ListGroup>
           <h3>Sales</h3>
-          <ListGroup horizontal>{renderUsers('sales')}</ListGroup>
+          <ListGroup horizontal>{users && renderUsers('sales')}</ListGroup>
           <h3>Warehouse</h3>
-          <ListGroup horizontal>{renderUsers('warehouse')}</ListGroup>
+          <ListGroup horizontal>{users && renderUsers('warehouse')}</ListGroup>
         </Container>
       </div>
       <UserModal
         show={showModal}
         handleClose={handleCloseModal}
-        setUsers={setUsers}
         action={'new'}
       />
     </>
