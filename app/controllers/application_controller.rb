@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
-  include ActionController::MimeResponds
 
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 

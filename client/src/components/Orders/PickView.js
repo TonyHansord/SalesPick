@@ -1,102 +1,96 @@
-import DetailsContainer from '../Utilities/DetailsContainer'
-import ActionContainer from '../Utilities/ActionContainer'
-import ViewTitleBar from '../Utilities/ViewTitleBar'
-import { useCallback, useEffect, useState, useContext } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import './Orders.css'
-import PhotosModal from './PhotosModal'
-import PickItem from './PickItem'
-import { Button } from 'react-bootstrap'
-import Package from './Package'
-import { MessageContext } from '../../App'
+import DetailsContainer from '../Utilities/DetailsContainer';
+import ActionContainer from '../Utilities/ActionContainer';
+import ViewTitleBar from '../Utilities/ViewTitleBar';
+import { useCallback, useEffect, useState, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import './Orders.css';
+import PhotosModal from './PhotosModal';
+import PickItem from './PickItem';
+import { Button } from 'react-bootstrap';
+import Package from './Package';
+import { MessageContext } from '../../App';
 
-function PickView () {
-  const params = useParams()
+function PickView() {
+  const params = useParams();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [order, setOrder] = useState({
     id: '',
     customer: {
-      name: ''
+      name: '',
     },
     status: '',
     order_total: 0,
     items: [],
     order_images: [],
-    packages: []
-  })
+    packages: [],
+  });
 
-  const [currentPackageID, setCurrentPackageID] = useState('')
-  const [showModal, setShowModal] = useState(false)
-  const [packagesHidden, setPackagesHidden] = useState(true)
-  const { displayMessage } = useContext(MessageContext)
+  const [currentPackageID, setCurrentPackageID] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [packagesHidden, setPackagesHidden] = useState(true);
+  const { displayMessage } = useContext(MessageContext);
 
   const orderDetails = [
     {
       title: 'Order ID',
-      value: order.id
+      value: order.id,
     },
     {
       title: 'Customer',
-      value: order.customer.name
+      value: order.customer.name,
     },
     {
       title: 'Status',
       value:
         order.status === 'in_progress'
           ? 'in progress'.toUpperCase()
-          : order.status.toUpperCase()
+          : order.status.toUpperCase(),
     },
     {
       title: 'Package Number',
-      value: currentPackageID
-    }
-  ]
+      value: currentPackageID,
+    },
+  ];
 
   const actions = [
     {
       title: 'Generate Package',
       method: () => {
-        console.log('Generate Package')
+        console.log('Generate Package');
         fetch('/api/packages', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             order_id: order.id,
             height: 0,
             width: 0,
             length: 0,
-            weight: 0
-          })
+            weight: 0,
+          }),
         })
-          .then(res => res.json())
-          .then(data => {
-            console.log(data)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
             if (data.error) {
-              displayMessage(data.error, 'error')
+              displayMessage(data.error, 'error');
             } else {
-              setCurrentPackageID(data.id)
-              displayMessage(data.message, 'success')
-              fetchOrder()
+              setCurrentPackageID(data.id);
+              displayMessage(data.message, 'success');
+              fetchOrder();
             }
-          })
-      }
+          });
+      },
     },
     {
       title: 'Photos',
       method: () => {
-        console.log('Photos')
-        handleShowModal()
-      }
-    },
-    {
-      title: 'Print Invoice',
-      method: () => {
-       navigate(`/picking/${order.id}/invoice`)
-      }
+        console.log('Photos');
+        handleShowModal();
+      },
     },
     {
       title: 'Complete',
@@ -104,111 +98,109 @@ function PickView () {
         fetch(`/api/orders/${params.id}/complete`, {
           method: 'PATCH',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            status: 2
-          })
+            status: 2,
+          }),
         })
-          .then(res => res.json())
-          .then(data => {
-            console.log(data)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
             if (data.error) {
-              console.log(data)
-              displayMessage(data.error, 'error')
+              console.log(data);
+              displayMessage(data.error, 'error');
             } else {
-              displayMessage(data.message, 'success')
+              displayMessage(data.message, 'success');
               setTimeout(() => {
-                navigate('/picking')
-              }, 3000)
+                navigate('/picking');
+              }, 3000);
             }
-          })
-      }
-    }
-  ]
+          });
+      },
+    },
+  ];
 
   const fetchOrder = useCallback(() => {
     fetch(`/api/orders/${params.id}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const lastID = data.packages[data.packages.length - 1]
           ? data.packages[data.packages.length - 1].id
-          : ''
-        setCurrentPackageID(lastID)
-        setOrder(data)
-      })
-  }, [params.id])
+          : '';
+        setCurrentPackageID(lastID);
+        setOrder(data);
+      });
+  }, [params.id]);
 
   useEffect(() => {
-    fetchOrder()
-  }, [fetchOrder])
+    fetchOrder();
+  }, [fetchOrder]);
 
-  const handleCloseModal = () => setShowModal(false)
-  const handleShowModal = () => setShowModal(true)
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
 
-  const addItemToPackage = item => {
-    console.log(item)
-    console.log(currentPackageID)
+  const addItemToPackage = (item) => {
+    console.log(item);
+    console.log(currentPackageID);
 
     fetch('/api/package_items', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         item_id: item.id,
         package_id: currentPackageID,
         product_id: item.product.id,
-        quantity: 1
-      })
+        quantity: 1,
+      }),
     })
-      .then(res => res.json())
-      .then(data => {
-        data.error
-          ? displayMessage(data.error, 'error')
-          : displayMessage(data.message, 'success')
-        fetchOrder()
-      })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        data.error ? displayMessage(data.error, 'error') : displayMessage(data.message, 'success');
+        fetchOrder();
+      });
+  };
 
-  const deletePackage = id => {
-    console.log('delete package')
+  const deletePackage = (id) => {
+    console.log('delete package');
 
     fetch(`/api/packages/${id}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         id: id,
-        order_id: order.id
-      })
+        order_id: order.id,
+      }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         data.error
           ? displayMessage(data.error, 'error')
-          : displayMessage(data.message, 'success')
-        fetchOrder()
-      })
-  }
+          : displayMessage(data.message, 'success');
+        fetchOrder();
+      });
+  };
 
-  const setActivePackage = id => setCurrentPackageID(id)
+  const setActivePackage = (id) => setCurrentPackageID(id);
 
   const renderItems = () => {
     return order.items.map((item, index) => {
-      return <PickItem key={index} item={item} addItem={addItemToPackage} />
-    })
-  }
+      return <PickItem key={index} item={item} addItem={addItemToPackage} />;
+    });
+  };
 
   const handleTogglePackages = () => {
-    console.log(packagesHidden)
-    setPackagesHidden(!packagesHidden)
-  }
+    console.log(packagesHidden);
+    setPackagesHidden(!packagesHidden);
+  };
 
   const renderPackages = () => {
     return order.packages.map((pack, index) => {
-      console.log(pack)
+      console.log(pack);
 
       return (
         <Package
@@ -219,23 +211,23 @@ function PickView () {
           deletePackage={deletePackage}
           setActivePackage={setActivePackage}
         />
-      )
-    })
-  }
+      );
+    });
+  };
 
   return (
     <>
-      <ViewTitleBar title='Pick View' hasBackButton={true} />
-      <div className='main-container'>
-        <div className='top-container'>
+      <ViewTitleBar title="Pick View" hasBackButton={true} />
+      <div className="main-container">
+        <div className="top-container">
           <DetailsContainer data={orderDetails} />
           <ActionContainer actions={actions} cardSize={'sml'} />
         </div>
-        <div className='bottom-container'>
-          <div className='Items'>
-            <div className='items'>{renderItems()}</div>
+        <div className="bottom-container">
+          <div className="Items">
+            <div className="items">{renderItems()}</div>
           </div>
-          <Button className='packages-btn' onClick={handleTogglePackages}>
+          <Button className="packages-btn" onClick={handleTogglePackages}>
             {packagesHidden ? 'Show Packages' : 'Hide Packages'}
           </Button>
           <div className={packagesHidden ? 'packages hidden' : 'packages'}>
@@ -250,7 +242,7 @@ function PickView () {
         fetchOrder={fetchOrder}
       />
     </>
-  )
+  );
 }
 
-export default PickView
+export default PickView;
