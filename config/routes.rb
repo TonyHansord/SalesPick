@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   get "/api/orders", to: "orders#index"
   get "/api/orders/:id", to: "orders#show"
+  get "/api/orders/:id/invoice", to: "orders#generate_invoice"
   post "/api/orders", to: "orders#create"
   patch "/api/orders/:id", to: "orders#update"
   post "/api/orders/:id/photos", to: "orders#add_photos"

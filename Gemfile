@@ -51,3 +51,8 @@ group :test do
 end
 
 gem "active_model_serializers", "~> 0.10.12"
+
+
+gem 'wicked_pdf'
+gem 'prawn'
+gem 'wkhtmltopdf-binary'

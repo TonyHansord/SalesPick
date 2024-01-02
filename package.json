@@ -11,6 +11,7 @@
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^3.1.14",
     "axios": "^1.6.0",
     "bootstrap": "^5.3.1",
     "react-bootstrap": "^2.8.0"
