@@ -125,7 +125,7 @@ body {
 
 .login-view .demo {
   display: flex;
-  width: 80vw;
+  width: 40vw;
   justify-content: center;
   background-color: var(--secondary-text-color);
   border-radius: 20px;
@@ -473,6 +473,11 @@ select {
   .action-container {
     width: 100%;
     padding: 20px 0;
+  }
+
+  .login-view .demo {
+    width: 80vw;
+    flex-direction: column;
   }
 
   .login-view h1 {

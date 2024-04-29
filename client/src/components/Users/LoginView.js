@@ -33,14 +33,10 @@ function LoginView ({ setUser, setIsLoggedIn }) {
 
   return (
     <div className='login-view'>
+      <h1 className='login-title'>SalesPick</h1>
+
       <div className='demo'>
         <div className='col'>
-          <p className='demo-desc'>
-            SalesPick is a web application for managing sales orders and
-            inventory. It allows sales staff to create and manage orders, and
-            warehouse staff to manage inventory and fulfill orders.
-          </p>
-
           <p className='demo-desc'>
             This is a proof of concept application and is designed to be used
             with a business and is not a public facing app. Please use the demo
@@ -49,14 +45,12 @@ function LoginView ({ setUser, setIsLoggedIn }) {
         </div>
 
         <div className='col'>
-          <h2>Demo Credentials</h2>
+          <h5>Demo Credentials</h5>
           <p>Use the following credentials to login:</p>
           <p>Username: gjones</p>
           <p>Password: admin</p>
         </div>
       </div>
-
-      <h1 className='login-title'>SalesPick</h1>
 
       <Form noValidate onSubmit={handleLogin}>
         <h3>Login</h3>
