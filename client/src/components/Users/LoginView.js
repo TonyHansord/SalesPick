@@ -1,77 +1,100 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Form } from 'react-bootstrap';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Form } from 'react-bootstrap'
 
-function LoginView({ setUser, setIsLoggedIn }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+function LoginView ({ setUser, setIsLoggedIn }) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = e => {
+    e.preventDefault()
 
     fetch('/api/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password })
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         if (data.username) {
-          console.log(data);
-          setUser(data);
-          setIsLoggedIn(true);
-          navigate('/');
+          console.log(data)
+          setUser(data)
+          setIsLoggedIn(true)
+          navigate('/')
         } else {
-          alert('Invalid username or password');
+          alert('Invalid username or password')
         }
-      });
-  };
+      })
+  }
 
   return (
-    <div className="login-view">
-      <h1 className="login-title">SalesPick</h1>
+    <div className='login-view'>
+      <div className='demo'>
+        <div className='col'>
+          <p className='demo-desc'>
+            SalesPick is a web application for managing sales orders and
+            inventory. It allows sales staff to create and manage orders, and
+            warehouse staff to manage inventory and fulfill orders.
+          </p>
+
+          <p className='demo-desc'>
+            This is a proof of concept application and is designed to be used
+            with a business and is not a public facing app. Please use the demo
+            credentials below to login and explore the application.
+          </p>
+        </div>
+
+        <div className='col'>
+          <h2>Demo Credentials</h2>
+          <p>Use the following credentials to login:</p>
+          <p>Username: gjones</p>
+          <p>Password: admin</p>
+        </div>
+      </div>
+
+      <h1 className='login-title'>SalesPick</h1>
 
       <Form noValidate onSubmit={handleLogin}>
         <h3>Login</h3>
-        <Form.Group className="form-group" controlId="formBasicName">
+        <Form.Group className='form-group' controlId='formBasicName'>
           <Form.Label>Username</Form.Label>
           <Form.Control
             required
-            type="text"
-            placeholder="Enter name"
-            name="name"
+            type='text'
+            placeholder='Enter name'
+            name='name'
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={e => setUsername(e.target.value)}
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type='invalid'>
             Please provide a valid name.
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="form-group" controlId="formBasicPassword">
+        <Form.Group className='form-group' controlId='formBasicPassword'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             required
-            type="password"
-            placeholder="Password"
-            name="password"
+            type='password'
+            placeholder='Password'
+            name='password'
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
-          <Form.Control.Feedback type="invalid">
+          <Form.Control.Feedback type='invalid'>
             Please provide a valid password.
           </Form.Control.Feedback>
         </Form.Group>
 
-        <button className="btn" type="submit">
+        <button className='btn' type='submit'>
           Login
         </button>
       </Form>
     </div>
-  );
+  )
 }
 
-export default LoginView;
+export default LoginView

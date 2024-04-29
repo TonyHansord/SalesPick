@@ -35,7 +35,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   height: 100vh;
-  gap: 10vw;
+  gap: 5vw;
   margin-top: 10vh;
 }
 
@@ -71,6 +71,7 @@ body {
   color: var(--text-color);
   font-size: 5vw;
 }
+
 
 .login-view .btn {
   background-color: var(--primary-color);
@@ -120,6 +121,17 @@ body {
 
 .login-view .btn:hover {
   background-color: #4a9cb7;
+}
+
+.login-view .demo {
+  display: flex;
+  width: 80vw;
+  justify-content: center;
+  background-color: var(--secondary-text-color);
+  border-radius: 20px;
+  padding: 1rem;
+  color: var(--primary-color);
+
 }
 
 .action-button.btn {
